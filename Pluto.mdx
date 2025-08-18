@@ -1,5 +1,74 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: Pluto v1.1
+description: Set up a low-latency, streaming voice assistant using SuperU, WebSockets, and PyAudio.
+sidebar:
+  order: 1
 ---
 
+This guide will help you set up a real-time AI voice assistant using the SuperU SDK and WebSockets. You’ll be able to speak to an AI and get instant, natural-sounding replies—perfect for customer support, call centres, or adding a voice assistant to any app.
+
+---
+
+## 1) Introduction
+
+**Pluto** lets you build a real-time conversational AI voice assistant for your website or app. It uses your microphone to capture audio, streams it to an AI model, and plays back the AI’s spoken response—all in just a few hundred milliseconds.
+
+---
+
+## 2) Quick Overview
+
+**Goal:** Enable real-time voice conversations with AI.
+
+**Use Cases:**
+- Customer support over AI calls
+- Voice assistant for your website/app
+- Cold calling with AI
+- Call center automation
+
+**Tech Stack:**
+- Python
+- PyAudio
+- WebSockets
+- SuperU SDK
+
+**Input:** Microphone audio  
+**Output:** AI-generated speech
+
+---
+
+## 3) Prerequisites
+
+Before you start, make sure you have:
+
+- Python installed on your computer
+- Internet connection
+- A microphone and speakers/headphones
+- An account on [SuperU](https://dev.superu.ai/)
+
+---
+
+## 4) Getting Started
+
+### Step 1 — Sign Up and Get Your API Key
+
+1. Go to [dev.superu.ai](https://dev.superu.ai/) and sign up for an account.  
+2. Open your dashboard.  
+3. Copy your **API Key**.
+
+<Callout type="info">
+For security, store your API key in an environment variable (e.g., <code>SUPERU_API_KEY</code>) instead of hard-coding it.
+</Callout>
+
+---
+
+## 5) Setup & Configuration
+
+### Step 2 — Install Dependencies
+
+```bash
+# Windows
+pip install pyaudio websockets superu
+
+# macOS / Linux
+pip3 install pyaudio websockets superu
+```
