@@ -16,27 +16,13 @@
           {
             "group": "Getting started",
             "pages": [
-              "pluto"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
+              
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Step By Step",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "steps/pluto"
             ]
           }
         ]
@@ -62,15 +48,10 @@
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "chatgpt",
+      "claude",
+      "copy"
+    ]
   },
   "footer": {
     "socials": {

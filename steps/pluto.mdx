@@ -1,0 +1,254 @@
+---
+title: "Pluto Voice Assistant - Step-by-Step Guide"
+description: "Complete guide to building a real-time AI voice assistant using SuperU SDK, WebSockets, and PyAudio for customer support and interactive applications."
+---
+
+This guide will help you set up a real-time AI voice assistant using the SuperU SDK and WebSockets. You'll be able to speak to an AI and get instant, natural-sounding replies—perfect for customer support, call centers, or adding a voice assistant to any app.
+
+---
+
+## Introduction
+
+**Pluto** lets you build a real-time conversational AI voice assistant for your website or app. It uses your microphone to capture audio, streams it to an AI model, and plays back the AI's spoken response—all in just a few hundred milliseconds.
+
+---
+
+## Quick Overview
+
+**Goal:** Enable real-time voice conversations with AI.
+
+**Use Cases:**
+- Customer support over AI calls
+- Voice assistant for your website/app
+- Cold calling with AI
+- Call center automation
+
+**Tech Stack:**
+- Python
+- PyAudio
+- WebSockets
+- SuperU SDK
+
+**Input:** Microphone audio  
+**Output:** AI-generated speech
+
+---
+
+## Prerequisites
+
+Before you start, make sure you have:
+
+- Python installed on your computer
+- Internet connection
+- A microphone and speakers/headphones
+- An account on [SuperU](https://dev.superu.ai/)
+
+---
+
+## Getting Started
+
+<Steps>
+  <Step title="Sign Up and Get Your API Key">
+    1. Go to [dev.superu.ai](https://dev.superu.ai/) and sign up for an account
+    2. After signing up, visit your dashboard
+    3. Copy your API key from the dashboard
+    
+    <Note>
+      For security, store your API key in an environment variable instead of hard-coding it in your code.
+    </Note>
+  </Step>
+</Steps>
+
+---
+
+## Setup & Configuration
+
+<Steps>
+  <Step title="Install Dependencies">
+    Open your terminal and run the appropriate command for your operating system:
+
+    ```bash
+    # Windows
+    pip install pyaudio websockets superu
+
+    # macOS/Linux
+    pip3 install pyaudio websockets superu
+    ```
+  </Step>
+
+  <Step title="Configure Audio">
+    The code will use your system's default microphone and speakers. No extra setup is needed, but make sure your devices are working properly.
+    
+    <Tip>
+      Test your microphone and speakers before running the assistant to ensure optimal performance.
+    </Tip>
+  </Step>
+</Steps>
+
+---
+
+## Running the Demo
+
+<Steps>
+  <Step title="Copy and Run the Code">
+    Create a new Python file (e.g., `pluto_voice_assistant.py`) and paste the following code. Replace `<YOUR_API_KEY>` with your actual API key:
+
+    ```python
+    import asyncio
+    import pyaudio
+    import websockets
+    import uuid
+    import base64
+    import json
+    import superu
+
+    FORMAT = pyaudio.paInt16
+    CHANNELS = 1
+    SEND_SAMPLE_RATE = 16000
+    CHUNK_SIZE = 1024
+    pya = pyaudio.PyAudio()
+
+    def get_default_input_device_index():
+        for i in range(pya.get_device_count()):
+            dev = pya.get_device_info_by_index(i)
+            if dev['maxInputChannels'] > 0:
+                print(f"Using device: {dev['name']} (Index: {i})")
+                return i
+        raise RuntimeError("No input device found.")
+
+    mic_index = get_default_input_device_index()
+
+    async def send_audio(stream, websocket, streamId):
+        await websocket.send(json.dumps({"event": "start", "start": {"streamId": streamId}}))
+        while True:
+            audio_chunk = await asyncio.to_thread(stream.read, CHUNK_SIZE)
+            payload = base64.b64encode(audio_chunk).decode('utf-8')
+            await websocket.send(json.dumps({"event": "media", "media": {"payload": payload}}))
+
+    async def receive_messages(websocket):
+        output_stream = await asyncio.to_thread(
+            pya.open, format=FORMAT, channels=CHANNELS, rate=SEND_SAMPLE_RATE, output=True)
+        while True:
+            try:
+                response = json.loads(await websocket.recv())
+                if response.get("event") == "playAudio":
+                    audio_data = base64.b64decode(response["media"]["payload"])
+                    await asyncio.to_thread(output_stream.write, audio_data)
+            except websockets.exceptions.ConnectionClosed:
+                print("WebSocket connection closed.")
+                break
+
+    async def listen_and_send(uri, streamId):
+        stream = await asyncio.to_thread(
+            pya.open, format=FORMAT, channels=CHANNELS, rate=SEND_SAMPLE_RATE,
+            input=True, input_device_index=mic_index, frames_per_buffer=CHUNK_SIZE)
+        async with websockets.connect(uri) as websocket:
+            print("Connected to WebSocket. Streaming audio...")
+            try:
+                await asyncio.gather(
+                    send_audio(stream, websocket, streamId),
+                    receive_messages(websocket))
+            except Exception as e:
+                print(f"Error: {e}")
+            finally:
+                stream.stop_stream()
+                stream.close()
+                pya.terminate()
+                print("Connection closed.")
+
+    if __name__ == "__main__":
+        superu_client = superu.SuperU('<YOUR_API_KEY>')
+        First_message = "Hey there! Ready to explore some fascinating science today?"
+        System_prompt = """
+            You are a helpful and curious science assistant. Your job is to answer questions clearly, concisely, and in a way that's engaging for someone interested in science.
+        """
+        pluto = superu_client.pluto.create_call(
+            first_message=First_message,
+            system_prompt=System_prompt,
+            voice_id="90ipbRoKi4CpHXvKVtl0"  # Anika - Customer Care Agent
+        )
+        asyncio.run(listen_and_send(pluto['ws_url'], pluto['streamId']))
+    ```
+  </Step>
+
+  <Step title="Run the Application">
+    Execute your Python file using the appropriate command:
+
+    ```bash
+    # Windows
+    python pluto_voice_assistant.py
+
+    # macOS/Linux
+    python3 pluto_voice_assistant.py
+    ```
+    
+    <Check>
+      You should see "Connected to WebSocket. Streaming audio..." in your terminal, indicating a successful connection.
+    </Check>
+  </Step>
+</Steps>
+
+---
+
+## Customizing Your Assistant
+
+You can personalize your AI assistant by modifying several key components:
+
+### Change the First Message
+
+The `First_message` variable defines what the assistant says when the conversation starts.
+
+```python
+First_message = "Hello! How can I help you today?"
+```
+
+Set this to any greeting or introduction that fits your use case.
+
+### Modify the System Prompt
+
+The `System_prompt` variable defines how the assistant should behave and respond.
+
+```python
+System_prompt = """
+You are a friendly and knowledgeable customer support assistant. 
+Help users with their questions about our products and services.
+"""
+```
+
+<Tip>
+  Adjust this prompt to fit your specific use case, such as customer support, language learning, or technical help.
+</Tip>
+
+---
+
+## How It Works
+
+The voice assistant operates through a real-time audio streaming process:
+
+1. **Audio Capture**: Your microphone captures your voice
+2. **WebSocket Transmission**: Audio is sent to the AI model via WebSocket connection
+3. **AI Processing**: The AI listens, processes, and generates a response
+4. **Voice Synthesis**: The AI's response is converted to natural-sounding speech
+5. **Audio Playback**: You hear the AI's response through your speakers—all in real time!
+
+---
+
+## Available Voices
+
+You can choose from many different AI voices by changing the `voice_id` parameter. Each voice has a unique ID and supports various languages.
+
+<Note>
+  Contact SuperU support or check the documentation for a complete list of available voice IDs and their characteristics.
+</Note>
+
+---
+
+## Additional Resources
+
+- [Join the SuperU Discord Community](https://discord.gg/superu)
+- [Watch Tutorial Videos](https://youtube.com/superu)
+- [SuperU Website](https://superu.ai)
+
+<Check>
+  Congratulations! You now have a real-time AI voice assistant running on your machine.
+</Check>
