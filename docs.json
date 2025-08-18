@@ -24,6 +24,13 @@
             "pages": [
               "steps/pluto"
             ]
+          },
+          {
+            "group": "Models",
+            "pages": [
+              "models/pluto_1_1",
+              "models/pluto_1_0"
+            ]
           }
         ]
       }

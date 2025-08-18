@@ -1,0 +1,59 @@
+---
+title: "Pluto v1.1"
+description: "Launch date : 15-08-2025"
+---
+
+## Presenting Pluto v1.1 with VAD (Voice Activity Detection), noise reduction, and ultra low latency of just 200ms.
+
+<Card
+  title="Start here"
+  icon="rocket"
+  href="/steps/pluto"
+  horizontal
+>
+  Follow our Pluto Voice Assistant step-by-step quickstart guide.
+</Card>
+
+## How to use Pluto v1.1
+
+After setting up the Pluto Voice Assistant with step-by-step guide, you can use this advance pluto version to interact with your AI assistant. 
+
+<Steps>
+  <Step title="Just add a Model argument to create_call with pluto v1.1">
+    In the create_call function (e.g., `pluto_voice_assistant.py`), add the model argument with pluto v1.1.
+
+    ```python {12}
+
+    if __name__ == "__main__":
+        superu_client = superu.SuperU('<YOUR_API_KEY>')
+        First_message = "Hey there! Ready to explore some fascinating science today?"
+        System_prompt = """
+            You are a helpful and curious science assistant. Your job is to answer questions clearly, concisely, and in a way that's engaging for someone interested in science.
+        """
+        pluto = superu_client.pluto.create_call(
+            first_message=First_message,
+            system_prompt=System_prompt,
+            voice_id="90ipbRoKi4CpHXvKVtl0",
+            model = "pluto_1.1",
+            language_clue="en-US",
+        )
+        asyncio.run(listen_and_send(pluto['ws_url'], pluto['streamId']))
+    ```
+  </Step>
+
+  <Step title="Run the Application">
+    Execute your Python file using the appropriate command:
+
+    ```bash
+    # Windows
+    python pluto_voice_assistant.py
+
+    # macOS/Linux
+    python3 pluto_voice_assistant.py
+    ```
+    
+    <Check>
+      You should see "Connected to WebSocket. Streaming audio..." in your terminal, indicating a successful connection.
+    </Check>
+  </Step>
+</Steps>
