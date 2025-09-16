@@ -1,0 +1,57 @@
+---
+title: "Calling using agent"
+---
+
+## Server Side
+
+```python
+def create_call_plivo(self , voice_id , from_ , to_ , model=None , assistant_id=None , system_prompt=None , first_message=None , language_clue="en-US" , background_audio=False, prewarm_agent=False , localhost=None ,max_duration_seconds=120 , custom_analysis_prompt=None , custom_summary_prompt=None , **kwargs):
+    data_json = {
+        'from_': from_,
+        'to_': to_,
+        'max_duration_seconds': max_duration_seconds,
+        **kwargs,
+        'api_key': self.api_key
+    }
+
+    response = requests.post(
+        f'{server_url}/pypi_support/pluto/call_create',
+        json=data_json,
+    )
+
+    plivo_call = response.json()
+
+    plivo_call_uuid = plivo_call['call_uuid']
+
+    self.create_call(voice_id ,
+    model=model ,
+    call_uuid=plivo_call_uuid ,
+    assistant_id=assistant_id ,
+    system_prompt=system_prompt ,
+    first_message=first_message ,
+    language_clue=language_clue ,
+    background_audio=background_audio ,
+    prewarm_agent=prewarm_agent ,
+    localhost=localhost ,
+    Telephony=True ,
+    custom_analysis_prompt=custom_analysis_prompt ,
+    custom_summary_prompt=custom_summary_prompt)
+
+    return plivo_call
+```
+
+## Client Side
+
+```python
+def get_call(self , call_id , model=None):
+    if model == "pluto_1.1":
+        self.pluto_url = "pluto-ws.superu.ai"
+
+    response = requests.get(
+        f'http://{self.pluto_url}/call_logs/{call_id}',
+        json={'api_key': self.api_key}
+        )
+    if response.status_code != 200:
+        raise Exception(f"Failed to get call: {response.status_code}, {response.text}")
+    return response.json()
+```

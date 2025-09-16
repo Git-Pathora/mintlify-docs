@@ -31,6 +31,14 @@
               "models/pluto_1_1",
               "models/pluto_1_0"
             ]
+          },
+          {
+            "group": "Agents",
+            "pages": [
+              "agents/create_assistant",
+              "agents/use_superu",
+              "agents/initiate_and_analyze_calls"
+            ]
           }
         ]
       }

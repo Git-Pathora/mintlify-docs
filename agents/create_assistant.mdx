@@ -1,0 +1,725 @@
+---
+title: "Creating an Agent"
+description: "Complete guide to building a AI Agent using superU"
+---
+
+This guide will help you develop fully functional end-to-end AI Agents with multi-modal capabilites
+
+---
+
+## Introduction
+
+**superU** lets you build a real-time conversational AI voice assistant for your website or app. It uses your microphone to capture audio, streams it to an AI model, and plays back the AI's spoken response—all in just a few hundred milliseconds.
+
+---
+
+## Getting Started
+
+<Steps>
+  <Step title="Sign Up and Get Your API Key">
+    1. Go to [dev.superu.ai](https://dev.superu.ai/) and sign up for an account
+    2. After signing up, visit your dashboard
+    3. Copy your API key from the dashboard
+    <Note>
+      For security, store your API key in an environment variable instead of
+      hard-coding it in your code.
+    </Note>
+
+  </Step>
+</Steps>
+
+---
+
+## Setup & Configuration
+
+<Steps>
+  <Step title="Install Dependencies">
+    Open your terminal and run the appropriate command for your operating system:
+
+    ```bash
+    # Windows
+    pip install superu
+
+    # macOS/Linux
+    pip3 install superu
+    ```
+
+  </Step>
+
+  <Step title="Configure Audio">
+    The code will use your system's default microphone and speakers. No extra setup is needed, but make sure your devices are working properly.
+    
+    <Tip>
+      Test your microphone and speakers before running the assistant to ensure optimal performance.
+    </Tip>
+  </Step>
+</Steps>
+
+---
+
+## Create Basic Assistant
+
+<Steps>
+  <Step title="Copy and Run the Code">
+    Create a new Python file (e.g., `superu_voice_assistant.py`) and paste the following code. Replace `<YOUR_API_KEY>` with your actual API key:
+
+    ```python
+    import superu
+    import time
+    import json
+
+    superu_client = superu.SuperU("<YOUR_API_KEY>")
+
+
+    create_basic = superu_client.assistants.create_basic(
+        name="Help full assitnat Nina",
+        voice_id="FFmp1h1BMl0iVHA0JxrI",
+        first_message="Hello This is nina , hwo can i help you ? ",
+        system_prompt="Nina is a helpfull assistant, she can help you with your questions and help you with your problems"
+    )
+
+
+    assistant_id = create_basic['id']
+    ```
+
+  </Step>
+
+  <Step title="Run the Application">
+    Execute your Python file using the appropriate command:
+
+    ```bash
+    # Windows
+    python superu_voice_assistant.py
+
+    # macOS/Linux
+    python3 superu_voice_assistant.py
+    ```
+
+    <Check>
+      You should see "Connected to WebSocket. Streaming audio..." in your terminal, indicating a successful connection.
+    </Check>
+
+  </Step>
+</Steps>
+
+---
+
+## Create Advance Assistant
+
+<Steps>
+  <Step title="Copy and Run the Code">
+    Create a new Python file (e.g., `superu_voice_assistant.py`) and paste the following code. Replace `<YOUR_API_KEY>` with your actual API key:
+
+    ```python
+    import superu
+    import time
+    import json
+
+    superu_client = superu.SuperU('FI3amZjYVXirV6rytRGlTleSQN')
+
+    exmaple_json = {
+        "name": "Paras test pypi",
+        "voice": {
+            "model": "eleven_flash_v2_5",
+            "voiceId": "FFmp1h1BMl0iVHA0JxrI",
+            "provider": "11labs",
+            "stability": 0.9,
+            "similarityBoost": 0.9,
+            "useSpeakerBoost": True,
+            "inputMinCharacters": 5
+        },
+        "model": {
+            "model": "gpt-4o-mini",
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "Part 1: Role and Style\n\nYou are an AI voice assistant calling on behalf of Lon-dhe Jewellers.\n\nSpeak clearly in Hinglish (not too much Hindi or English).\n\nMaintain a steady and natural pace — not too fast.\n\nUse simple, polite, professional language.\n\nPronounce numbers in English. Say जान-कारी, not jankari. Say लोंडे in one go.\n\nAlways thank them for their time.\n\nPart 2: Initial Greeting\n\nWait for response\n\nIf positive → Go to Step 1\n\nIf busy/uninterested → Go to Step 2\n\nStep 1: Offer Intro\n\n\"Sir, Lon-dhe Jewellers, इस Akshay Tritiya के शुभ अवसर पर पचहत्तर हज़ार ki shopping karne pe ek saree, और डेढ़ लाख ki shopping karne pe ek hair straightener as gift de रहा है, और छह लाख ki purchase karne pe ek TV as gift diya ja raha hai. क्या आप इस offer के बारे में और जान-कारी लेना चाहेंगे?\"\n\nIf yes → Step 7\n\nIf no/busy → Step 2\n\nPart 3: Handling No/Busy\n\nStep 2: Customer Busy or Uninterested\n\"Sir, Lon-dhe Jewellers, के किसी भी store visit करके आप इन offers का लाभ उठा सकते हैं। आपका समय देने के लिए धन्यवाद। आपका दिन शुभ हो।\"\n\nStep 3: If Callback is Requested\n\"बिलकुल Sir, मैं आपको कब call back कर सकती हूँ?\"\n\nStep 4: If uncertain response\n\"Sir मैंने आपको, Lon-dhe Jewellers, के Akshay Tritiya offers के बारे में बताने के लिए call किया है। Lon-dhe Jewellers, par पचहत्तर हज़ार ki shopping karne pe ek saree, और डेढ़ लाख ki shopping karne pe ek hair straightener as gift मिल रहा है, और छह लाख ki purchase karne pe ek TV as gift diya ja raha hai। क्या आपको और जान-कारी चाहिए?\"\n\nPart 4: Callback and Ending\n\nStep 5: Confirm Callback\n\nAsk for good time to call.\n\nThen → Go to Step 6\n\nStep 6: End Politely\n\"आपका समय देने के लिए धन्यवाद। आपका दिन शुभ हो। Thank you!\"\n\nStep 7: Detailed Offer\n\n\"इस Akshay Tritiya के शुभ अवसर पर, Lon-dhe Jewellers, के किसी भी store पर visit करके आप इन offers का लाभ उठा सकते हैं। जब आपको सुविधा हो, हमारे स्टोर ज़रूर आएं। क्या आप बता सकते हैं, आप कब आ पाएंगे?\"\n\nIf yes → Step 9\n\nIf no → Step 8\n\nStep 8: End if Not Interested\n\"कोई बात नहीं। आप Lon-dhe Jewellers, के किसी भी store पर visit करके ये offers avail कर सकते हैं। आपका समय देने के लिए धन्यवाद। आपका दिन शुभ हो।\"\n\nStep 9: Ask for Visit Date\n\"Sir, आप हमारे offers का लाभ उठाने के लिए कब visit कर पाएंगे?\"\n\nIf yes → Step 10\n\nIf no → Step 8\n\nStep 10: Final Thank You\n\"धन्यवाद Sir, हम आपके visit का इंतज़ार करेंगे। आपका समय देने के लिए धन्यवाद। आपका दिन शुभ हो।\"\n\nPart 5: If Asked\n\nAre you AI/human?\n\"मैं Lon-dhe Jewellers के behalf पे एक AI agent बोल रही हूँ।\"\n\nNeed callback from staff?\n\"अगर आप चाहें तो मैं हमारे customer service manager से call back arrange करवा सकती हूँ।\"\n\nPart 6: FAQs (Answer if Asked)\n\nOffer valid till?\"ये offer agle week तक है।\"\n\nGold rate?\"माफ़ कीजिए, rate call पर नहीं देते। Store पे best rate मिलता है।\"\n\nOffer हर store में?\"हाँ जी, सभी लोंडे stores में valid है।\"\n\nGold making charge?\"अगर आप चाहें तो मैं हमारे customer service manager से call back arrange करवा सकती हूँ। Wo aapko is baare mai jaankaari dedenge\"\n\nStore कहाँ हैं?\n\"हमारे stores सीताबुलडी, धर्मपेठ aur, मनीष नगर mai hai. Aapko jo location convenient lage, waha aa sakte hain.\"\n\nTimings?\"सुबह 11 से रात 8 बजे तक।\"\n\nSunday?\"हाँ जी, 7 दिन open है।\"\n\nSalesperson से बात?\"मैं call back करवाती हूँ।\"\n\nGold exchange?\"हाँ जी। Visit करें for जान-कारी।\"\n\nFinal Interaction Tips\n\nSpeak naturally and clearly.\n\nAvoid errors or gibberish.\n\nUse simple Hinglish.\n\nUse exact lines.\n\nAlways end with thanks and a warm goodbye."
+                }
+            ],
+            "provider": "openai",
+            "temperature": 0,
+                    "toolIds" : ["54256603-fb54-4eb0-b258-27ae1b3765ef"]
+        },
+        "firstMessage": "",
+        "voicemailMessage": "Please call back when you're available.",
+        "endCallFunctionEnabled": True,
+        "endCallMessage": "Goodbye.Thank you.",
+        "transcriber": {
+            "model": "nova-2",
+            "language": "en",
+            "numerals": False,
+            "provider": "deepgram",
+            "endpointing": 300,
+            "confidenceThreshold": 0.4
+        },
+        "clientMessages": [
+            "transcript",
+            "hang",
+            "function-call",
+            "speech-update",
+            "metadata",
+            "transfer-update",
+            "conversation-update",
+            "workflow.node.started"
+        ],
+        "serverMessages": [
+            "end-of-call-report",
+            "status-update",
+            "hang",
+            "function-call"
+        ],
+        "hipaaEnabled": False,
+        "backgroundSound": "office",
+        "backchannelingEnabled": False,
+        "backgroundDenoisingEnabled": True,
+        "messagePlan": {
+            "idleMessages": [
+                "Are you still there?"
+            ],
+            "idleMessageMaxSpokenCount": 2,
+            "idleTimeoutSeconds": 5
+        },
+        "startSpeakingPlan": {
+            "waitSeconds": 0.4,
+            "smartEndpointingEnabled": "livekit",
+            "smartEndpointingPlan": {
+                "provider": "vapi"
+            }
+        },
+        "stopSpeakingPlan": {
+            "numWords": 2,
+            "voiceSeconds": 0.3,
+            "backoffSeconds": 1
+        }
+    }
+
+
+    assistant_created = superu_client.assistants.create(
+        **exmaple_json
+    )
+
+    assistant_id = assistant_created['id']
+    ```
+
+  </Step>
+
+  <Step title="Run the Application">
+    Execute your Python file using the appropriate command:
+
+    ```bash
+    # Windows
+    python superu_voice_assistant.py
+
+    # macOS/Linux
+    python3 superu_voice_assistant.py
+    ```
+
+    <Check>
+      You should see "Connected to WebSocket. Streaming audio..." in your terminal, indicating a successful connection.
+    </Check>
+
+  </Step>
+</Steps>
+
+---
+
+## Available AI Voices
+
+You can choose from many different AI voices by changing the `voice_id` parameter. Each voice has a unique ID and supports various languages.
+
+Service provider: **Elevenlab**
+
+```json
+voice_list = {
+  "gHu9GtaHOXcSqFTK06ux": {
+    "language": "Hindi",
+    "gender": "Female",
+    "accent": "Standard",
+    "name": "Anjali - Soothing Hindi Voice"
+  },
+  "m5qndnI7u4OAdXhH0Mr5": {
+    "language": "Hindi",
+    "gender": "Male",
+    "accent": "Standard",
+    "name": "Krishna - Energetic Hindi Voice"
+  },
+  "90ipbRoKi4CpHXvKVtl0": {
+    "language": "English",
+    "gender": "Female",
+    "accent": "Indian",
+    "name": "Anika - Customer Care Agent"
+  },
+  "xnx6sPTtvU635ocDt2j7": {
+    "language": "English",
+    "gender": "Male",
+    "accent": "Indian",
+    "name": "Chinmay - Calm, Energetic & Relatable"
+  },
+  "kdmDKE6EkgrWrrykO9Qt": {
+    "language": "English",
+    "gender": "Female",
+    "accent": "American",
+    "name": "Alexandra"
+  },
+  "XA2bIQ92TabjGbpO2xRr": {
+    "language": "English",
+    "gender": "Male",
+    "accent": "American",
+    "name": "Jerry"
+  },
+  "MzqUf1HbJ8UmQ0wUsx2p": {
+    "language": "English",
+    "gender": "Female",
+    "accent": "British",
+    "name": "Katie X"
+  },
+  "qxjGnozOAtD4eqNuXms4": {
+    "language": "English",
+    "gender": "Male",
+    "accent": "British",
+    "name": "John Shaw - Polite Customer Care Voice"
+  },
+  "6qpxBH5KUSDb40bij36w": {
+    "language": "English",
+    "gender": "Female",
+    "accent": "Singaporean",
+    "name": "Lilian"
+  },
+  "aCChyB4P5WEomwRsOKRh": {
+    "language": "English",
+    "gender": "Female",
+    "accent": "Middle east",
+    "name": "Salma - Conversational Expressive Voice"
+  }
+}
+
+```
+
+---
+
+## Customizing Your Assistant
+
+You can personalize your AI assistant by modifying several key components:
+
+### Name
+
+This is the name of the assistant.
+
+### Transcriber
+
+These are the options for the assistant’s transcriber
+
+- **assembly-ai**
+
+```json
+{
+  "provider": "assembly-ai", // Required: transcription provider
+
+  "confidenceThreshold": 0.4, // Optional: transcripts below this confidence will be discarded (>=0, <=1), default is 0.4
+
+  "disablePartialTranscripts": false, // Optional: set to true to disable receiving partial transcripts, default is false
+
+  "endUtteranceSilenceThreshold": 1500, // Optional: silence duration (in ms) that marks end of an utterance
+
+  "fallbackPlan": {
+    "provider": "backup-provider",
+    "strategy": "retry" // Optional: example plan in case the main provider fails
+  },
+
+  "language": "en", // Optional: language for transcription, defaults to "en"
+
+  "realtimeUrl": "wss://transcriber.example.com/socket", // Optional: WebSocket URL the transcriber connects to
+
+  "wordBoost": ["blockchain", "quantum computing", "neural networks"] // Optional: custom vocabulary, up to 2500 characters
+}
+```
+
+- **azure**
+
+```json
+{
+  "provider": "azure", // Required: transcription provider
+  "language": "en-US" // Optional: transcription language (must be from Azure's supported list)
+  // list of azure supported languages
+  // https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt
+}
+```
+
+Telugu Transcriber
+
+```json
+{
+  "provider": "azure", // Required: transcription provider
+  "language": "te-IN" // Optional: transcription language (must be from Azure's supported list)
+  // list of azure supported languages
+  // https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt
+}
+```
+
+Tamil Transcriber
+
+```json
+{
+  "provider": "azure", // Required: transcription provider
+  "language": "ta-IN" // Optional: transcription language (must be from Azure's supported list)
+  // list of azure supported languages
+  // https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt
+}
+```
+
+- **deepgram**
+
+```json
+{
+  // Required: deepgram transcriber config
+  "provider": "deepgram",
+
+  "codeSwitchingEnabled": false,
+  // Optional: Enables automatic switching between supported languages mid-call.
+  // Default is false.
+  // Supported languages: https://developers.deepgram.com/docs/supported-languages
+
+  "confidenceThreshold": 0.4,
+  // Optional: Transcripts below this confidence will be discarded.
+  // Must be between 0 and 1. Default is 0.4.
+
+  "endpointing": 10,
+  // Optional: Timeout (in ms) after user silence to send transcript.
+  // Recommended values: 10 (faster, less accurate for short phrases), or 300 (slightly slower, more accurate).
+  // Docs: https://developers.deepgram.com/docs/endpointing
+  // Range: 10–500, default is 10.
+
+  "fallbackPlan": {
+    "provider": "backup-deepgram",
+    "strategy": "failover"
+  },
+  // Optional: Fallback voice provider if Deepgram fails
+
+  "keyterm": ["priority support", "platinum subscription"],
+  // Optional: Keyterm Prompting improves Keyword Recall Rate (KRR)
+
+  "keywords": ["VapiAI", "DeepSync", "EdgeCompute"],
+  // Optional: Helps Deepgram model recognize uncommon or domain-specific terms
+
+  "language": "en-US",
+  // Optional: Set the transcription language
+  // Supported languages: https://developers.deepgram.com/docs/models-languages-overview
+
+  "mipOptOut": false,
+  // Optional: Opt out of Deepgram's Model Improvement Program
+  // Docs: https://developers.deepgram.com/docs/the-deepgram-model-improvement-partnership-program#want-to-opt-out
+
+  "model": "nova",
+  // Optional: Specifies the Deepgram model to use
+  // Available models: https://developers.deepgram.com/docs/models-languages-overview
+
+  "numerals": true,
+  // Optional: Converts spoken numbers into numeric form
+  // e.g., "nine-seven-two" becomes "972"
+
+  "smartFormat": true
+  // Optional: Applies smart formatting to transcription output
+  // May format numbers as times; use with caution
+}
+```
+
+- **11labs**
+
+```json
+{
+  // Required: 11labs transcriber config
+  "provider": "11labs",
+
+  "fallbackPlan": {
+    "provider": "backup-11labs",
+    "strategy": "failover"
+  },
+  // Optional: Fallback voice provider if 11labs fails
+
+  "language": "en",
+  // Optional: Language for transcription
+  // Must be one of the ISO 639-1 or ISO 639-2 language codes (e.g., "en", "fr", "es", "hi", "zh", "yue")
+  // Full list of supported codes is extensive, including:
+  // ar (Arabic), bn (Bengali), zh (Chinese), en (English), fr (French), de (German), hi (Hindi), ja (Japanese), ru (Russian), es (Spanish), etc.
+
+  "model": "scribe_v1"
+  // Optional: Transcription model to use
+  // Currently defaults to "scribe_v1"
+}
+```
+
+### Model (Pick one of the options)
+
+- **openai**
+
+```json
+{
+  // Required: OpenAI llm
+  "provider": "openai",
+
+  "model": "gpt-4o",
+  // Required: The OpenAI model to use for transcription and conversation
+  // Options include: "gpt-4o", "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", etc.
+  // Full model list provided by Vapi
+
+  "emotionRecognitionEnabled": false,
+  // Optional: Whether to detect user emotion from speech
+  // Default is false, as OpenAI models infer emotion well from text alone
+
+  "fallbackModels": ["gpt-3.5-turbo", "gpt-4-0613"],
+  // Optional: Models to fall back to if primary model fails
+  // Vapi usually auto-selects optimal fallbacks, only override if necessary
+
+  "knowledgeBase": {
+    // Optional: Custom knowledge base support
+    "server": {
+      "url": "https://your-knowledge-api.com/query",
+      // Required: API endpoint for your knowledge base
+
+      "timeoutSeconds": 20,
+      // Optional: Timeout for requests in seconds (1–120)
+      // Default is 20
+
+      "secret": "my-secret-key",
+      // Optional: Secret sent as `x-vapi-secret` header
+
+      "headers": {
+        "Authorization": "Bearer custom-token",
+        "Custom-Header": "value"
+      },
+      // Optional: Additional headers to send with the request
+
+      "backoffPlan": {
+        "initialDelay": 1000,
+        "maxDelay": 10000,
+        "multiplier": 2
+      }
+      // Optional: Retry strategy if requests to your knowledge base fail
+    },
+
+    "knowledgeBaseId": "kb-ocean-facts"
+    // Optional: ID of the knowledge base to be used
+  },
+
+  "maxTokens": 500,
+  // Optional: Max tokens the assistant can generate per turn (50–10000)
+  // Default is 250
+
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant."
+    },
+    {
+      "role": "user",
+      "content": "How does transcription work?"
+    }
+  ],
+  // Optional: Initial conversation state provided to the model
+
+  "numFastTurns": 2,
+  // Optional: Use faster, smaller model (e.g., gpt-3.5) for first N turns
+  // Default is 0
+
+  "temperature": 0.7,
+  // Optional: Controls randomness/creativity of the output (0–2)
+  // Default is 0 for fast caching and low latency
+
+  "toolIds": [
+    "7709cdd9-4fff-4c6d-8d34-dc2e4988550a",
+    "1ecd7247-a3c2-423f-8c5f-08b379c7b055"
+  ]
+  // Optional: List of tools the assistant can use during conversation
+  // Can be used alongside `tools` for transient tool support
+}
+```
+
+### Voice (Pick one of the options)
+
+- **11labs**
+
+```json
+{
+  // Required: The provider ID for this configuration
+  "provider": "11labs",
+
+  "voiceId": "FFmp1h1BMl0iVHA0JxrI",
+  // Checkout Voices :  https://elevenlabs.io/app/voice-library
+  // Required: Voice ID from your 11Labs Voice Library
+  // Can be a string or enum — ensure it exists in your library
+
+  "autoMode": false,
+  // Optional: Enables or disables automatic voice settings mode
+  // Default is false
+
+  "cachingEnabled": true,
+  // Optional: Enables voice caching for performance optimization
+  // Default is true
+
+  "chunkPlan": {
+    "chunkSizeMs": 400,
+    // Optional: Duration (in milliseconds) of each audio chunk
+
+    "delayBeforeFirstChunkMs": 100,
+    // Optional: Delay (in ms) before the first audio chunk is sent
+
+    "maxChunkDelayMs": 300,
+    // Optional: Max delay between chunks (in ms)
+
+    "maxChunkSizeMs": 1000
+    // Optional: Max allowed size of a chunk (in ms)
+  },
+  // Optional: Controls how text-to-speech output is broken into chunks
+
+  "enableSsmlParsing": false,
+  // Optional: Enables [SSML parsing](https://elevenlabs.io/docs/speech-synthesis/prompting#pronunciation)
+  // Default is false to reduce latency
+
+  "language": "en",
+  // Optional: Enforced language (ISO 639-1 format)
+  // Only supported in Turbo v2.5 models — others will return an error if set
+
+  "model": "eleven_turbo_v2_5",
+  // Optional: Voice model to be used
+  // Available options:
+  // "eleven_multilingual_v2", "eleven_turbo_v2", "eleven_turbo_v2_5",
+  // "eleven_flash_v2", "eleven_flash_v2_5", "eleven_monolingual_v1"
+
+  "optimizeStreamingLatency": 3,
+  // Optional: Controls latency optimization (range: 0–4)
+  // Default is 3
+
+  "similarityBoost": 0.8,
+  // Optional: Controls how closely the voice matches original training samples (0–1)
+
+  "speed": 1.0,
+  // Optional: Adjusts speech rate (range: 0.7–1.2)
+
+  "stability": 0.6,
+  // Optional: Controls variation vs consistency in voice generation (0–1)
+
+  "style": 0.5,
+  // Optional: Adds expressiveness/styling to the voice (0–1)
+
+  "useSpeakerBoost": true
+  // Optional: Enables speaker boost for clarity and energy
+}
+```
+
+Tamil Voice
+
+```python
+        {
+            // Required: The provider ID for this configuration
+            "provider": "11labs",
+
+            "voiceId": "gCr8TeSJgJaeaIoV4RWH",
+
+            # Remainging Other Values as mentioned above
+        }
+
+```
+
+- **Azure**
+
+Telugu Voice
+
+```python
+{
+    // Required: The provider ID for this configuration
+    "provider": "azure",
+
+    "voiceId": "te-IN-MohanNeural",
+    # Male Telugu Voice : te-IN-MohanNeural
+    # Female Telugu Voice : te-IN-ShrutiNeural
+}
+
+```
+
+Tamil Voice
+
+```python
+{
+    // Required: The provider ID for this configuration
+    "provider": "azure",
+
+    "voiceId": "ta-IN-PallaviNeural",
+    # Female Tamil Voice : ta-IN-PallaviNeural
+}
+
+```
+
+### Other Customization options
+
+- **firstMessage**
+
+  This is the first message that the assistant will say. This can also be a URL to a containerized audio file (mp3, wav, etc.).
+
+  If unspecified, assistant will wait for user to speak and use the model to respond once they speak.
+
+  ```json
+  first_message: "Hi, This is Nikita calling from super you. Is this a good time to speak? "
+  ```
+
+  - **firstMessageInterruptionsEnabled**
+
+    boolean Optional Defaults to `false`
+
+- **firstMessageMode**
+
+  This is the mode for the first message. Default is ‘assistant-speaks-first’.
+
+  Use:
+
+  - ‘assistant-speaks-first’ to have the assistant speak first.
+  - ‘assistant-waits-for-user’ to have the assistant wait for the user to speak first.
+  - ‘assistant-speaks-first-with-model-generated-message’ to have the assistant speak first with a message generated by the model based on the conversation state. (**`assistant.model.messages`** at call start, **`call.messages`** at squad transfer points).
+
+  @default ‘assistant-speaks-first’
+
+  Allowed values:
+
+  **`assistant-speaks-first`**
+
+  **`assistant-speaks-first-with-model-generated-message`**
+
+  **`assistant-waits-for-user`**
+
+  - **silenceTimeoutSeconds**
+    doubleOptional **`>=10    <=3600`**
+    How many seconds of silence to wait before ending the call. Defaults to 30.
+    @default 30
+  - **maxDurationSeconds**
+    doubleOptional **`>=10       <=43200`**
+    This is the maximum number of seconds that the call will last. When the call reaches this duration, it will be ended.
+    @default 600 (10 minutes)
+  - **backgroundSound**
+    This enables filtering of noise and background speech while the user is talking.
+    Default **`false`** while in beta.
+    @default false
+  - **backgroundDenoisingEnabled**
+    This enables filtering of noise and background speech while the user is talking.
+    Default **`false`** while in beta.
+    @default false
+  - **voicemailMessage**
+    **`<=1000 characters`**
+    This is the message that the assistant will say if the call is forwarded to voicemail.
+    If unspecified, it will hang up.
+  - **endCallMessage**
+    **`<=1000 characters`**
+    This is the message that the assistant will say if it ends the call.
+    If unspecified, it will hang up without saying anything.
+
+---
+
+## Additional Resources
+
+- [Join the SuperU Discord Community](https://discord.gg/e4QJ7RmFaH)
+- [Watch Tutorial Videos](https://youtube.com/superu)
+- [SuperU Website](https://superu.ai)
+
+<Check>
+  Congratulations! You now have a real-time AI Voice Agent running on your
+  machine.
+</Check>
+````
