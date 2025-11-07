@@ -39,6 +39,12 @@
               "agents/use_superu",
               "agents/initiate_and_analyze_calls"
             ]
+          },
+          {
+            "group" : "API Reference",
+            "pages": [
+              "CRM/Contacts"
+            ]
           }
         ]
       }

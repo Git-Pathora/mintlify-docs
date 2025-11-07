@@ -1,0 +1,100 @@
+---
+title: "Contact Management"
+description: ""
+---
+
+## Prerequisites
+
+Before you start, make sure you have:
+
+- Python installed on your computer
+- Internet connection
+- A microphone and speakers/headphones
+- An account on [SuperU](https://workspace.superu.ai//)
+
+---
+
+## Getting Started
+
+<Steps>
+  <Step title="Sign Up and Get Your API Key">
+    1. Go to [workspace.superu.ai/](https://workspace.superu.ai/) and sign up for an account
+    2. After signing up, visit your dashboard
+    3. Copy your API key from the dashboard
+    
+    <Note>
+      For security, store your API key in an environment variable instead of hard-coding it in your code.
+    </Note>
+  </Step>
+</Steps>
+
+---
+
+## Setup & Configuration
+
+<Steps>
+  <Step title="Install Dependencies">
+    Open your terminal and run the appropriate command for your operating system:
+
+    ```bash
+    # Windows
+    pip install superu
+
+    # macOS/Linux
+    pip3 install superu
+    ```
+  </Step>
+
+  <Step title="Create Contact">
+  ```python
+  import superu
+
+  superu_client = superu.SuperU('<YOUR API KEY>')
+
+  superu_client.contacts.create({
+    'first_name': 'John',
+    'last_name': 'Doe',
+    'email': 'john.doe@example.com',
+    'country_code': '+1',
+    'phone_number': '1234567890'
+  })
+  ```
+  </Step>
+
+  <Step title="Create Audience">
+  An audience is a collection of contacts grouped together for targeted communication or management.
+  ```python
+  import superu
+
+  superu_client = superu.SuperU('<YOUR API KEY>')
+
+  audience = superu_client.create_audience(audience_name = "Test Audience" ,  audience_description="Test Audience for Contacts" , contacts = [
+    {
+       'first_name': 'John',
+       'last_name': 'Doe',
+       'email': 'john.doe@example.com',
+       'country_code': '+1',
+       'phone_number': '1234567890'
+   },
+    {
+         'first_name': 'Jane',
+         'last_name': 'Smith',
+         'email': 'jane.smith@example.com',
+         'country_code': '+1',
+         'phone_number': '0987654321'
+   }
+])
+  ```
+  </Step>
+
+  <Step title="List Contact">
+  Iterate through contacts using pagination. The maximum page size is 100.
+  ```python
+  import superu
+
+  contacts_list = superu_client.contacts.list(page=1, page_size=5)
+  print(contacts_list)
+  ```
+  </Step>
+
+</Steps>
