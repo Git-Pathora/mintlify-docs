@@ -68,7 +68,7 @@ Before you start, make sure you have:
 
   superu_client = superu.SuperU('<YOUR API KEY>')
 
-  audience = superu_client.create_audience(audience_name = "Test Audience" ,  audience_description="Test Audience for Contacts" , contacts = [
+  audience = superu_client.contacts.create_audience(audience_name = "Test Audience" ,  audience_description="Test Audience for Contacts" , contacts = [
     {
        'first_name': 'John',
        'last_name': 'Doe',
