@@ -1,0 +1,515 @@
+# Go Live with your superU AI Voice Agent
+
+### Follow this quick guide to set up your first superU AI voice agent in just a few minutes.
+
+Talking to your customers through AI shouldn’t feel like rocket science. With superU AI, you can set it up in minutes with no code and no tech hassle. Just build your agent, test it, and hear it talk live.
+
+It’s made for people who care about great conversations, not complex tools.
+And it’s surprisingly affordable and scales as fast as your business grows.
+
+Let’s get started:
+
+### **Step 1: Sign into the superU dashboard**
+
+- Go to the [superU Dashboard.](https://workspace.superu.ai/dashboard)
+- Sign up to your workspace
+
+### **Step 2: Build your AI Agent**
+
+- Choose how you want to build your agent. You can start from scratch, let AI create one from your brief, or pick a ready-made template to get started quickly.
+
+![Screenshot 2025-11-08 135454.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-08_135454.png)
+
+- If you choose to use our templates, you’ll see an assorted set of templates on the next page. We have over 100+ selections of templates from various industries and use cases for you to choose. Select one which suits you.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image.png)
+
+- Just click on ‘Create Agent’ to see your agent created on your dashboard.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%201.png)
+
+- After that step, your agent will be visible on your dashboard, once you click on it, you can try ‘Test AI Agent’ to hear your agent.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%202.png)
+
+- If you would rather create your agent using our AI’s help, then click on ‘Create with AI’. Describe the kind of agent you want to build. Share what it should do, who it will talk to, and the tone you want. The assistant will turn your idea into a ready-to-edit draft.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%203.png)
+
+- Wait a little while for your agent to be created and you’ll be able to see a fully functional agent draft ready for you to publish. Edit as per your wishes and then click on ‘Publish’.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%204.png)
+
+- If you choose to start from a blank agent, you’ll begin by setting up the basics: pick a voice, language, and model, then describe what your agent should do. You’ll also add the system prompt to define its personality and write the first message it’ll say on a call.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%202.png)
+
+- Browse the **Voice Library** from the sidebar, filter by provider, gender, or language, and play a few samples to find one that matches your agent’s tone and personality. Keep your preferred voice in mind for later since you can change it anytime from your agent settings.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%205.png)
+
+### **Step 3: Add your Knowledge Base**
+
+- From the left sidebar, click **Knowledge Base** under the “Build” section.
+
+![Screenshot 2025-11-11 120823.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-11_120823.png)
+
+- You’ll see a list of all your existing Knowledge Bases.
+- Click **Create Knowledge Base** in the top-right corner to make a new one.
+
+### **3.1 Create a New Knowledge Base**
+
+- Enter a **Name** for your Knowledge Base.
+- Add a **Description** that clearly explains what the file contains.
+- **You absolutely need to add an accurate description along with your PDF or CSV file without it, the Knowledge Base will not have enough context to work properly.**
+- Upload your file by clicking **Choose Files**.
+    - Supported formats: **CSV** or **PDF**
+    - File size limit: **10 MB**
+- Click **Create** once your file is uploaded and description is filled in.
+
+![Screenshot 2025-11-11 120949.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-11_120949.png)
+
+### **3.2 Connect the Knowledge Base to your Agent**
+
+- Go to the **Agents** tab.
+- Open the agent you want to link with this Knowledge Base.
+- On the right panel, click **Knowledge Base**.
+
+![Screenshot 2025-11-11 121028.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-11_121028.png)
+
+- Select your new Knowledge Base and click **Save**.
+
+![Screenshot 2025-11-11 121052.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-11_121052.png)
+
+- The agent will now use that Knowledge Base to answer questions during calls.
+
+### **Step 4: Test Your Agent**
+
+- Once your agent is created and published, you can now test how it performs in real time.
+- Click **“Test AI Agent”** at the top right of your screen.
+- A test window will open where you can choose between **Web Call** (browser-based) or **Phone Call**.
+- Plug in your **headphones or mic** for a smoother experience.
+- Click **“Initiate Call”** to start testing.
+- Speak naturally or type your questions to check how the agent greets, responds, and follows the script.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%206.png)
+
+- If you spot any issues, make quick adjustments in the **System Prompt**, **First Message**, or **Knowledge Base**, then test again.
+- Once your agent sounds polished and natural, you’re ready to move on to the next step, connecting a number or launching a campaign.
+
+### **Step 5: Buy a Phone Number and Connect it to a Campaign**
+
+- Choose your country, add a prefix or digits if you want to filter results, then click **Search** to view available numbers. If you leave the box blank, you’ll see all options. Pick a number that fits your region and click **Continue to checkout** to move ahead. You can use our free 100 credits to get your first phone number for free.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%207.png)
+
+- After this, click on the ‘Campaign’ tab where we will be creating a campaign according to your needs. Select ‘Inbound’ or ‘Outbound’.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%208.png)
+
+- For Outbound, click on **Create Campaign**, then enter a name, date, time, agent, phone number, audience, and number of concurrent calls.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%209.png)
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2010.png)
+
+- Hit **Create Campaign** to start your outbound calls and your agent will begin dialing contacts automatically at the scheduled time. You can make unlimited outbound calls with our voice AI agent.
+- For Inbound calls, your purchased phone number will be visible right away. Click on ‘Assign’, add ‘Campaign name’ and select your agent which you will be able to see in the dropdown box. Click on ‘Assign’ and your agent will be live on this number.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2011.png)
+
+- You can add a whole contact list here (called audience) by clicking on the Audience tab, to create different call lists to make it easier for you. After you complete this step, your campaign is created and your agent is live.
+
+That’s it ! Your superU AI agent is now live.
+
+It can take incoming calls, make outbound ones, hold natural conversations, and stay active around the clock. Plus, you’ll also get full call-analytics in the superU AI dashboard so you can track calls, outcomes and performance all in one place.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2012.png)
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2013.png)
+
+## **How to Buy a Phone Number on superU AI**
+
+### Phone numbers are how your superU Voice AI agents connect with real people.
+
+Once you buy a number, you can attach it to any agent for inbound or outbound campaigns 
+
+You can manage all your numbers inside your dashboard to purchase, assign, or remove them anytime.
+
+### **Why You Need a Number**
+
+Every live call made through superU AI runs through a verified phone number. 
+
+Buying your own number ensures your calls look professional, helps track campaigns, and allows inbound calls to reach your agent directly. You can choose local or international numbers depending on where your customers are.
+
+### **How to Buy a Number**
+
+### **Step 1: Login and Buy a Number**
+
+- **Open the Dashboard**
+    
+    Log in to your superU workspace and go to the **Phone Numbers** tab from the left menu.
+    
+    ![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2014.png)
+    
+- **Click “Buy New Number” after choosing a country or region**
+    
+    You’ll see a list of available numbers.
+    
+    ![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2015.png)
+    
+    Pick the area that matches your customer base. We offer phone numbers of major countries.
+    
+    Example: If you serve clients in the US, choose an US number for a US based caller ID.
+    
+- **Review and Confirm**
+    
+    Once you select a number, review the details and click **Buy Number**.
+    
+    The number will be added to your workspace instantly.
+    
+- **Check Your Phone Numbers List**
+    
+    You’ll now see your purchased number listed under **Phone Numbers** with its status set to **Active**.
+    
+
+### **Step 2: Connecting the Number**
+
+Once your number is ready, you can link it to your agent for live calls.
+
+**For Inbound Calls:**
+
+- Go to your agent’s settings.
+- Click **Assign Number** and choose your purchased number.
+- Save the setup, your agent will now automatically answer incoming calls on that number.
+
+**For Outbound Calls:**
+
+- Open the **Campaigns** tab.
+- Click **Create Campaign** and select the agent you want to use.
+- Choose the phone number (it will automatically be visible) you purchased under **Call From**.
+- Upload your contact list and schedule your campaign.
+
+![Gemini_Generated_Image_4q3xy04q3xy04q3x.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Gemini_Generated_Image_4q3xy04q3xy04q3x.png)
+
+Once linked, your AI agent can start making and receiving calls instantly, it will all visible and trackable from your superU dashboard.
+
+## **Outbound Campaigning with superU AI**
+
+**Take your voice agent from setup to live customer calls in minutes.**
+
+### **Why Outbound Calling Matters**
+
+**Take your voice agent from setup to live customer calls in minutes.**
+
+Outbound campaigns help you reach your audience directly: to qualify leads, follow up with sign-ups, share updates, or announce offers. With superU AI, all of this happens automatically, at scale, while maintaining a natural, human-like tone.
+
+### **Step 1: Sign up to the superU Dashboard**
+
+- Go to the [superU Dashboard.](https://workspace.superu.ai/dashboard)
+- Sign up to your workspace
+
+### **Step 2: Assign a Phone Number**
+
+- Choose how you want to build your agent. You can start from scratch, let AI create one from your brief, or pick a ready-made template to get started quickly.
+
+![Screenshot 2025-11-08 135454.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-08_135454.png)
+
+- If you choose to use our templates, you’ll see an assorted set of templates on the next page. We have over 100+ selections of templates from various industries and use cases for you to choose. Select one which suits you.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image.png)
+
+- Just click on ‘Create Agent’ to see your agent created on your dashboard. After that step, your agent will be visible on your dashboard.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2016.png)
+
+- If you would rather create your agent using our AI’s help, then click on ‘Create with AI’. Describe the kind of agent you want to build. Share what it should do, who it will talk to, and the tone you want. The assistant will turn your idea into a ready-to-edit draft.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%203.png)
+
+- Wait a little while for your agent to be created and you’ll be able to see a fully functional agent draft ready for you to publish. Edit as per your wishes and then click on ‘Publish’.
+- If you choose to start from a blank agent, you’ll begin by setting up the basics: pick a voice, language, and model, then describe what your agent should do. You’ll also add the system prompt to define its personality and write the first message it’ll say on a call.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2017.png)
+
+- Browse the **Voice Library** from the sidebar, filter by provider, gender, or language, and play a few samples to find one that matches your agent’s tone and personality. Keep your preferred voice in mind for later since you can change it anytime from your agent settings.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%205.png)
+
+- **Add a Knowledge Base:** Upload PDFs or documents that contain product or service details your agent should know. Add a clear and accurate description so the AI can understand and answer user questions correctly.
+
+![Screenshot 2025-11-08 174249.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-08_174249.png)
+
+### **Step 3: Assign a Phone Number**
+
+- Head to the **Audience** tab.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2018.png)
+
+- Upload your CSV with customer names and phone numbers.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2019.png)
+
+- Map CSV columns and check if you have any validation errors.
+- Create the audience when it looks right.
+
+### **Step 4: Assign a Phone Number**
+
+- Open the **Phone Numbers** tab in your dashboard.
+- Click **Buy New Number**, pick your preferred country or region, and confirm. (refer to ——— to have a detailed guide on how to buy a new phone number)
+- Once purchased, assign that number to your outbound agent.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2020.png)
+
+- This will be the caller ID shown when your agent makes calls.
+
+### **Step 5: Set Up Your Campaign**
+
+- Go to **Campaigns → Create Campaign**.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2021.png)
+
+- Enter a campaign name and select your outbound agent.
+
+![Gemini_Generated_Image_4q3xy04q3xy04q3x.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Gemini_Generated_Image_4q3xy04q3xy04q3x.png)
+
+- Choose your audience list and the phone number to use.
+- Pick a date, time, and number of concurrent calls.
+- Review everything and click **Create Campaign** to launch.
+
+### **Step 6: Go Live and Track Results**
+
+- Once your campaign begins, your agent will automatically start calling contacts.
+- You can track all calls in your dashboard with live status, duration, and outcomes.
+
+![Screenshot 2025-11-05 at 11.28.28 AM (1).png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-05_at_11.28.28_AM_(1).png)
+
+- Review transcripts and recordings to understand how each call went.
+
+![Screenshot 2025-11-05 at 11.31.25 AM.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-05_at_11.31.25_AM.png)
+
+Adjust your message, script, or timing based on insights for even better results next time.
+
+Each campaign teaches your AI to get smarter and more natural with time. With superU AI, you’re not just automating calls, you’re building a voice engine for your business.
+
+## **Inbound Campaigning with superU AI**
+
+**Turn your voice agent into a 24/7 call responder that never misses a customer.**
+
+### **Why Inbound Calling Matters**
+
+Inbound campaigns help your business handle incoming calls smoothly, without needing a live team on every line. With superU AI, your agent can greet callers, answer questions, route requests, or record feedback, all in real time.
+
+It’s perfect for businesses that need round-the-clock availability and consistent, high-quality customer conversations.
+
+### **Step 1: Sign up to the superU Dashboard**
+
+- Go to the [superU Dashboard.](https://workspace.superu.ai/dashboard)
+- Sign up to your workspace
+
+### **Step 2: Buy a Phone Number**
+
+- Choose how you want to build your agent. You can start from scratch, let AI create one from your brief, or pick a ready-made template to get started quickly.
+
+![Screenshot 2025-11-08 135454.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-08_135454.png)
+
+- If you choose to use our templates, you’ll see an assorted set of templates on the next page. We have over 100+ selections of templates from various industries and use cases for you to choose. Select one which suits you.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image.png)
+
+- Just click on ‘Create Agent’ to see your agent created on your dashboard.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%201.png)
+
+- After that step, your agent will be visible on your dashboard, once you click on it, you can try ‘Test AI Agent’ to hear your agent.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%202.png)
+
+- If you would rather create your agent using our AI’s help, then click on ‘Create with AI’. Describe the kind of agent you want to build. Share what it should do, who it will talk to, and the tone you want. The assistant will turn your idea into a ready-to-edit draft.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%203.png)
+
+- Wait a little while for your agent to be created and you’ll be able to see a fully functional agent draft ready for you to publish. Edit as per your wishes and then click on ‘Publish’.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%204.png)
+
+- If you choose to start from a blank agent, you’ll begin by setting up the basics: pick a voice, language, and model, then describe what your agent should do. You’ll also add the system prompt to define its personality and write the first message it’ll say on a call.
+- Browse the **Voice Library** from the sidebar, filter by provider, gender, or language, and play a few samples to find one that matches your agent’s tone and personality. Keep your preferred voice in mind for later since you can change it anytime from your agent settings.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%205.png)
+
+- **Add a Knowledge Base:** Upload PDFs or documents that contain product or service details your agent should know. Add a clear and accurate description so the AI can understand and answer user questions correctly.
+
+![Screenshot 2025-11-08 174249.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-08_174249.png)
+
+### **Step 3: Buy a Phone Number**
+
+- Go to the **Phone Numbers** tab.
+- Click **Buy New Number**, choose a region or country, and confirm the purchase.
+- Once added, the number appears in your list and is ready to be connected. (Refer to this guide to get a detailed picture of how to buy a new phone number)
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2022.png)
+
+### Step 4: Connect Your Agent to an Inbound Campaign
+
+- Go to the **Campaign** tab in your superU dashboard.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2023.png)
+
+- Click **Inbound Campaigns** and create a new inbound campaign.
+- Select the **phone number** you’ve purchased or added earlier.
+- Under **Assigned Agent**, choose the inbound agent you created (for example, “Inbound Calls Agent”).
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2024.png)
+
+- Once assigned, the campaign status will change to **Active**, and your agent will be ready to **receive live incoming calls**.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2025.png)
+
+### **Step 5: Test Your Inbound Flow**
+
+- Call the assigned number from your phone.
+- Listen to how your agent greets and interacts.
+- If needed, update your greeting, voice, or logic directly in the dashboard.
+- Test again until you’re satisfied with the experience
+
+### **Step 6: Track Results using our Call Analytics**
+
+- Once your campaign begins, your agent will automatically start calling contacts.
+- You can track all calls in your dashboard with live status, duration, and outcomes.
+
+![Screenshot 2025-11-05 at 11.28.28 AM (1).png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-05_at_11.28.28_AM_(1).png)
+
+- Review transcripts and recordings to understand how each call went.
+
+![Screenshot 2025-11-05 at 11.31.25 AM.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-05_at_11.31.25_AM.png)
+
+- Adjust your message, script, or timing based on insights for even better results next time.
+
+## **Monitor Your Calls with superU AI**
+
+**Understand every conversation your voice agents have, live or recorded.**
+
+### **Why Monitoring Matters**
+
+Monitoring your calls helps you see how your agents perform in real-world scenarios. With superU AI, every inbound and outbound call is logged automatically. You can review transcripts, listen to recordings, and measure outcomes without any manual effort. This gives you full visibility into customer interactions, so you can make your voice agents smarter and your campaigns more effective.
+
+### **Step-1: Open the Dashboard and Click on the Monitor tab**
+
+- Log in to your **superU dashboard**.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2026.png)
+
+- Go to the **Monitor** tab and click on it.
+
+![Screenshot 2025-11-05 at 11.28.28 AM (1).png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-05_at_11.28.28_AM_(1).png)
+
+- You’ll see all your inbound and outbound calls listed with time, duration, and agent details.
+
+### **Step 2: Review Call Details and Use that Data for your Future Campaigns**
+
+- Click on any call record to open it.
+
+![Screenshot 2025-11-05 at 11.31.25 AM.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-05_at_11.31.25_AM.png)
+
+- Review the full transcript and listen to the recording.
+
+![Screenshot 2025-11-05 at 11.38.53 AM.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-05_at_11.38.53_AM.png)
+
+You can review your call analytics and use them as useful data for your future campaigns. With superU AI, every call becomes data you can learn from.
+
+## **Use a Template**
+
+**Build your first agent faster using pre-built conversation templates.**
+
+### **Why Templates Help**
+
+Templates are the quickest way to start building. Whether it’s lead qualification, feedback collection, appointment booking, or missed-call follow-up, superU AI offers ready-made templates you can customize in minutes.
+
+### **Choose a Template and Create an Agent Using it**
+
+- Log in to your **superU dashboard**.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2026.png)
+
+- Go to the Agents tab and click on ‘Create an Agent’. Then click on ‘Start from Template’ to choose one amongst our 100+ ready-to-use templates to make agent building much easier.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2027.png)
+
+- Browse through the templates like Customer Feedback, Outbound festival promotion, Store launch and many more. Select the one you want.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image.png)
+
+1. Click on a template to preview its flow and prompt. Then click on ‘Create Agent’
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%201.png)
+
+- After that step, your agent will be visible on your dashboard, once you click on it, you can try ‘Test AI Agent’ to hear your agent.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%202.png)
+
+- Interact with your agent and see the template in action.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%206.png)
+
+Now, you can go ahead buy a phone number, add it to a campaign to start making calls.
+
+SuperU templates give you a head start, so you can focus on conversations, not configuration.
+
+## **Setting Up the Knowledge Base**
+
+### **Working with Knowledge Bases**
+
+The Knowledge Base is what makes your AI agent sound informed.
+
+It’s where you store all the product details, FAQs, or support information your agent will use while talking to customers.
+
+Think of it as your agent’s brain: without it, the agent can talk, but it won’t *know* much.
+
+### **Step 1: Go to the Knowledge Base Section**
+
+- From the left sidebar, click **Knowledge Base** under the “Build” section.
+
+![Screenshot 2025-11-08 175914.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-08_175914.png)
+
+- You’ll see a list of all your existing Knowledge Bases.
+- Click **Create Knowledge Base** in the top-right corner to make a new one.
+
+### **Step 2: Create a New Knowledge Base**
+
+- Enter a **Name** for your Knowledge Base (for example, *Genus Product FAQs*).
+
+![Screenshot 2025-11-08 174249.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/Screenshot_2025-11-08_174249.png)
+
+- Add a **Description** that clearly explains what the file contains.
+    - Example: *This Knowledge Base includes Genus inverter and battery FAQs with product features, model details, and warranty information.*
+- **You absolutely need to add an accurate description along with your PDF or CSV file without it, the Knowledge Base will not have enough context to work properly.**
+- Upload your file by clicking **Choose Files**.
+    - Supported formats: **CSV** or **PDF**
+    - File size limit: **10 MB**
+- Click **Create** once your file is uploaded and description is filled in.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2028.png)
+
+- Your Knowledge Base will now appear in the main list.
+
+### **Step 3: Review Uploaded Files**
+
+- Click it anytime to view or replace the document.
+- You can upload multiple files if you want to expand the same Knowledge Base later.
+
+### **Step 4: Connect the Knowledge Base to an Agent**
+
+- Go to the **Agents** tab.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/695925bd-4a04-44d5-ad63-c31999eb5f2c.png)
+
+- Open the agent you want to link with this Knowledge Base.
+- On the right panel, click **Knowledge Base**.
+- Select your new Knowledge Base and click **Save**.
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2029.png)
+
+![image.png](Go%20Live%20with%20your%20superU%20AI%20Voice%20Agent/image%2030.png)
+
+The agent will now use that Knowledge Base to answer questions during calls and your agent will sound informed and updated.
