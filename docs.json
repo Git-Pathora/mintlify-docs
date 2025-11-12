@@ -47,6 +47,23 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Platform Guide",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": []
+          },
+          {
+            "group": "Features",
+            "pages": []
+          },
+          {
+            "group": "Best Practices",
+            "pages": []
+          }
+        ]
       }
     ]
   },
