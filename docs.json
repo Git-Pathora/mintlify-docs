@@ -11,12 +11,46 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Platform Guide",
+        "groups": [
+          {
+            "group": "Build",
+            "pages": ["platform-guide/build-first-agent", "platform-guide/create-with-ai", "platform-guide/start-template", "platform-guide/knowledge-base"]
+          },
+          {
+            "group": "Deploy",
+            "pages": ["platform-guide/add-phone-number", "platform-guide/create-audience", "platform-guide/outbound-campaign"]
+          },
+          {
+            "group": "Monitor",
+            "pages": ["platform-guide/monitor"]
+          }
+        ]
+      },
+      {
+        "tab": "Pricing",
+        "groups": [
+          {
+            "group": "Plans",
+            "pages": ["pricing/individuals-small-teams"]
+          },
+          {
+            "group": "Partners & Enterprise",
+            "pages": ["pricing/enterprise", "pricing/white-label"]
+          },
+          {
+            "group": "Add-ons",
+            "pages": ["pricing/add-ons-services"]
+          }
+        ]
+      },
+      {
         "tab": "API Reference",
         "groups": [
           {
             "group": "Getting started",
             "pages": [
-              
+
             ]
           },
           {
@@ -45,40 +79,6 @@
             "pages": [
               "CRM/Contacts"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "Platform Guide",
-        "groups": [
-          {
-            "group": "Build",
-            "pages": ["platform-guide/build-first-agent", "platform-guide/create-with-ai", "platform-guide/start-template", "platform-guide/knowledge-base"]
-          },
-          {
-            "group": "Deploy",
-            "pages": ["platform-guide/add-phone-number", "platform-guide/create-audience", "platform-guide/outbound-campaign"]
-          },
-          {
-            "group": "Monitor",
-            "pages": ["platform-guide/monitor"]
-          }
-        ]
-      },
-      {
-        "tab": "Pricing",
-        "groups": [
-          {
-            "group": "Plans",
-            "pages": ["pricing/individuals-small-teams"]
-          },
-          {
-            "group": "Enterprise",
-            "pages": ["pricing/enterprise", "pricing/white-label"]
-          },
-          {
-            "group": "Add-ons",
-            "pages": ["pricing/add-ons-services"]
           }
         ]
       }
