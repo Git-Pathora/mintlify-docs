@@ -64,6 +64,23 @@
             "pages": ["platform-guide/monitor"]
           }
         ]
+      },
+      {
+        "tab": "Pricing",
+        "groups": [
+          {
+            "group": "Plans",
+            "pages": ["pricing/individuals-small-teams"]
+          },
+          {
+            "group": "Enterprise",
+            "pages": ["pricing/enterprise", "pricing/white-label"]
+          },
+          {
+            "group": "Add-ons",
+            "pages": ["pricing/add-ons-services"]
+          }
+        ]
       }
     ]
   },
