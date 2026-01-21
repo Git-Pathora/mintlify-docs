@@ -28,6 +28,20 @@
         ]
       },
       {
+        "tab": "Video Tutorials",
+        "groups": [
+          {
+            "group": "Tutorials",
+            "pages": [
+              "video-tutorials/how-to-create-an-agent",
+              "video-tutorials/how-to-write-effective-system-prompt",
+              "video-tutorials/how-to-add-a-knowledge-base",
+              "video-tutorials/how-to-create-an-outbound-campaign"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Pricing",
         "groups": [
           {
