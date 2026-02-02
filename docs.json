@@ -95,6 +95,20 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "BYON",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": [
+              "byon/plivo",
+              "byon/twilio",
+              "byon/telnyx",
+              "byon/wavix"
+            ]
+          }
+        ]
       }
     ]
   },

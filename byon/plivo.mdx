@@ -1,0 +1,75 @@
+---
+title: "Plivo <> outbound trunk"
+description: "Configure your Plivo Outbound Trunk for use with SuperU.ai"
+---
+
+<Steps>
+  <Step title="Sign in to Plivo Console">
+    Sign in to the [Plivo Console](https://console.plivo.com/).
+  </Step>
+
+<Step title="Navigate to Outbound Trunks">
+  Navigate to **Zentrunk** → **Outbound Trunks**.
+</Step>
+
+<Step title="Create New Outbound Trunk">
+  Select **Create New Outbound Trunk** and provide a descriptive name for your
+  trunk.
+</Step>
+
+  <Step title="Trunk Authentication">
+    In the **Trunk Authentication** section → **Credentials List**, select **Add New Credentials List**.
+
+    Add a username and strong password for outbound call authentication.
+
+    <Note>
+      Make sure these values match the username and password you use for your superU outbound trunk.
+    </Note>
+
+  </Step>
+
+  <Step title="Secure Trunking">
+    For **Secure Trunking**, select **Enabled** (recommended).
+
+    <Warning>
+      If you enable secure trunking in Plivo, you must also enable secure trunking in superU. To learn more, see Secure trunking.
+    </Warning>
+
+  </Step>
+
+<Step title="Complete Configuration">
+  Select **Create Trunk** to complete your outbound trunk configuration.
+</Step>
+
+<Step title="Copy Termination SIP Domain">
+  Copy the **Termination SIP Domain** for the next step.
+</Step>
+
+  <Step title="Connect to SuperU">
+    Go to your SuperU dashboard and open the **Bring Your Own Number** modal.
+
+    <img src="/images/sip-byon.png" alt="SIP Bring Your Own Number" style={{height: "500px",width: "auto",cursor: "zoom-in"}} />
+
+    Fill in the details using the information from your Plivo trunk:
+
+    *   **Phone Number**: Enter the phone number you configured in Plivo.
+    *   **Destination**: Select the appropriate region.
+        <img src="/images/sip-destinations.png" alt="SIP Destinations" style={{height: "500px",width: "auto",cursor: "zoom-in"}} />
+        Supported regions include:
+        *   India
+        *   United States
+        *   United Kingdom
+        *   France
+        *   Germany
+        *   Zurich
+        *   Saudi Arabia
+        *   Australia
+    *   **Termination URI**: Paste the **Termination SIP Domain** you copied earlier.
+    *   **SIP Username**: Enter the username you created in the **Trunk Authentication** step.
+    *   **SIP Password**: Enter the password you created in the **Trunk Authentication** step.
+    *   **Nickname**: Give this number a recognizable name (e.g., "Sales Line").
+
+    Click **Save Number** to finish.
+
+  </Step>
+</Steps>

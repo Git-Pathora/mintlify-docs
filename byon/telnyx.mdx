@@ -1,0 +1,59 @@
+---
+title: "Telnyx <> Outbound Trunk"
+description: "Configure your Telnyx Outbound Trunk for use with SuperU.ai"
+---
+
+<Steps>
+  <Step title="Sign in to Telnyx Portal">
+    Sign in to the [Telnyx Portal](https://portal.telnyx.com/).
+  </Step>
+
+<Step title="Create SIP Connection">
+  Navigate to **Voice** → **SIP Trunking**. Select **Create SIP Connection**,
+  provide a friendly name (e.g., "SuperU Outbound"), and click **Create SIP
+  Connection**.
+</Step>
+
+  <Step title="Configure Outbound Settings">
+    Select **Outbound** in the settings of your SIP connection.
+
+    1.  **Outbound Voice Profile**: Create a new profile or select an existing one.
+    2.  **Authentication**: Under **Expert Settings** (or Authentication settings), choose **Credentials**.
+    3.  **Credentials**: Create a **Username** and **Password**.
+
+    <Note>
+      Make sure these values match the username and password you use for your
+      SuperU outbound trunk.
+    </Note>
+
+  </Step>
+
+<Step title="Connect to SuperU">
+    Go to your SuperU dashboard and open the **Bring Your Own Number** modal.
+
+    <img src="/images/sip-byon.png" alt="SIP Bring Your Own Number" style={{height: "500px",width: "auto",cursor: "zoom-in"}} />
+
+    Fill in the details using the information from your Telnyx trunk:
+
+    *   **Phone Number**: Enter the phone number you purchased in Telnyx.
+    *   **Destination**: Select the appropriate region.
+        <img src="/images/sip-destinations.png" alt="SIP Destinations" style={{height: "500px",width: "auto",cursor: "zoom-in"}} />
+        Supported regions include:
+        *   India
+        *   United States
+        *   United Kingdom
+        *   France
+        *   Germany
+        *   Zurich
+        *   Saudi Arabia
+        *   Australia
+
+    *   **Termination URI**: Enter `sip.telnyx.com`.
+    *   **SIP Username**: Enter the username you created in the **Outbound Settings**.
+    *   **SIP Password**: Enter the password you created in the **Outbound Settings**.
+    *   **Nickname**: Give this number a recognizable name (e.g., "Telnyx Outbound").
+
+    Click **Save Number** to finish.
+
+  </Step>
+</Steps>

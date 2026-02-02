@@ -1,0 +1,57 @@
+---
+title: "Wavix <> Outbound Trunk"
+description: "Configure your Wavix Outbound Trunk for use with SuperU.ai"
+---
+
+<Steps>
+  <Step title="Sign in to Wavix">
+    Sign in to your [Wavix account](https://app.wavix.com).
+  </Step>
+
+  <Step title="Create SIP Trunk">
+    Navigate to **Numbers & Trunks** → **Trunks**.
+    
+    1. Select the **Create new** button.
+    2. Enter a **SIP trunk name**.
+    3. In the **Caller ID** section, select one of the phone numbers you purchased.
+    4. Under **Authentication Method**, select **Digest**.
+    5. Enter a strong **Password**.
+    6. Select **Next**.
+    7. Optionally configure limits, then select **Save**.
+
+    <Note>
+      After creating the trunk, note the 5-digit **SIP trunk ID** (Username) and the **Password** you set. You will need these for SuperU.
+    </Note>
+
+  </Step>
+
+  <Step title="Connect to SuperU">
+    Go to your SuperU dashboard and open the **Bring Your Own Number** modal.
+
+    <img src="/images/sip-byon.png" alt="SIP Bring Your Own Number" style={{height: "500px",width: "auto",cursor: "zoom-in"}} />
+
+    Fill in the details using the information from your Wavix trunk:
+
+    *   **Phone Number**: Enter the Wavix phone number you associated with the trunk.
+    *   **Destination**: Select the appropriate region.
+        <img src="/images/sip-destinations.png" alt="SIP Destinations" style={{height: "500px",width: "auto",cursor: "zoom-in"}} />
+        Supported regions include:
+        *   India
+        *   United States
+        *   United Kingdom
+        *   France
+        *   Germany
+        *   Zurich
+        *   Saudi Arabia
+        *   Australia
+
+    *   **Termination URI**: Enter the Wavix SIP gateway address (e.g., `us1.wavix.net` or `<country-code>.wavix.net`).
+        <Tip>Check the [Wavix trunks page](https://app.wavix.com/trunks) for the gateway closest to your location.</Tip>
+    *   **SIP Username**: Enter your 5-digit **SIP trunk ID**.
+    *   **SIP Password**: Enter the **Password** you set for the trunk.
+    *   **Nickname**: Give this number a recognizable name (e.g., "Wavix Outbound").
+
+    Click **Save Number** to finish.
+
+  </Step>
+</Steps>
