@@ -86,12 +86,6 @@
             ]
           },
           {
-            "group": "Featured Endpoints",
-            "pages": [
-              "api-reference/create-agent"
-            ]
-          },
-          {
             "group": "Calls",
             "openapi": "api-reference/openapi.json",
             "pages": [

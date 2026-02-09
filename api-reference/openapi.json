@@ -80,7 +80,8 @@
                 "assistant_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
               }
             }
-          }
+          },
+          "description": "Request body for Create Twilio call."
         },
         "responses": {
           "200": {
@@ -147,7 +148,8 @@
                 "call_uuid": "aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed"
               }
             }
-          }
+          },
+          "description": "Request body for Analyze Twilio call."
         },
         "responses": {
           "200": {
@@ -220,7 +222,8 @@
                 "customer_id": "cust_123"
               }
             }
-          }
+          },
+          "description": "Request body for Create outbound call."
         },
         "responses": {
           "200": {
@@ -288,7 +291,8 @@
                 "type": "outbound"
               }
             }
-          }
+          },
+          "description": "Request body for Create agent."
         },
         "responses": {
           "200": {
@@ -397,7 +401,8 @@
                 "search_query": "sales"
               }
             }
-          }
+          },
+          "description": "Request body for List agents."
         },
         "responses": {
           "200": {
@@ -472,7 +477,8 @@
                 "name": "Sales Assistant V2"
               }
             }
-          }
+          },
+          "description": "Request body for Update agent name."
         },
         "responses": {
           "200": {
@@ -540,7 +546,8 @@
                 "agent_object_id": "66d3f3417bc4a5d5f8b7c8f4"
               }
             }
-          }
+          },
+          "description": "Request body for Delete agent."
         },
         "responses": {
           "200": {
@@ -611,7 +618,8 @@
                 }
               }
             }
-          }
+          },
+          "description": "Request body for Create agent version."
         },
         "responses": {
           "200": {
@@ -681,7 +689,8 @@
                 "version": "v2.1"
               }
             }
-          }
+          },
+          "description": "Request body for Update agent version."
         },
         "responses": {
           "200": {
@@ -749,7 +758,8 @@
                 "version": "v2"
               }
             }
-          }
+          },
+          "description": "Request body for Get agent version."
         },
         "responses": {
           "200": {
@@ -819,7 +829,8 @@
                 "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
               }
             }
-          }
+          },
+          "description": "Request body for List agent versions."
         },
         "responses": {
           "200": {
@@ -895,7 +906,8 @@
                 "version_id": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D"
               }
             }
-          }
+          },
+          "description": "Request body for Deploy agent version."
         },
         "responses": {
           "200": {
@@ -1183,7 +1195,8 @@
                 "tool_url_domain": "https://your-api.com"
               }
             }
-          }
+          },
+          "description": "Request body for Create tool."
         },
         "responses": {
           "201": {
@@ -1251,7 +1264,8 @@
                 "per_page": 20
               }
             }
-          }
+          },
+          "description": "Request body for List tools."
         },
         "responses": {
           "200": {
@@ -1404,7 +1418,8 @@
                 "name": "check-user-status-v2"
               }
             }
-          }
+          },
+          "description": "Request body for Update tool."
         },
         "responses": {
           "200": {
@@ -1535,7 +1550,8 @@
                 "folder_name": "Outbound Agents"
               }
             }
-          }
+          },
+          "description": "Request body for Create folder."
         },
         "responses": {
           "200": {
@@ -1603,7 +1619,8 @@
                 "per_page": 20
               }
             }
-          }
+          },
+          "description": "Request body for List folders."
         },
         "responses": {
           "200": {
@@ -1746,7 +1763,8 @@
                 "folder_name": "Outbound Team"
               }
             }
-          }
+          },
+          "description": "Request body for Update folder."
         },
         "responses": {
           "200": {
@@ -1813,7 +1831,8 @@
                 "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1"
               }
             }
-          }
+          },
+          "description": "Request body for Delete folder."
         },
         "responses": {
           "200": {
@@ -1880,7 +1899,8 @@
                 "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
               }
             }
-          }
+          },
+          "description": "Request body for Assign agent to folder."
         },
         "responses": {
           "200": {
@@ -1961,7 +1981,8 @@
                 "per_page": 20
               }
             }
-          }
+          },
+          "description": "Request body for List folder agents."
         },
         "responses": {
           "200": {
@@ -2038,7 +2059,8 @@
                 "phone_number": "5551234567"
               }
             }
-          }
+          },
+          "description": "Request body for Create contact."
         },
         "responses": {
           "200": {
@@ -2225,7 +2247,8 @@
                 ]
               }
             }
-          }
+          },
+          "description": "Request body for Create audience."
         },
         "responses": {
           "200": {
@@ -2554,7 +2577,8 @@
                 "audience_name": "Demo Audience - Q1"
               }
             }
-          }
+          },
+          "description": "Request body for Update audience."
         },
         "responses": {
           "200": {
@@ -2635,7 +2659,8 @@
                 ]
               }
             }
-          }
+          },
+          "description": "Request body for Add contacts to audience."
         },
         "responses": {
           "200": {
@@ -2710,7 +2735,8 @@
                 "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
               }
             }
-          }
+          },
+          "description": "Request body for Delete audience."
         },
         "responses": {
           "200": {
@@ -2814,7 +2840,8 @@
                 ]
               }
             }
-          }
+          },
+          "description": "Request body for Create knowledge base."
         },
         "responses": {
           "200": {
@@ -2886,7 +2913,8 @@
                 "limit": 10
               }
             }
-          }
+          },
+          "description": "Request body for List knowledge bases."
         },
         "responses": {
           "200": {
@@ -3102,18 +3130,22 @@
         "properties": {
           "status": {
             "type": "string",
-            "example": "success"
+            "example": "success",
+            "description": "Status value."
           },
           "message": {
             "type": "string",
-            "example": "Request completed successfully"
+            "example": "Request completed successfully",
+            "description": "Message value."
           },
           "data": {
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": true,
+            "description": "Data value."
           }
         },
-        "additionalProperties": true
+        "additionalProperties": true,
+        "description": "Generic Response schema."
       },
       "ErrorResponse": {
         "type": "object",
@@ -3123,22 +3155,27 @@
         "properties": {
           "status": {
             "type": "string",
-            "example": "error"
+            "example": "error",
+            "description": "Status value."
           },
           "message": {
             "type": "string",
-            "example": "Invalid request payload"
+            "example": "Invalid request payload",
+            "description": "Message value."
           },
           "error": {
             "type": "string",
-            "example": "Bad Request"
+            "example": "Bad Request",
+            "description": "Error value."
           },
           "code": {
             "type": "string",
-            "example": "BAD_REQUEST"
+            "example": "BAD_REQUEST",
+            "description": "Code value."
           }
         },
-        "additionalProperties": true
+        "additionalProperties": true,
+        "description": "Error Response schema."
       },
       "CustomAnalysisField": {
         "type": "object",
@@ -3170,7 +3207,8 @@
               "other"
             ]
           }
-        }
+        },
+        "description": "Custom Analysis Field schema."
       },
       "TwilioCallCreateRequest": {
         "allOf": [
@@ -3198,11 +3236,13 @@
                 "example": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
               },
               "additional_payload": {
-                "$ref": "#/components/schemas/JsonObject"
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Additional payload value."
               }
             }
           }
-        ]
+        ],
+        "description": "Twilio Call Create Request schema."
       },
       "TwilioCallAnalysisRequest": {
         "allOf": [
@@ -3226,7 +3266,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Twilio Call Analysis Request schema."
       },
       "OutboundCallCreateRequest": {
         "allOf": [
@@ -3271,11 +3312,13 @@
                 "example": "cust_123"
               },
               "variable_values": {
-                "$ref": "#/components/schemas/JsonObject"
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Variable values value."
               }
             }
           }
-        ]
+        ],
+        "description": "Outbound Call Create Request schema."
       },
       "AgentCreateRequest": {
         "allOf": [
@@ -3361,10 +3404,12 @@
                 "example": "Blank Template"
               },
               "form_model": {
-                "$ref": "#/components/schemas/JsonObject"
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Form model value."
               },
               "assistant_data": {
-                "$ref": "#/components/schemas/JsonObject"
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Assistant data value."
               },
               "knowledgeBase": {
                 "type": "array",
@@ -3383,14 +3428,17 @@
                 },
                 "example": [
                   "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
-                ]
+                ],
+                "description": "Tools value."
               },
               "call_forwarding": {
-                "$ref": "#/components/schemas/JsonObject"
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Call forwarding value."
               }
             }
           }
-        ]
+        ],
+        "description": "Agent Create Request schema."
       },
       "AgentListRequest": {
         "allOf": [
@@ -3404,7 +3452,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Agent List Request schema."
       },
       "AgentUpdateNameRequest": {
         "allOf": [
@@ -3427,7 +3476,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Agent Update Name Request schema."
       },
       "AgentDeleteRequest": {
         "allOf": [
@@ -3444,7 +3494,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Agent Delete Request schema."
       },
       "AgentVersionCreateRequest": {
         "allOf": [
@@ -3467,7 +3518,8 @@
                 "example": "v2"
               },
               "assistant_data": {
-                "$ref": "#/components/schemas/JsonObject"
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Assistant data value."
               },
               "knowledgeBase": {
                 "type": "array",
@@ -3476,7 +3528,8 @@
                 },
                 "example": [
                   "kb_01HXRA4N5B8Q0SJC0F30Z8W0DT"
-                ]
+                ],
+                "description": "Knowledge Base value."
               },
               "tools": {
                 "type": "array",
@@ -3485,14 +3538,17 @@
                 },
                 "example": [
                   "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
-                ]
+                ],
+                "description": "Tools value."
               },
               "call_forwarding": {
-                "$ref": "#/components/schemas/JsonObject"
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Call forwarding value."
               }
             }
           }
-        ]
+        ],
+        "description": "Agent Version Create Request schema."
       },
       "AgentVersionUpdateRequest": {
         "allOf": [
@@ -3519,10 +3575,12 @@
                 "example": "v2.1"
               },
               "assistant_data": {
-                "$ref": "#/components/schemas/JsonObject"
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Assistant data value."
               },
               "composio-app": {
-                "$ref": "#/components/schemas/JsonObject"
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Composio app value."
               }
             }
           },
@@ -3545,7 +3603,8 @@
               }
             ]
           }
-        ]
+        ],
+        "description": "Agent Version Update Request schema."
       },
       "AgentVersionGetRequest": {
         "allOf": [
@@ -3568,7 +3627,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Agent Version Get Request schema."
       },
       "AgentVersionListRequest": {
         "allOf": [
@@ -3585,7 +3645,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Agent Version List Request schema."
       },
       "AgentVersionDeployRequest": {
         "allOf": [
@@ -3608,7 +3669,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Agent Version Deploy Request schema."
       },
       "ToolCreateRequest": {
         "allOf": [
@@ -3671,7 +3733,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Tool Create Request schema."
       },
       "ToolListRequest": {
         "allOf": [
@@ -3685,13 +3748,15 @@
               "page": {
                 "type": "integer",
                 "minimum": 1,
-                "example": 1
+                "example": 1,
+                "description": "Page value."
               },
               "per_page": {
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 100,
-                "example": 20
+                "example": 20,
+                "description": "Per page value."
               },
               "type": {
                 "type": "string",
@@ -3700,7 +3765,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Tool List Request schema."
       },
       "ToolUpdateRequest": {
         "allOf": [
@@ -3709,36 +3775,44 @@
             "properties": {
               "name": {
                 "type": "string",
-                "example": "check-user-status-v2"
+                "example": "check-user-status-v2",
+                "description": "Name value."
               },
               "description": {
                 "type": "string",
-                "example": "Check if a user exists in CRM"
+                "example": "Check if a user exists in CRM",
+                "description": "Description value."
               },
               "parameters": {
-                "$ref": "#/components/schemas/JsonObject"
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Parameters value."
               },
               "tool_url": {
                 "type": "string",
-                "example": "/api/check-user"
+                "example": "/api/check-user",
+                "description": "Tool url value."
               },
               "tool_url_domain": {
                 "type": "string",
-                "example": "https://your-api.com"
+                "example": "https://your-api.com",
+                "description": "Tool url domain value."
               },
               "type": {
                 "type": "string",
-                "example": "http"
+                "example": "http",
+                "description": "Type value."
               },
               "async_": {
                 "type": "boolean",
-                "example": false
+                "example": false,
+                "description": "Async value."
               }
             },
             "additionalProperties": true,
             "minProperties": 1
           }
-        ]
+        ],
+        "description": "Tool Update Request schema."
       },
       "FolderCreateRequest": {
         "allOf": [
@@ -3760,7 +3834,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Folder Create Request schema."
       },
       "FolderListRequest": {
         "allOf": [
@@ -3774,17 +3849,20 @@
               "page": {
                 "type": "integer",
                 "minimum": 1,
-                "example": 1
+                "example": 1,
+                "description": "Page value."
               },
               "per_page": {
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 100,
-                "example": 20
+                "example": 20,
+                "description": "Per page value."
               }
             }
           }
-        ]
+        ],
+        "description": "Folder List Request schema."
       },
       "FolderUpdateRequest": {
         "allOf": [
@@ -3825,7 +3903,8 @@
               }
             ]
           }
-        ]
+        ],
+        "description": "Folder Update Request schema."
       },
       "FolderDeleteRequest": {
         "allOf": [
@@ -3842,7 +3921,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Folder Delete Request schema."
       },
       "FolderAssignAgentRequest": {
         "allOf": [
@@ -3864,7 +3944,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Folder Assign Agent Request schema."
       },
       "FolderAgentsRequest": {
         "allOf": [
@@ -3878,17 +3959,20 @@
               "page": {
                 "type": "integer",
                 "minimum": 1,
-                "example": 1
+                "example": 1,
+                "description": "Page value."
               },
               "per_page": {
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 100,
-                "example": 20
+                "example": 20,
+                "description": "Per page value."
               }
             }
           }
-        ]
+        ],
+        "description": "Folder Agents Request schema."
       },
       "ContactCreateRequest": {
         "type": "object",
@@ -3931,7 +4015,8 @@
             "description": "Optional audience ID",
             "example": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
           }
-        }
+        },
+        "description": "Contact Create Request schema."
       },
       "AudienceContact": {
         "type": "object",
@@ -3943,29 +4028,36 @@
         "properties": {
           "first_name": {
             "type": "string",
-            "example": "Ava"
+            "example": "Ava",
+            "description": "First name value."
           },
           "last_name": {
             "type": "string",
-            "example": "Patel"
+            "example": "Patel",
+            "description": "Last name value."
           },
           "email": {
             "type": "string",
             "format": "email",
-            "example": "ava.patel@example.com"
+            "example": "ava.patel@example.com",
+            "description": "Email value."
           },
           "country_code": {
             "type": "string",
-            "example": "+1"
+            "example": "+1",
+            "description": "Country code value."
           },
           "phone_number": {
             "type": "string",
-            "example": "5551234567"
+            "example": "5551234567",
+            "description": "Phone number value."
           },
           "variable_values": {
-            "$ref": "#/components/schemas/JsonObject"
+            "$ref": "#/components/schemas/JsonObject",
+            "description": "Variable values value."
           }
-        }
+        },
+        "description": "Audience Contact schema."
       },
       "AudienceCreateRequest": {
         "allOf": [
@@ -3991,11 +4083,13 @@
                 "minItems": 1,
                 "items": {
                   "$ref": "#/components/schemas/AudienceContact"
-                }
+                },
+                "description": "Contacts value."
               }
             }
           }
-        ]
+        ],
+        "description": "Audience Create Request schema."
       },
       "AudienceUpdateRequest": {
         "allOf": [
@@ -4036,7 +4130,8 @@
               }
             ]
           }
-        ]
+        ],
+        "description": "Audience Update Request schema."
       },
       "AudienceAddContactsRequest": {
         "allOf": [
@@ -4057,11 +4152,13 @@
                 "minItems": 1,
                 "items": {
                   "$ref": "#/components/schemas/AudienceContact"
-                }
+                },
+                "description": "Contacts value."
               }
             }
           }
-        ]
+        ],
+        "description": "Audience Add Contacts Request schema."
       },
       "AudienceDeleteRequest": {
         "allOf": [
@@ -4078,7 +4175,8 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Audience Delete Request schema."
       },
       "KnowledgeBaseListRequest": {
         "type": "object",
@@ -4090,15 +4188,18 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "example": 1
+            "example": 1,
+            "description": "Page value."
           },
           "limit": {
             "type": "integer",
             "minimum": 1,
             "maximum": 50,
-            "example": 10
+            "example": 10,
+            "description": "Limit value."
           }
-        }
+        },
+        "description": "Knowledge Base List Request schema."
       }
     },
     "responses": {
