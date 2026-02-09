@@ -210,7 +210,7 @@
   },
   "api": {
     "playground": {
-      "mode": "show"
+      "display": "interactive"
     },
     "examples": {
       "languages": [
