@@ -1,216 +1,4359 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
+    "title": "SuperU API",
+    "description": "Comprehensive API reference for SuperU voice agents, calls, tools, contacts, audiences, and knowledge bases.",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://voip-middlware.superu.ai",
+      "description": "Production"
     }
   ],
   "security": [
     {
-      "bearerAuth": []
+      "superUApiKey": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Calls",
+      "description": "Create and analyze calls."
+    },
+    {
+      "name": "Agents",
+      "description": "Create, list, import, update, and delete agents."
+    },
+    {
+      "name": "Agent Versions",
+      "description": "Manage versions for existing agents."
+    },
+    {
+      "name": "Phone Numbers",
+      "description": "Fetch phone numbers available in your account."
+    },
+    {
+      "name": "Call Logs",
+      "description": "Retrieve call history with filters."
+    },
+    {
+      "name": "Tools",
+      "description": "Create and manage callable tools."
+    },
+    {
+      "name": "Folders",
+      "description": "Organize agents into folders."
+    },
+    {
+      "name": "Contacts",
+      "description": "Create and list contacts."
+    },
+    {
+      "name": "Audiences",
+      "description": "Create and manage audiences and contacts."
+    },
+    {
+      "name": "Knowledge Base",
+      "description": "Upload and manage knowledge bases."
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
+    "/pypi_support/twilio_call_create": {
+      "post": {
+        "tags": [
+          "Calls"
         ],
+        "summary": "Create Twilio call",
+        "description": "Creates a Twilio call request for an assistant.",
+        "operationId": "createTwilioCall",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TwilioCallCreateRequest"
+              },
+              "example": {
+                "phoneNumberId": "pn_123",
+                "to_": "+14155552671",
+                "assistant_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                "additional_payload": {
+                  "key": "value"
+                }
+              }
+            }
+          },
+          "description": "Request body for Create Twilio call."
+        },
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Twilio call request created",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "call_uuid": "aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed",
+                  "message": "Call queued"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/pypi_support/twilio_call_create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"phoneNumberId\": \"pn_123\",\n  \"to_\": \"+14155552671\",\n  \"assistant_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"additional_payload\": {\n    \"key\": \"value\"\n  }\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"phoneNumberId\": \"pn_123\",\n    \"to_\": \"+14155552671\",\n    \"assistant_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"additional_payload\": {\n        \"key\": \"value\"\n    }\n}\n\nresponse = client.calls.create_twilio_call(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/pypi_support/twilio_call_analysis": {
+      "post": {
+        "tags": [
+          "Calls"
+        ],
+        "summary": "Analyze Twilio call",
+        "description": "Analyzes a completed call and optionally extracts custom fields.",
+        "operationId": "analyzeTwilioCall",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TwilioCallAnalysisRequest"
+              },
+              "example": {
+                "call_uuid": "aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed",
+                "custom_fields": []
+              }
+            }
+          },
+          "description": "Request body for Analyze Twilio call."
+        },
+        "responses": {
+          "200": {
+            "description": "Call analysis generated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "summary": "Caller asked about pricing and requested a callback.",
+                  "custom_fields": {
+                    "intent": "sales"
                   }
                 }
               }
             }
           },
           "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
           }
-        }
-      },
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/pypi_support/twilio_call_analysis \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"call_uuid\": \"aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed\",\n  \"custom_fields\": [\n    {\n      \"field\": \"intent\",\n      \"definition\": \"Primary intent of the caller\",\n      \"outputs_options\": [\n        \"sales\",\n        \"support\",\n        \"other\"\n      ]\n    }\n  ]\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"call_uuid\": \"aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed\",\n    \"custom_fields\": [\n        {\n            \"field\": \"intent\",\n            \"definition\": \"Primary intent of the caller\",\n            \"outputs_options\": [\n                \"sales\",\n                \"support\",\n                \"other\"\n            ]\n        }\n    ]\n}\n\nresponse = client.calls.analysis_twilio_call(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/campaign/outbound/create_call/superu": {
       "post": {
-        "description": "Creates a new plant in the store",
+        "tags": [
+          "Calls"
+        ],
+        "summary": "Create outbound call",
+        "description": "Creates an outbound campaign call for a configured assistant.",
+        "operationId": "createOutboundCall",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/OutboundCallCreateRequest"
+              },
+              "example": {
+                "assistant_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                "to": "+14155552671",
+                "campaign_id": "demo_call",
+                "customer_name": "Ava",
+                "customer_id": "cust_123",
+                "from": "+14155550000",
+                "variable_values": {
+                  "key": "value"
+                }
               }
             }
           },
-          "required": true
+          "description": "Request body for Create outbound call."
         },
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "Outbound call created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "call_uuid": "e8f87167-d4fd-44f2-b03a-24cb600f86f2",
+                  "campaign_id": "demo_call",
+                  "message": "Outbound call created"
                 }
               }
             }
           },
           "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/campaign/outbound/create_call/superu \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"assistant_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"to\": \"+14155552671\",\n  \"from\": \"+14155550000\",\n  \"campaign_id\": \"demo_call\",\n  \"customer_name\": \"Ava\",\n  \"customer_id\": \"cust_123\",\n  \"variable_values\": {\n    \"key\": \"value\"\n  }\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"assistant_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"to\": \"+14155552671\",\n    \"from\": \"+14155550000\",\n    \"campaign_id\": \"demo_call\",\n    \"customer_name\": \"Ava\",\n    \"customer_id\": \"cust_123\",\n    \"variable_values\": {\n        \"key\": \"value\"\n    }\n}\n\nresponse = client.calls.create_outbound_call(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/agent/create": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Create agent",
+        "description": "Creates a new SuperU voice agent.",
+        "operationId": "createAgent",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentCreateRequest"
+              },
+              "example": {
+                "type": "outbound",
+                "name": "Demo Assistant",
+                "company_name": "SuperU",
+                "assistant_name": "Ava",
+                "first_message": "Hi, thanks for taking the call.",
+                "voice": "90ipbRoKi4CpHXvKVtl0",
+                "voice_id": "90ipbRoKi4CpHXvKVtl0",
+                "voice_provider": "11labs",
+                "speed": "1.0",
+                "bg_noice": "false",
+                "backgroundNoise": false,
+                "script": "You are a friendly assistant.",
+                "industry": "Blank Template",
+                "useCase": "Blank Template",
+                "form_model": {
+                  "key": "value"
+                },
+                "assistant_data": {
+                  "key": "value"
+                },
+                "knowledgeBase": [
+                  "kb_abc123"
+                ],
+                "tools": [
+                  "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
+                ],
+                "call_forwarding": {
+                  "key": "value"
                 }
               }
             }
+          },
+          "description": "Request body for Create agent."
+        },
+        "responses": {
+          "200": {
+            "description": "Agent created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                  "message": "Agent created successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"type\": \"outbound\",\n  \"name\": \"Demo Assistant\",\n  \"company_name\": \"SuperU\",\n  \"assistant_name\": \"Ava\",\n  \"first_message\": \"Hi, thanks for taking the call.\",\n  \"voice\": \"90ipbRoKi4CpHXvKVtl0\",\n  \"voice_id\": \"90ipbRoKi4CpHXvKVtl0\",\n  \"voice_provider\": \"11labs\",\n  \"speed\": \"1.0\",\n  \"bg_noice\": \"false\",\n  \"backgroundNoise\": false,\n  \"script\": \"You are a friendly assistant.\",\n  \"industry\": \"Blank Template\",\n  \"useCase\": \"Blank Template\",\n  \"form_model\": {\n    \"key\": \"value\"\n  },\n  \"assistant_data\": {\n    \"key\": \"value\"\n  },\n  \"knowledgeBase\": [\n    \"kb_abc123\"\n  ],\n  \"tools\": [\n    \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n  ],\n  \"call_forwarding\": {\n    \"key\": \"value\"\n  }\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"type\": \"outbound\",\n    \"name\": \"Demo Assistant\",\n    \"company_name\": \"SuperU\",\n    \"assistant_name\": \"Ava\",\n    \"first_message\": \"Hi, thanks for taking the call.\",\n    \"voice\": \"90ipbRoKi4CpHXvKVtl0\",\n    \"voice_id\": \"90ipbRoKi4CpHXvKVtl0\",\n    \"voice_provider\": \"11labs\",\n    \"speed\": \"1.0\",\n    \"bg_noice\": \"false\",\n    \"backgroundNoise\": False,\n    \"script\": \"You are a friendly assistant.\",\n    \"industry\": \"Blank Template\",\n    \"useCase\": \"Blank Template\",\n    \"form_model\": {\n        \"key\": \"value\"\n    },\n    \"assistant_data\": {\n        \"key\": \"value\"\n    },\n    \"knowledgeBase\": [\n        \"kb_abc123\"\n    ],\n    \"tools\": [\n        \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n    ],\n    \"call_forwarding\": {\n        \"key\": \"value\"\n    }\n}\n\nresponse = client.agents.create_agent(**payload)\nprint(response)"
+          }
+        ]
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/agent/list": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "List agents",
+        "description": "Lists agents with pagination and optional filters.",
+        "operationId": "listAgents",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "minimum": 1,
+              "default": 1,
+              "example": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "example": 20
+            }
+          },
+          {
+            "name": "inbound_or_outbound",
+            "in": "query",
+            "description": "Optional direction filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "inbound",
+                "outbound"
+              ],
+              "example": "outbound"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentListRequest"
+              },
+              "example": {
+                "search_query": "sales"
+              }
+            }
+          },
+          "description": "Request body for List agents."
+        },
+        "responses": {
+          "200": {
+            "description": "Agent list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "agent_list": [
+                    {
+                      "vapi_assistant_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                      "name": "Sales Agent",
+                      "type": "outbound"
+                    }
+                  ],
+                  "page": 1,
+                  "limit": 20
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/list?page=1&limit=20&inbound_or_outbound=outbound \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"search_query\": \"sales\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": \"1\",\n    \"limit\": \"20\",\n    \"inbound_or_outbound\": \"outbound\",\n    \"search_query\": \"sales\"\n}\n\nresponse = client.agents.list(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/agent/update/name": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Update agent name",
+        "description": "Updates the display name of an existing agent.",
+        "operationId": "updateAgentName",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentUpdateNameRequest"
+              },
+              "example": {
+                "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                "name": "Sales Assistant V2"
+              }
+            }
+          },
+          "description": "Request body for Update agent name."
+        },
+        "responses": {
+          "200": {
+            "description": "Agent name updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                  "name": "Sales Assistant V2",
+                  "message": "Agent name updated"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/update/name \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"name\": \"Sales Assistant V2\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"name\": \"Sales Assistant V2\"\n}\n\nresponse = client.agents.update_name(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/agent/delete": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Delete agent",
+        "description": "Deletes an agent by object ID.",
+        "operationId": "deleteAgent",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentDeleteRequest"
+              },
+              "example": {
+                "agent_object_id": "66d3f3417bc4a5d5f8b7c8f4"
+              }
+            }
+          },
+          "description": "Request body for Delete agent."
+        },
+        "responses": {
+          "200": {
+            "description": "Agent deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "agent_object_id": "66d3f3417bc4a5d5f8b7c8f4",
+                  "message": "Agent deleted"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/delete \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_object_id\": \"66d3f3417bc4a5d5f8b7c8f4\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_object_id\": \"66d3f3417bc4a5d5f8b7c8f4\"\n}\n\nresponse = client.agents.delete(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/agent/version/create": {
+      "post": {
+        "tags": [
+          "Agent Versions"
+        ],
+        "summary": "Create agent version",
+        "description": "Creates a new version for an existing agent.",
+        "operationId": "createAgentVersion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentVersionCreateRequest"
+              },
+              "example": {
+                "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                "version": "v2",
+                "assistant_data": {
+                  "key": "value"
+                },
+                "knowledgeBase": [
+                  "kb_01HXRA4N5B8Q0SJC0F30Z8W0DT"
+                ],
+                "tools": [
+                  "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
+                ],
+                "call_forwarding": {
+                  "key": "value"
+                }
+              }
+            }
+          },
+          "description": "Request body for Create agent version."
+        },
+        "responses": {
+          "200": {
+            "description": "Version created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "version_id": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D",
+                  "version": "v2",
+                  "message": "Version created"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/version/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"version\": \"v2\",\n  \"assistant_data\": {\n    \"key\": \"value\"\n  },\n  \"knowledgeBase\": [\n    \"kb_01HXRA4N5B8Q0SJC0F30Z8W0DT\"\n  ],\n  \"tools\": [\n    \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n  ],\n  \"call_forwarding\": {\n    \"key\": \"value\"\n  }\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"version\": \"v2\",\n    \"assistant_data\": {\n        \"key\": \"value\"\n    },\n    \"knowledgeBase\": [\n        \"kb_01HXRA4N5B8Q0SJC0F30Z8W0DT\"\n    ],\n    \"tools\": [\n        \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n    ],\n    \"call_forwarding\": {\n        \"key\": \"value\"\n    }\n}\n\nresponse = client.agents.create_version(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/agent/version/update": {
+      "post": {
+        "tags": [
+          "Agent Versions"
+        ],
+        "summary": "Update agent version",
+        "description": "Updates an existing agent version.",
+        "operationId": "updateAgentVersion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentVersionUpdateRequest"
+              },
+              "example": {
+                "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                "version_id": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D",
+                "version": "v2.1",
+                "assistant_data": {
+                  "key": "value"
+                },
+                "composio-app": {
+                  "key": "value"
+                }
+              }
+            }
+          },
+          "description": "Request body for Update agent version."
+        },
+        "responses": {
+          "200": {
+            "description": "Version updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "version_id": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D",
+                  "message": "Version updated"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/version/update \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"version_id\": \"ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D\",\n  \"version\": \"v2.1\",\n  \"assistant_data\": {\n    \"key\": \"value\"\n  },\n  \"composio-app\": {\n    \"key\": \"value\"\n  }\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"version_id\": \"ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D\",\n    \"version\": \"v2.1\",\n    \"assistant_data\": {\n        \"key\": \"value\"\n    },\n    \"composio-app\": {\n        \"key\": \"value\"\n    }\n}\n\nresponse = client.agents.update_version(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/agent/version/get": {
+      "post": {
+        "tags": [
+          "Agent Versions"
+        ],
+        "summary": "Get agent version",
+        "description": "Fetches one version for an agent by version label.",
+        "operationId": "getAgentVersion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentVersionGetRequest"
+              },
+              "example": {
+                "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                "version": "v2"
+              }
+            }
+          },
+          "description": "Request body for Get agent version."
+        },
+        "responses": {
+          "200": {
+            "description": "Version retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                  "version": "v2",
+                  "assistant_data": {
+                    "first_message": "Hello from version 2"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/version/get \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"version\": \"v2\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"version\": \"v2\"\n}\n\nresponse = client.agents.get_version(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/agent/version/list": {
+      "post": {
+        "tags": [
+          "Agent Versions"
+        ],
+        "summary": "List agent versions",
+        "description": "Lists all versions for an agent.",
+        "operationId": "listAgentVersions",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentVersionListRequest"
+              },
+              "example": {
+                "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+              }
+            }
+          },
+          "description": "Request body for List agent versions."
+        },
+        "responses": {
+          "200": {
+            "description": "Version list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "versions": [
+                    {
+                      "version_id": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D",
+                      "version": "v2"
+                    },
+                    {
+                      "version_id": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A1N",
+                      "version": "v1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/version/list \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\"\n}\n\nresponse = client.agents.list_versions(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/agent/version/deploy": {
+      "post": {
+        "tags": [
+          "Agent Versions"
+        ],
+        "summary": "Deploy agent version",
+        "description": "Deploys a version for an agent.",
+        "operationId": "deployAgentVersion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentVersionDeployRequest"
+              },
+              "example": {
+                "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                "version_id": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D"
+              }
+            }
+          },
+          "description": "Request body for Deploy agent version."
+        },
+        "responses": {
+          "200": {
+            "description": "Version deployed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "version_id": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D",
+                  "message": "Version deployed"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/version/deploy \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"version_id\": \"ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"version_id\": \"ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D\"\n}\n\nresponse = client.agents.deploy_version(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/phoneNumber/owned": {
+      "post": {
+        "tags": [
+          "Phone Numbers"
+        ],
+        "summary": "Get owned phone numbers",
+        "description": "Returns phone numbers owned by the authenticated account.",
+        "operationId": "getOwnedPhoneNumbers",
+        "responses": {
+          "200": {
+            "description": "Owned numbers returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "phone_numbers": [
+                    {
+                      "phoneNumberId": "pn_123",
+                      "number": "+14155552671"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/phoneNumber/owned \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\nresponse = client.phone_numbers.get_owned()\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/call-logs/{assistant_id}": {
+      "post": {
+        "tags": [
+          "Call Logs"
+        ],
+        "summary": "Get call logs",
+        "description": "Returns call logs for one assistant or for all assistants.",
+        "operationId": "getCallLogs",
+        "parameters": [
+          {
+            "name": "assistant_id",
+            "in": "path",
+            "description": "Assistant ID or `all`",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "all"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Records per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100,
+              "example": 20
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1,
+              "example": 1
+            }
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "Upper timestamp/date bound",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "2026-02-01T00:00:00Z"
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Lower timestamp/date bound",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "2026-01-01T00:00:00Z"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Call status filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "completed"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "description": "Campaign filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "demo_call"
+            }
+          },
+          {
+            "name": "search_query",
+            "in": "query",
+            "description": "Search filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Ava"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
+          "200": {
+            "description": "Call logs returned",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "logs": [
+                    {
+                      "call_uuid": "e8f87167-d4fd-44f2-b03a-24cb600f86f2",
+                      "to": "+14155552671",
+                      "status": "completed"
+                    }
+                  ],
+                  "page": 1,
+                  "limit": 20
                 }
               }
             }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/call-logs/all?limit=20&page=1&before=2026-02-01T00%3A00%3A00Z&after=2026-01-01T00%3A00%3A00Z&status=completed&campaign_id=demo_call&search_query=Ava \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"assistant_id\": \"all\",\n    \"limit\": \"20\",\n    \"page\": \"1\",\n    \"before\": \"2026-02-01T00:00:00Z\",\n    \"after\": \"2026-01-01T00:00:00Z\",\n    \"status\": \"completed\",\n    \"campaign_id\": \"demo_call\",\n    \"search_query\": \"Ava\"\n}\n\nresponse = client.call_logs.get_logs(**payload)\nprint(response)"
+          }
+        ]
       }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
+    },
+    "/tool": {
       "post": {
-        "description": "Information about a new plant added to the store",
+        "tags": [
+          "Tools"
+        ],
+        "summary": "Create tool",
+        "description": "Creates a callable tool for agents.",
+        "operationId": "createTool",
         "requestBody": {
-          "description": "Plant added to the store",
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/ToolCreateRequest"
+              },
+              "example": {
+                "name": "check-user-status",
+                "description": "Check if a user exists in the database",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "User email"
+                    }
+                  },
+                  "required": [
+                    "email"
+                  ]
+                },
+                "tool_url": "/api/check-user",
+                "tool_url_domain": "https://your-api.com",
+                "type": "http",
+                "async_": false
               }
             }
+          },
+          "description": "Request body for Create tool."
+        },
+        "responses": {
+          "201": {
+            "description": "Tool created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "tool_id": "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2",
+                  "message": "Tool created"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
           }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/tool \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"name\": \"check-user-status\",\n  \"description\": \"Check if a user exists in the database\",\n  \"parameters\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"email\": {\n        \"type\": \"string\",\n        \"description\": \"User email\"\n      }\n    },\n    \"required\": [\n      \"email\"\n    ]\n  },\n  \"tool_url\": \"/api/check-user\",\n  \"tool_url_domain\": \"https://your-api.com\",\n  \"type\": \"http\",\n  \"async_\": false\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"name\": \"check-user-status\",\n    \"description\": \"Check if a user exists in the database\",\n    \"parameters\": {\n        \"type\": \"object\",\n        \"properties\": {\n            \"email\": {\n                \"type\": \"string\",\n                \"description\": \"User email\"\n            }\n        },\n        \"required\": [\n            \"email\"\n        ]\n    },\n    \"tool_url\": \"/api/check-user\",\n    \"tool_url_domain\": \"https://your-api.com\",\n    \"type\": \"http\",\n    \"async_\": False\n}\n\nresponse = client.tools.create(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/tool/list": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "List tools",
+        "description": "Returns tools for the current account.",
+        "operationId": "listTools",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToolListRequest"
+              },
+              "example": {
+                "page": 1,
+                "per_page": 20,
+                "type": "http"
+              }
+            }
+          },
+          "description": "Request body for List tools."
         },
         "responses": {
           "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
+            "description": "Tool list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "tool_list": [
+                    {
+                      "tool_id": "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2",
+                      "name": "check-user-status",
+                      "type": "http"
+                    }
+                  ],
+                  "page": 1,
+                  "per_page": 20
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/tool/list \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"page\": 1,\n  \"per_page\": 20,\n  \"type\": \"http\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": 1,\n    \"per_page\": 20,\n    \"type\": \"http\"\n}\n\nresponse = client.tools.list(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/tool/{tool_id}": {
+      "get": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "Get tool",
+        "description": "Fetches one tool by ID.",
+        "operationId": "getTool",
+        "parameters": [
+          {
+            "name": "tool_id",
+            "in": "path",
+            "description": "Tool ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tool details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "tool": {
+                    "tool_id": "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2",
+                    "name": "check-user-status",
+                    "description": "Check if a user exists"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/tool/tool_01HXR9259WDZ2X3ZZKQ7HDG4C2 \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"tool_id\": \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n}\n\nresponse = client.tools.get(**payload)\nprint(response)"
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "Update tool",
+        "description": "Updates fields on an existing tool.",
+        "operationId": "updateTool",
+        "parameters": [
+          {
+            "name": "tool_id",
+            "in": "path",
+            "description": "Tool ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToolUpdateRequest"
+              },
+              "example": {
+                "name": "check-user-status-v2",
+                "description": "Check if a user exists in CRM",
+                "parameters": {
+                  "key": "value"
+                },
+                "tool_url": "/api/check-user",
+                "tool_url_domain": "https://your-api.com",
+                "type": "http",
+                "async_": false
+              }
+            }
+          },
+          "description": "Request body for Update tool."
+        },
+        "responses": {
+          "200": {
+            "description": "Tool updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "tool_id": "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2",
+                  "message": "Tool updated"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request PATCH \\\\\n  --url https://voip-middlware.superu.ai/tool/tool_01HXR9259WDZ2X3ZZKQ7HDG4C2 \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"name\": \"check-user-status-v2\",\n  \"description\": \"Check if a user exists in CRM\",\n  \"parameters\": {\n    \"key\": \"value\"\n  },\n  \"tool_url\": \"/api/check-user\",\n  \"tool_url_domain\": \"https://your-api.com\",\n  \"type\": \"http\",\n  \"async_\": false\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"tool_id\": \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\",\n    \"name\": \"check-user-status-v2\",\n    \"description\": \"Check if a user exists in CRM\",\n    \"parameters\": {\n        \"key\": \"value\"\n    },\n    \"tool_url\": \"/api/check-user\",\n    \"tool_url_domain\": \"https://your-api.com\",\n    \"type\": \"http\",\n    \"async_\": False\n}\n\nresponse = client.tools.update(**payload)\nprint(response)"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "Delete tool",
+        "description": "Deletes a tool by ID.",
+        "operationId": "deleteTool",
+        "parameters": [
+          {
+            "name": "tool_id",
+            "in": "path",
+            "description": "Tool ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tool deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "tool_id": "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2",
+                  "message": "Tool deleted"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request DELETE \\\\\n  --url https://voip-middlware.superu.ai/tool/tool_01HXR9259WDZ2X3ZZKQ7HDG4C2 \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"tool_id\": \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n}\n\nresponse = client.tools.delete(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/folder/create": {
+      "post": {
+        "tags": [
+          "Folders"
+        ],
+        "summary": "Create folder",
+        "description": "Creates a new folder to organize agents.",
+        "operationId": "createFolder",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolderCreateRequest"
+              },
+              "example": {
+                "folder_name": "Outbound Agents",
+                "description": "Sales and support"
+              }
+            }
+          },
+          "description": "Request body for Create folder."
+        },
+        "responses": {
+          "200": {
+            "description": "Folder created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1",
+                  "message": "Folder created"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"folder_name\": \"Outbound Agents\",\n  \"description\": \"Sales and support\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"folder_name\": \"Outbound Agents\",\n    \"description\": \"Sales and support\"\n}\n\nresponse = client.folders.create(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/folder/list": {
+      "post": {
+        "tags": [
+          "Folders"
+        ],
+        "summary": "List folders",
+        "description": "Lists folders with pagination.",
+        "operationId": "listFolders",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolderListRequest"
+              },
+              "example": {
+                "page": 1,
+                "per_page": 20
+              }
+            }
+          },
+          "description": "Request body for List folders."
+        },
+        "responses": {
+          "200": {
+            "description": "Folder list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "folder_list": [
+                    {
+                      "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1",
+                      "folder_name": "Outbound Agents"
+                    }
+                  ],
+                  "page": 1,
+                  "per_page": 20
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/list \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"page\": 1,\n  \"per_page\": 20\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": 1,\n    \"per_page\": 20\n}\n\nresponse = client.folders.list(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/folder/{folder_id}": {
+      "post": {
+        "tags": [
+          "Folders"
+        ],
+        "summary": "Get folder",
+        "description": "Gets details for one folder.",
+        "operationId": "getFolder",
+        "parameters": [
+          {
+            "name": "folder_id",
+            "in": "path",
+            "description": "Folder ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "fld_01HXR9A3RWQXTQED0KH43WSYH1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Folder details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "folder": {
+                    "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1",
+                    "folder_name": "Outbound Agents",
+                    "description": "Sales and support"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/fld_01HXR9A3RWQXTQED0KH43WSYH1 \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n}\n\nresponse = client.folders.get(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/folder/update": {
+      "post": {
+        "tags": [
+          "Folders"
+        ],
+        "summary": "Update folder",
+        "description": "Updates a folder name and/or description.",
+        "operationId": "updateFolder",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolderUpdateRequest"
+              },
+              "example": {
+                "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1",
+                "folder_name": "Outbound Team",
+                "description": "Top of funnel campaigns"
+              }
+            }
+          },
+          "description": "Request body for Update folder."
+        },
+        "responses": {
+          "200": {
+            "description": "Folder updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1",
+                  "message": "Folder updated"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/update \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\",\n  \"folder_name\": \"Outbound Team\",\n  \"description\": \"Top of funnel campaigns\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\",\n    \"folder_name\": \"Outbound Team\",\n    \"description\": \"Top of funnel campaigns\"\n}\n\nresponse = client.folders.update(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/folder/delete": {
+      "post": {
+        "tags": [
+          "Folders"
+        ],
+        "summary": "Delete folder",
+        "description": "Deletes a folder by ID.",
+        "operationId": "deleteFolder",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolderDeleteRequest"
+              },
+              "example": {
+                "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1"
+              }
+            }
+          },
+          "description": "Request body for Delete folder."
+        },
+        "responses": {
+          "200": {
+            "description": "Folder deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1",
+                  "message": "Folder deleted"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/delete \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n}\n\nresponse = client.folders.delete(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/folder/assign-agent": {
+      "post": {
+        "tags": [
+          "Folders"
+        ],
+        "summary": "Assign agent to folder",
+        "description": "Assigns an agent to a folder.",
+        "operationId": "assignAgentToFolder",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolderAssignAgentRequest"
+              },
+              "example": {
+                "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1"
+              }
+            }
+          },
+          "description": "Request body for Assign agent to folder."
+        },
+        "responses": {
+          "200": {
+            "description": "Agent assigned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                  "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1",
+                  "message": "Agent assigned to folder"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/assign-agent \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n}\n\nresponse = client.folders.assign_agent(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/folder/{folder_id}/agents": {
+      "post": {
+        "tags": [
+          "Folders"
+        ],
+        "summary": "List folder agents",
+        "description": "Lists agents assigned to a folder.",
+        "operationId": "listFolderAgents",
+        "parameters": [
+          {
+            "name": "folder_id",
+            "in": "path",
+            "description": "Folder ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "fld_01HXR9A3RWQXTQED0KH43WSYH1"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolderAgentsRequest"
+              },
+              "example": {
+                "page": 1,
+                "per_page": 20
+              }
+            }
+          },
+          "description": "Request body for List folder agents."
+        },
+        "responses": {
+          "200": {
+            "description": "Folder agents returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "agents": [
+                    {
+                      "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                      "name": "Sales Agent"
+                    }
+                  ],
+                  "page": 1,
+                  "per_page": 20
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/fld_01HXR9A3RWQXTQED0KH43WSYH1/agents \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"page\": 1,\n  \"per_page\": 20\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\",\n    \"page\": 1,\n    \"per_page\": 20\n}\n\nresponse = client.folders.get_agents(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/contact/create": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Create contact",
+        "description": "Creates a contact after validating fields.",
+        "operationId": "createContact",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactCreateRequest"
+              },
+              "example": {
+                "first_name": "Ava",
+                "last_name": "Patel",
+                "email": "ava.patel@example.com",
+                "country_code": "+1",
+                "phone_number": "5551234567",
+                "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
+              }
+            }
+          },
+          "description": "Request body for Create contact."
+        },
+        "responses": {
+          "200": {
+            "description": "Contact created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "contact_id": "con_01HXR9N8QCYHTWNB5JX22P4QZA",
+                  "message": "Contact created"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Contact created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "contact_id": "con_01HXR9N8QCYHTWNB5JX22P4QZA",
+                  "message": "Contact created"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/contact/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"first_name\": \"Ava\",\n  \"last_name\": \"Patel\",\n  \"email\": \"ava.patel@example.com\",\n  \"country_code\": \"+1\",\n  \"phone_number\": \"5551234567\",\n  \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"first_name\": \"Ava\",\n    \"last_name\": \"Patel\",\n    \"email\": \"ava.patel@example.com\",\n    \"country_code\": \"+1\",\n    \"phone_number\": \"5551234567\",\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n}\n\nresponse = client.contacts.create(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/contact/list": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "List contacts",
+        "description": "Returns contacts with pagination and optional search.",
+        "operationId": "listContacts",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "example": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Contacts per page (1-100)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10,
+              "example": 10
+            }
+          },
+          {
+            "name": "search_query",
+            "in": "query",
+            "description": "Search text",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "ava"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contacts returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "contact_list": [
+                    {
+                      "contact_id": "con_01HXR9N8QCYHTWNB5JX22P4QZA",
+                      "first_name": "Ava",
+                      "phone_number": "5551234567"
+                    }
+                  ],
+                  "page": 1,
+                  "limit": 10
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/contact/list?page=1&limit=10&search_query=ava \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": \"1\",\n    \"limit\": \"10\",\n    \"search_query\": \"ava\"\n}\n\nresponse = client.contacts.list(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/audience/create": {
+      "post": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "Create audience",
+        "description": "Creates an audience and inserts initial contacts.",
+        "operationId": "createAudience",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AudienceCreateRequest"
+              },
+              "example": {
+                "audience_name": "Demo Audience",
+                "contacts": [
+                  {
+                    "first_name": "Ava",
+                    "last_name": "Patel",
+                    "email": "ava.patel@example.com",
+                    "country_code": "+1",
+                    "phone_number": "5551234567",
+                    "variable_values": {
+                      "key": "value"
+                    }
+                  }
+                ],
+                "audience_description": "Leads from webinar"
+              }
+            }
+          },
+          "description": "Request body for Create audience."
+        },
+        "responses": {
+          "200": {
+            "description": "Audience created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B",
+                  "contacts_added": 1,
+                  "message": "Audience created"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/audience/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"audience_name\": \"Demo Audience\",\n  \"audience_description\": \"Leads from webinar\",\n  \"contacts\": [\n    {\n      \"first_name\": \"Ava\",\n      \"last_name\": \"Patel\",\n      \"email\": \"ava.patel@example.com\",\n      \"country_code\": \"+1\",\n      \"phone_number\": \"5551234567\",\n      \"variable_values\": {\n        \"key\": \"value\"\n      }\n    }\n  ]\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_name\": \"Demo Audience\",\n    \"audience_description\": \"Leads from webinar\",\n    \"contacts\": [\n        {\n            \"first_name\": \"Ava\",\n            \"last_name\": \"Patel\",\n            \"email\": \"ava.patel@example.com\",\n            \"country_code\": \"+1\",\n            \"phone_number\": \"5551234567\",\n            \"variable_values\": {\n                \"key\": \"value\"\n            }\n        }\n    ]\n}\n\nresponse = client.audience.create(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/audience/list": {
+      "get": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "List audiences",
+        "description": "Returns audiences for the current user.",
+        "operationId": "listAudiences",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1,
+              "example": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Records per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100,
+              "example": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audiences returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "audience_list": [
+                    {
+                      "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B",
+                      "audience_name": "Demo Audience",
+                      "contactCount": 32
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/audience/list?page=1&limit=10 \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": \"1\",\n    \"limit\": \"10\"\n}\n\nresponse = client.audience.list(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/audience/{audience_id}": {
+      "get": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "Get audience",
+        "description": "Returns detailed audience data.",
+        "operationId": "getAudience",
+        "parameters": [
+          {
+            "name": "audience_id",
+            "in": "path",
+            "description": "Audience ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audience details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B",
+                  "audience_name": "Demo Audience",
+                  "audience_description": "Leads from webinar",
+                  "contact_count": 32
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Audience not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/audience/aud_01HXR9V5S7W1S0Q4H4PDTGM43B \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n}\n\nresponse = client.audience.get(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/audience/contacts/list": {
+      "get": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "List audience contacts",
+        "description": "Returns paginated contacts for an audience.",
+        "operationId": "getAudienceContacts",
+        "parameters": [
+          {
+            "name": "audience_id",
+            "in": "query",
+            "description": "Audience ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1,
+              "example": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Records per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100,
+              "example": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audience contacts returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "contact_list": [
+                    {
+                      "contact_id": "con_01HXR9N8QCYHTWNB5JX22P4QZA",
+                      "first_name": "Ava",
+                      "country_code": "+1",
+                      "phone_number": "5551234567"
+                    }
+                  ],
+                  "page": 1,
+                  "limit": 10
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/audience/contacts/list?audience_id=aud_01HXR9V5S7W1S0Q4H4PDTGM43B&page=1&limit=10 \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n    \"page\": \"1\",\n    \"limit\": \"10\"\n}\n\nresponse = client.audience.get_contacts(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/audience/update": {
+      "put": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "Update audience",
+        "description": "Updates audience name and/or description.",
+        "operationId": "updateAudience",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AudienceUpdateRequest"
+              },
+              "example": {
+                "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B",
+                "audience_name": "Demo Audience - Q1",
+                "audience_description": "Qualified leads"
+              }
+            }
+          },
+          "description": "Request body for Update audience."
+        },
+        "responses": {
+          "200": {
+            "description": "Audience updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B",
+                  "message": "Audience updated"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Audience not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request PUT \\\\\n  --url https://voip-middlware.superu.ai/audience/update \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n  \"audience_name\": \"Demo Audience - Q1\",\n  \"audience_description\": \"Qualified leads\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n    \"audience_name\": \"Demo Audience - Q1\",\n    \"audience_description\": \"Qualified leads\"\n}\n\nresponse = client.audience.update(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/audience/add-contacts": {
+      "post": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "Add contacts to audience",
+        "description": "Adds one or more contacts to an audience.",
+        "operationId": "addAudienceContacts",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AudienceAddContactsRequest"
+              },
+              "example": {
+                "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B",
+                "contacts": [
+                  {
+                    "first_name": "Ava",
+                    "last_name": "Patel",
+                    "email": "ava.patel@example.com",
+                    "country_code": "+1",
+                    "phone_number": "5551234567",
+                    "variable_values": {
+                      "key": "value"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "description": "Request body for Add contacts to audience."
+        },
+        "responses": {
+          "200": {
+            "description": "Contacts added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B",
+                  "contacts_added": 2,
+                  "message": "Contacts added"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Audience not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/audience/add-contacts \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n  \"contacts\": [\n    {\n      \"first_name\": \"Ava\",\n      \"last_name\": \"Patel\",\n      \"email\": \"ava.patel@example.com\",\n      \"country_code\": \"+1\",\n      \"phone_number\": \"5551234567\",\n      \"variable_values\": {\n        \"key\": \"value\"\n      }\n    }\n  ]\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n    \"contacts\": [\n        {\n            \"first_name\": \"Ava\",\n            \"last_name\": \"Patel\",\n            \"email\": \"ava.patel@example.com\",\n            \"country_code\": \"+1\",\n            \"phone_number\": \"5551234567\",\n            \"variable_values\": {\n                \"key\": \"value\"\n            }\n        }\n    ]\n}\n\nresponse = client.audience.add_contacts(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/audience/delete": {
+      "delete": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "Delete audience",
+        "description": "Deletes an audience and its contacts.",
+        "operationId": "deleteAudience",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AudienceDeleteRequest"
+              },
+              "example": {
+                "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
+              }
+            }
+          },
+          "description": "Request body for Delete audience."
+        },
+        "responses": {
+          "200": {
+            "description": "Audience deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B",
+                  "contacts_deleted": 32,
+                  "message": "Audience deleted"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Audience not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request DELETE \\\\\n  --url https://voip-middlware.superu.ai/audience/delete \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n}\n\nresponse = client.audience.delete(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/knowledge-base/create": {
+      "post": {
+        "tags": [
+          "Knowledge Base"
+        ],
+        "summary": "Create knowledge base",
+        "description": "Creates a knowledge base and uploads CSV/PDF files.",
+        "operationId": "createKnowledgeBase",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "description",
+                  "files"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Knowledge base name",
+                    "example": "FAQ"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Knowledge base description",
+                    "example": "Frequently asked questions"
+                  },
+                  "files": {
+                    "type": "array",
+                    "description": "Files to upload",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "name": "FAQ",
+                "description": "Frequently asked questions",
+                "files": [
+                  "@/path/to/faq.pdf"
+                ]
+              }
+            }
+          },
+          "description": "Request body for Create knowledge base."
+        },
+        "responses": {
+          "200": {
+            "description": "Knowledge base created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "data": {
+                    "knowledge_base_id": "kb_01HXRA4N5B8Q0SJC0F30Z8W0DT",
+                    "kb_uuid": "kb_abc123",
+                    "embedding_status": "processing"
+                  },
+                  "message": "Knowledge base created"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/knowledge-base/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --form 'name=FAQ' \\\\\n  --form 'description=Frequently asked questions' \\\\\n  --form 'files=@/path/to/file.pdf'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nwith open(\"sample.pdf\", \"rb\") as f:\n    response = client.knowledge_base.create(\n        name=\"FAQ\",\n        description=\"Frequently asked questions\",\n        files=[f]\n    )\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/knowledge-base/list": {
+      "post": {
+        "tags": [
+          "Knowledge Base"
+        ],
+        "summary": "List knowledge bases",
+        "description": "Returns paginated knowledge base records.",
+        "operationId": "listKnowledgeBases",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeBaseListRequest"
+              },
+              "example": {
+                "page": 1,
+                "limit": 10
+              }
+            }
+          },
+          "description": "Request body for List knowledge bases."
+        },
+        "responses": {
+          "200": {
+            "description": "Knowledge bases returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "knowledge_bases": [
+                    {
+                      "knowledge_base_id": "kb_01HXRA4N5B8Q0SJC0F30Z8W0DT",
+                      "kb_uuid": "kb_abc123",
+                      "name": "FAQ",
+                      "embedding_status": "completed"
+                    }
+                  ],
+                  "page": 1,
+                  "limit": 10
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/knowledge-base/list \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"page\": 1,\n  \"limit\": 10\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": 1,\n    \"limit\": 10\n}\n\nresponse = client.knowledge_base.list(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/knowledge-base/{knowledge_base_id}": {
+      "get": {
+        "tags": [
+          "Knowledge Base"
+        ],
+        "summary": "Get knowledge base",
+        "description": "Returns details for a specific knowledge base.",
+        "operationId": "getKnowledgeBase",
+        "parameters": [
+          {
+            "name": "knowledge_base_id",
+            "in": "path",
+            "description": "Knowledge base ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "kb_01HXRA4N5B8Q0SJC0F30Z8W0DT"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Knowledge base details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "knowledge_base_id": "kb_01HXRA4N5B8Q0SJC0F30Z8W0DT",
+                  "kb_uuid": "kb_abc123",
+                  "name": "FAQ",
+                  "description": "Frequently asked questions",
+                  "files": [
+                    {
+                      "filename": "faq.pdf",
+                      "status": "embedded"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Knowledge base not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/knowledge-base/kb_01HXRA4N5B8Q0SJC0F30Z8W0DT \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"knowledge_base_id\": \"kb_01HXRA4N5B8Q0SJC0F30Z8W0DT\"\n}\n\nresponse = client.knowledge_base.get(**payload)\nprint(response)"
+          }
+        ]
+      }
+    },
+    "/agent/import": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Import agents",
+        "description": "Imports agents for the current account.",
+        "operationId": "importAgents",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Agents imported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "imported": 12,
+                  "message": "Agents imported successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/agent/import \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\nresponse = client.agents.import_agents()\nprint(response)"
+          }
+        ]
       }
     }
   },
   "components": {
+    "securitySchemes": {
+      "superUApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "superU-Api-Key",
+        "description": "Your SuperU API key."
+      }
+    },
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "JsonObject": {
         "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
+        "description": "Flexible JSON object",
+        "additionalProperties": true,
+        "example": {
+          "key": "value"
         }
       },
-      "NewPlant": {
+      "GenericResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success",
+            "description": "Status value."
+          },
+          "message": {
+            "type": "string",
+            "example": "Request completed successfully",
+            "description": "Message value."
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Data value."
+          }
+        },
+        "additionalProperties": true,
+        "description": "Generic Response schema."
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "error",
+            "description": "Status value."
+          },
+          "message": {
+            "type": "string",
+            "example": "Invalid request payload",
+            "description": "Message value."
+          },
+          "error": {
+            "type": "string",
+            "example": "Bad Request",
+            "description": "Error value."
+          },
+          "code": {
+            "type": "string",
+            "example": "BAD_REQUEST",
+            "description": "Code value."
+          }
+        },
+        "additionalProperties": true,
+        "description": "Error Response schema."
+      },
+      "CustomAnalysisField": {
+        "type": "object",
+        "required": [
+          "field",
+          "definition",
+          "outputs_options"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Output field name",
+            "example": "intent"
+          },
+          "definition": {
+            "type": "string",
+            "description": "Extraction instructions",
+            "example": "Primary intent of the caller"
+          },
+          "outputs_options": {
+            "type": "array",
+            "description": "Allowed output values",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "sales",
+              "support",
+              "other"
+            ]
+          }
+        },
+        "description": "Custom Analysis Field schema."
+      },
+      "TwilioCallCreateRequest": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
             "type": "object",
+            "required": [
+              "phoneNumberId",
+              "to_",
+              "assistant_id"
+            ],
             "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
+              "phoneNumberId": {
+                "type": "string",
+                "description": "Configured phone number ID",
+                "example": "pn_123"
+              },
+              "to_": {
+                "type": "string",
+                "description": "Destination number",
+                "example": "+14155552671"
+              },
+              "assistant_id": {
+                "type": "string",
+                "description": "Assistant ID",
+                "example": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+              },
+              "additional_payload": {
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Additional payload value."
               }
             }
           }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
         ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
+        "description": "Twilio Call Create Request schema."
+      },
+      "TwilioCallAnalysisRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "call_uuid"
+            ],
+            "properties": {
+              "call_uuid": {
+                "type": "string",
+                "description": "Call UUID",
+                "example": "aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed"
+              },
+              "custom_fields": {
+                "type": "array",
+                "description": "Optional custom extraction fields",
+                "items": {
+                  "$ref": "#/components/schemas/CustomAnalysisField"
+                }
+              }
+            }
           }
-        }
+        ],
+        "description": "Twilio Call Analysis Request schema."
+      },
+      "OutboundCallCreateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "assistant_id",
+              "to",
+              "campaign_id",
+              "customer_name",
+              "customer_id"
+            ],
+            "properties": {
+              "assistant_id": {
+                "type": "string",
+                "description": "Assistant ID",
+                "example": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+              },
+              "to": {
+                "type": "string",
+                "description": "Destination number",
+                "example": "+14155552671"
+              },
+              "from": {
+                "type": "string",
+                "description": "Optional source number",
+                "example": "+14155550000"
+              },
+              "campaign_id": {
+                "type": "string",
+                "description": "Campaign ID",
+                "example": "demo_call"
+              },
+              "customer_name": {
+                "type": "string",
+                "description": "Customer display name",
+                "example": "Ava"
+              },
+              "customer_id": {
+                "type": "string",
+                "description": "Customer identifier",
+                "example": "cust_123"
+              },
+              "variable_values": {
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Variable values value."
+              }
+            }
+          }
+        ],
+        "description": "Outbound Call Create Request schema."
+      },
+      "AgentCreateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Agent type",
+                "enum": [
+                  "inbound",
+                  "outbound"
+                ],
+                "example": "outbound"
+              },
+              "name": {
+                "type": "string",
+                "description": "Internal agent name",
+                "example": "Demo Assistant"
+              },
+              "company_name": {
+                "type": "string",
+                "description": "Company name",
+                "example": "SuperU"
+              },
+              "assistant_name": {
+                "type": "string",
+                "description": "Assistant display name",
+                "example": "Ava"
+              },
+              "first_message": {
+                "type": "string",
+                "description": "First message spoken by the assistant",
+                "example": "Hi, thanks for taking the call."
+              },
+              "voice": {
+                "type": "string",
+                "description": "Voice ID alias",
+                "example": "90ipbRoKi4CpHXvKVtl0"
+              },
+              "voice_id": {
+                "type": "string",
+                "description": "Voice ID",
+                "example": "90ipbRoKi4CpHXvKVtl0"
+              },
+              "voice_provider": {
+                "type": "string",
+                "description": "Voice provider",
+                "example": "11labs"
+              },
+              "speed": {
+                "type": "string",
+                "description": "Voice speed",
+                "example": "1.0"
+              },
+              "bg_noice": {
+                "type": "string",
+                "description": "Background noise toggle as lowercase string",
+                "enum": [
+                  "true",
+                  "false"
+                ],
+                "example": "false"
+              },
+              "backgroundNoise": {
+                "type": "boolean",
+                "description": "Background noise toggle as boolean",
+                "example": false
+              },
+              "script": {
+                "type": "string",
+                "description": "System prompt/script",
+                "example": "You are a friendly assistant."
+              },
+              "industry": {
+                "type": "string",
+                "description": "Industry template",
+                "example": "Blank Template"
+              },
+              "useCase": {
+                "type": "string",
+                "description": "Use case template",
+                "example": "Blank Template"
+              },
+              "form_model": {
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Form model value."
+              },
+              "assistant_data": {
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Assistant data value."
+              },
+              "knowledgeBase": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "kb_abc123"
+                ],
+                "description": "List of knowledge base UUIDs (kb_uuid) to attach to the agent."
+              },
+              "tools": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
+                ],
+                "description": "Tools value."
+              },
+              "call_forwarding": {
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Call forwarding value."
+              }
+            }
+          }
+        ],
+        "description": "Agent Create Request schema."
+      },
+      "AgentListRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "search_query": {
+                "type": "string",
+                "description": "Optional text filter",
+                "example": "sales"
+              }
+            }
+          }
+        ],
+        "description": "Agent List Request schema."
+      },
+      "AgentUpdateNameRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "agent_id",
+              "name"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "description": "Agent ID",
+                "example": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+              },
+              "name": {
+                "type": "string",
+                "description": "New name",
+                "example": "Sales Assistant V2"
+              }
+            }
+          }
+        ],
+        "description": "Agent Update Name Request schema."
+      },
+      "AgentDeleteRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "agent_object_id"
+            ],
+            "properties": {
+              "agent_object_id": {
+                "type": "string",
+                "description": "Agent object ID",
+                "example": "66d3f3417bc4a5d5f8b7c8f4"
+              }
+            }
+          }
+        ],
+        "description": "Agent Delete Request schema."
+      },
+      "AgentVersionCreateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "agent_id",
+              "version",
+              "assistant_data"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "description": "Agent ID",
+                "example": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+              },
+              "version": {
+                "type": "string",
+                "description": "Version label",
+                "example": "v2"
+              },
+              "assistant_data": {
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Assistant data value."
+              },
+              "knowledgeBase": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "kb_01HXRA4N5B8Q0SJC0F30Z8W0DT"
+                ],
+                "description": "Knowledge Base value."
+              },
+              "tools": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
+                ],
+                "description": "Tools value."
+              },
+              "call_forwarding": {
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Call forwarding value."
+              }
+            }
+          }
+        ],
+        "description": "Agent Version Create Request schema."
+      },
+      "AgentVersionUpdateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "agent_id",
+              "version_id"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "description": "Agent ID",
+                "example": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+              },
+              "version_id": {
+                "type": "string",
+                "description": "Version ID",
+                "example": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D"
+              },
+              "version": {
+                "type": "string",
+                "description": "New version label",
+                "example": "v2.1"
+              },
+              "assistant_data": {
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Assistant data value."
+              },
+              "composio-app": {
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Composio app value."
+              }
+            }
+          },
+          {
+            "anyOf": [
+              {
+                "required": [
+                  "version"
+                ]
+              },
+              {
+                "required": [
+                  "assistant_data"
+                ]
+              },
+              {
+                "required": [
+                  "composio-app"
+                ]
+              }
+            ]
+          }
+        ],
+        "description": "Agent Version Update Request schema."
+      },
+      "AgentVersionGetRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "agent_id",
+              "version"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "description": "Agent ID",
+                "example": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+              },
+              "version": {
+                "type": "string",
+                "description": "Version label",
+                "example": "v2"
+              }
+            }
+          }
+        ],
+        "description": "Agent Version Get Request schema."
+      },
+      "AgentVersionListRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "agent_id"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "description": "Agent ID",
+                "example": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+              }
+            }
+          }
+        ],
+        "description": "Agent Version List Request schema."
+      },
+      "AgentVersionDeployRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "agent_id",
+              "version_id"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "description": "Agent ID",
+                "example": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+              },
+              "version_id": {
+                "type": "string",
+                "description": "Version ID",
+                "example": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D"
+              }
+            }
+          }
+        ],
+        "description": "Agent Version Deploy Request schema."
+      },
+      "ToolCreateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "name",
+              "description",
+              "parameters",
+              "tool_url",
+              "tool_url_domain"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Tool name",
+                "example": "check-user-status"
+              },
+              "description": {
+                "type": "string",
+                "description": "What the tool does",
+                "example": "Check if a user exists in the database"
+              },
+              "parameters": {
+                "type": "object",
+                "description": "JSON schema-like parameter definition",
+                "additionalProperties": true,
+                "example": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "User email"
+                    }
+                  },
+                  "required": [
+                    "email"
+                  ]
+                }
+              },
+              "tool_url": {
+                "type": "string",
+                "description": "Endpoint path for tool execution",
+                "example": "/api/check-user"
+              },
+              "tool_url_domain": {
+                "type": "string",
+                "description": "Base domain for tool execution",
+                "example": "https://your-api.com"
+              },
+              "type": {
+                "type": "string",
+                "description": "Optional tool type",
+                "example": "http"
+              },
+              "async_": {
+                "type": "boolean",
+                "description": "Whether the tool runs asynchronously",
+                "example": false
+              }
+            }
+          }
+        ],
+        "description": "Tool Create Request schema."
+      },
+      "ToolListRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "page",
+              "per_page"
+            ],
+            "properties": {
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "example": 1,
+                "description": "Page value."
+              },
+              "per_page": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100,
+                "example": 20,
+                "description": "Per page value."
+              },
+              "type": {
+                "type": "string",
+                "description": "Optional tool type filter",
+                "example": "http"
+              }
+            }
+          }
+        ],
+        "description": "Tool List Request schema."
+      },
+      "ToolUpdateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "check-user-status-v2",
+                "description": "Name value."
+              },
+              "description": {
+                "type": "string",
+                "example": "Check if a user exists in CRM",
+                "description": "Description value."
+              },
+              "parameters": {
+                "$ref": "#/components/schemas/JsonObject",
+                "description": "Parameters value."
+              },
+              "tool_url": {
+                "type": "string",
+                "example": "/api/check-user",
+                "description": "Tool url value."
+              },
+              "tool_url_domain": {
+                "type": "string",
+                "example": "https://your-api.com",
+                "description": "Tool url domain value."
+              },
+              "type": {
+                "type": "string",
+                "example": "http",
+                "description": "Type value."
+              },
+              "async_": {
+                "type": "boolean",
+                "example": false,
+                "description": "Async value."
+              }
+            },
+            "additionalProperties": true,
+            "minProperties": 1
+          }
+        ],
+        "description": "Tool Update Request schema."
+      },
+      "FolderCreateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "folder_name"
+            ],
+            "properties": {
+              "folder_name": {
+                "type": "string",
+                "description": "Folder name",
+                "example": "Outbound Agents"
+              },
+              "description": {
+                "type": "string",
+                "description": "Folder description",
+                "example": "Sales and support"
+              }
+            }
+          }
+        ],
+        "description": "Folder Create Request schema."
+      },
+      "FolderListRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "page",
+              "per_page"
+            ],
+            "properties": {
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "example": 1,
+                "description": "Page value."
+              },
+              "per_page": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100,
+                "example": 20,
+                "description": "Per page value."
+              }
+            }
+          }
+        ],
+        "description": "Folder List Request schema."
+      },
+      "FolderUpdateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "folder_id"
+            ],
+            "properties": {
+              "folder_id": {
+                "type": "string",
+                "description": "Folder ID",
+                "example": "fld_01HXR9A3RWQXTQED0KH43WSYH1"
+              },
+              "folder_name": {
+                "type": "string",
+                "description": "New folder name",
+                "example": "Outbound Team"
+              },
+              "description": {
+                "type": "string",
+                "description": "New description",
+                "example": "Top of funnel campaigns"
+              }
+            }
+          },
+          {
+            "anyOf": [
+              {
+                "required": [
+                  "folder_name"
+                ]
+              },
+              {
+                "required": [
+                  "description"
+                ]
+              }
+            ]
+          }
+        ],
+        "description": "Folder Update Request schema."
+      },
+      "FolderDeleteRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "folder_id"
+            ],
+            "properties": {
+              "folder_id": {
+                "type": "string",
+                "description": "Folder ID",
+                "example": "fld_01HXR9A3RWQXTQED0KH43WSYH1"
+              }
+            }
+          }
+        ],
+        "description": "Folder Delete Request schema."
+      },
+      "FolderAssignAgentRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "agent_id"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "description": "Agent ID",
+                "example": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+              },
+              "folder_id": {
+                "type": "string",
+                "description": "Folder ID",
+                "example": "fld_01HXR9A3RWQXTQED0KH43WSYH1"
+              }
+            }
+          }
+        ],
+        "description": "Folder Assign Agent Request schema."
+      },
+      "FolderAgentsRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "page",
+              "per_page"
+            ],
+            "properties": {
+              "page": {
+                "type": "integer",
+                "minimum": 1,
+                "example": 1,
+                "description": "Page value."
+              },
+              "per_page": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100,
+                "example": 20,
+                "description": "Per page value."
+              }
+            }
+          }
+        ],
+        "description": "Folder Agents Request schema."
+      },
+      "ContactCreateRequest": {
+        "type": "object",
+        "required": [
+          "first_name",
+          "last_name",
+          "email",
+          "country_code",
+          "phone_number"
+        ],
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "description": "First name",
+            "example": "Ava"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Last name",
+            "example": "Patel"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email",
+            "example": "ava.patel@example.com"
+          },
+          "country_code": {
+            "type": "string",
+            "description": "Country code",
+            "example": "+1"
+          },
+          "phone_number": {
+            "type": "string",
+            "description": "Phone number",
+            "example": "5551234567"
+          },
+          "audience_id": {
+            "type": "string",
+            "description": "Optional audience ID",
+            "example": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
+          }
+        },
+        "description": "Contact Create Request schema."
+      },
+      "AudienceContact": {
+        "type": "object",
+        "required": [
+          "first_name",
+          "country_code",
+          "phone_number"
+        ],
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "example": "Ava",
+            "description": "First name value."
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Patel",
+            "description": "Last name value."
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "ava.patel@example.com",
+            "description": "Email value."
+          },
+          "country_code": {
+            "type": "string",
+            "example": "+1",
+            "description": "Country code value."
+          },
+          "phone_number": {
+            "type": "string",
+            "example": "5551234567",
+            "description": "Phone number value."
+          },
+          "variable_values": {
+            "$ref": "#/components/schemas/JsonObject",
+            "description": "Variable values value."
+          }
+        },
+        "description": "Audience Contact schema."
+      },
+      "AudienceCreateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "audience_name",
+              "contacts"
+            ],
+            "properties": {
+              "audience_name": {
+                "type": "string",
+                "description": "Audience name",
+                "example": "Demo Audience"
+              },
+              "audience_description": {
+                "type": "string",
+                "description": "Audience description",
+                "example": "Leads from webinar"
+              },
+              "contacts": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/components/schemas/AudienceContact"
+                },
+                "description": "Contacts value."
+              }
+            }
+          }
+        ],
+        "description": "Audience Create Request schema."
+      },
+      "AudienceUpdateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "audience_id"
+            ],
+            "properties": {
+              "audience_id": {
+                "type": "string",
+                "description": "Audience ID",
+                "example": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
+              },
+              "audience_name": {
+                "type": "string",
+                "description": "Updated audience name",
+                "example": "Demo Audience - Q1"
+              },
+              "audience_description": {
+                "type": "string",
+                "description": "Updated description",
+                "example": "Qualified leads"
+              }
+            }
+          },
+          {
+            "anyOf": [
+              {
+                "required": [
+                  "audience_name"
+                ]
+              },
+              {
+                "required": [
+                  "audience_description"
+                ]
+              }
+            ]
+          }
+        ],
+        "description": "Audience Update Request schema."
+      },
+      "AudienceAddContactsRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "audience_id",
+              "contacts"
+            ],
+            "properties": {
+              "audience_id": {
+                "type": "string",
+                "description": "Audience ID",
+                "example": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
+              },
+              "contacts": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/components/schemas/AudienceContact"
+                },
+                "description": "Contacts value."
+              }
+            }
+          }
+        ],
+        "description": "Audience Add Contacts Request schema."
+      },
+      "AudienceDeleteRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "audience_id"
+            ],
+            "properties": {
+              "audience_id": {
+                "type": "string",
+                "description": "Audience ID",
+                "example": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
+              }
+            }
+          }
+        ],
+        "description": "Audience Delete Request schema."
+      },
+      "KnowledgeBaseListRequest": {
+        "type": "object",
+        "required": [
+          "page",
+          "limit"
+        ],
+        "properties": {
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 1,
+            "description": "Page value."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "example": 10,
+            "description": "Limit value."
+          }
+        },
+        "description": "Knowledge Base List Request schema."
       }
     },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+    "responses": {
+      "BadRequest": {
+        "description": "Bad Request - invalid parameters or payload.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": "error",
+              "code": "BAD_REQUEST",
+              "message": "Request validation failed."
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized - missing or invalid API key.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": "error",
+              "code": "UNAUTHORIZED",
+              "message": "Invalid or missing superU-Api-Key."
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not Found - requested resource does not exist.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": "error",
+              "code": "NOT_FOUND",
+              "message": "Resource not found."
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal Server Error - unexpected backend error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": "error",
+              "code": "INTERNAL_SERVER_ERROR",
+              "message": "An unexpected server error occurred."
+            }
+          }
+        }
+      },
+      "NotImplemented": {
+        "description": "Not Implemented - this action is not available in the current deployment.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": "error",
+              "code": "NOT_IMPLEMENTED",
+              "message": "This endpoint is not implemented for your workspace."
+            }
+          }
+        }
       }
     }
   }

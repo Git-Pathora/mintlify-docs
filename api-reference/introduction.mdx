@@ -1,33 +1,71 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Build, test, and ship with the SuperU API'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+SuperU API lets you create and manage voice agents, place calls, handle tools, organize folders, and work with contacts, audiences, and knowledge bases.
 
-## Welcome
+## Base URL
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+`https://voip-middlware.superu.ai`
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+Use your API key in the `superU-Api-Key` header for all secured endpoints.
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```http
+superU-Api-Key: su_live_xxxxxxxxxxxxx
 ```
+
+## API Playground
+
+Every endpoint page in this section includes:
+
+- Interactive `Try it` requests
+- Auto-generated request examples
+- Copy-ready code examples in `cURL` and `Python`
+- Success and error response blocks
+
+## Common Status Codes
+
+These status codes are now documented across the API, including endpoint-level error examples.
+
+- `200` Success
+- `201` Created
+- `400` Bad Request
+- `401` Unauthorized
+- `404` Not Found
+- `500` Internal Server Error
+- `501` Not Implemented
+
+## Quick Start Example
+
+```bash cURL
+curl --request POST \
+  --url https://voip-middlware.superu.ai/agent/list \
+  --header 'superU-Api-Key: su_live_xxxxxxxxxxxxx' \
+  --data '{
+    "search_query": "sales"
+  }'
+```
+
+```python Python
+from superu import SuperU
+
+client = SuperU("YOUR_SUPERU_API_KEY")
+response = client.agents.list(search_query="sales")
+print(response)
+```
+
+## Endpoint Groups
+
+- Calls
+- Agents
+- Agent Versions
+- Phone Numbers
+- Call Logs
+- Tools
+- Folders
+- Contacts
+- Audiences
+- Knowledge Base

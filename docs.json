@@ -15,15 +15,26 @@
         "groups": [
           {
             "group": "Build",
-            "pages": ["platform-guide/build-first-agent", "platform-guide/create-with-ai", "platform-guide/start-template", "platform-guide/knowledge-base"]
+            "pages": [
+              "platform-guide/build-first-agent",
+              "platform-guide/create-with-ai",
+              "platform-guide/start-template",
+              "platform-guide/knowledge-base"
+            ]
           },
           {
             "group": "Deploy",
-            "pages": ["platform-guide/add-phone-number", "platform-guide/create-audience", "platform-guide/outbound-campaign"]
+            "pages": [
+              "platform-guide/add-phone-number",
+              "platform-guide/create-audience",
+              "platform-guide/outbound-campaign"
+            ]
           },
           {
             "group": "Monitor",
-            "pages": ["platform-guide/monitor"]
+            "pages": [
+              "platform-guide/monitor"
+            ]
           }
         ]
       },
@@ -46,15 +57,22 @@
         "groups": [
           {
             "group": "Plans",
-            "pages": ["pricing/individuals-small-teams"]
+            "pages": [
+              "pricing/individuals-small-teams"
+            ]
           },
           {
             "group": "Partners & Enterprise",
-            "pages": ["pricing/enterprise", "pricing/white-label"]
+            "pages": [
+              "pricing/enterprise",
+              "pricing/white-label"
+            ]
           },
           {
             "group": "Add-ons",
-            "pages": ["pricing/add-ons-services"]
+            "pages": [
+              "pricing/add-ons-services"
+            ]
           }
         ]
       },
@@ -62,36 +80,108 @@
         "tab": "API Reference",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
-
+              "api-reference/introduction"
             ]
           },
           {
-            "group": "Step By Step",
+            "group": "Calls",
+            "openapi": "api-reference/openapi.json",
             "pages": [
-              "steps/pluto"
-            ]
-          },
-          {
-            "group": "Models",
-            "pages": [
-              "models/pluto_1_1",
-              "models/pluto_1_0"
+              "POST /pypi_support/twilio_call_create",
+              "POST /pypi_support/twilio_call_analysis",
+              "POST /campaign/outbound/create_call/superu"
             ]
           },
           {
             "group": "Agents",
+            "openapi": "api-reference/openapi.json",
             "pages": [
-              "agents/create_assistant",
-              "agents/use_superu",
-              "agents/initiate_and_analyze_calls"
+              "POST /agent/create",
+              "POST /agent/list",
+              "GET /agent/import",
+              "POST /agent/update/name",
+              "POST /agent/delete"
             ]
           },
           {
-            "group" : "Contacts",
+            "group": "Agent Versions",
+            "openapi": "api-reference/openapi.json",
             "pages": [
-              "CRM/Contacts"
+              "POST /agent/version/create",
+              "POST /agent/version/update",
+              "POST /agent/version/get",
+              "POST /agent/version/list",
+              "POST /agent/version/deploy"
+            ]
+          },
+          {
+            "group": "Phone Numbers",
+            "openapi": "api-reference/openapi.json",
+            "pages": [
+              "POST /phoneNumber/owned"
+            ]
+          },
+          {
+            "group": "Call Logs",
+            "openapi": "api-reference/openapi.json",
+            "pages": [
+              "POST /call-logs/{assistant_id}"
+            ]
+          },
+          {
+            "group": "Tools",
+            "openapi": "api-reference/openapi.json",
+            "pages": [
+              "POST /tool",
+              "POST /tool/list",
+              "GET /tool/{tool_id}",
+              "PATCH /tool/{tool_id}",
+              "DELETE /tool/{tool_id}"
+            ]
+          },
+          {
+            "group": "Folders",
+            "openapi": "api-reference/openapi.json",
+            "pages": [
+              "POST /folder/create",
+              "POST /folder/list",
+              "POST /folder/{folder_id}",
+              "POST /folder/update",
+              "POST /folder/delete",
+              "POST /folder/assign-agent",
+              "POST /folder/{folder_id}/agents"
+            ]
+          },
+          {
+            "group": "Contacts",
+            "openapi": "api-reference/openapi.json",
+            "pages": [
+              "POST /contact/create",
+              "GET /contact/list"
+            ]
+          },
+          {
+            "group": "Audiences",
+            "openapi": "api-reference/openapi.json",
+            "pages": [
+              "POST /audience/create",
+              "GET /audience/list",
+              "GET /audience/{audience_id}",
+              "GET /audience/contacts/list",
+              "PUT /audience/update",
+              "POST /audience/add-contacts",
+              "DELETE /audience/delete"
+            ]
+          },
+          {
+            "group": "Knowledge Base",
+            "openapi": "api-reference/openapi.json",
+            "pages": [
+              "POST /knowledge-base/create",
+              "POST /knowledge-base/list",
+              "GET /knowledge-base/{knowledge_base_id}"
             ]
           }
         ]
@@ -112,6 +202,19 @@
       }
     ]
   },
+  "api": {
+    "playground": {
+      "display": "interactive"
+    },
+    "examples": {
+      "languages": [
+        "curl",
+        "python"
+      ],
+      "defaults": "all",
+      "prefill": true
+    }
+  },
   "logo": {
     "light": "/logo/light.png",
     "dark": "/logo/dark.png"
@@ -129,15 +232,7 @@
       "href": "https://dev.superu.ai/dashboard"
     }
   },
-  "contextual": {
-    "options": [
-      "chatgpt",
-      "claude",
-      "copy"
-    ]
-  },
   "footer": {
-    "socials": {
-    }
+    "socials": {}
   }
 }

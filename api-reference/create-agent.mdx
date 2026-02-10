@@ -1,0 +1,19 @@
+---
+title: 'Create Agent'
+description: 'Create a voice agent with configurable prompt, voice, tools, and knowledge base.'
+openapi: 'POST /agent/create'
+---
+
+Create a new SuperU voice agent.
+
+Use this endpoint to configure:
+
+- Agent type (`inbound` or `outbound`)
+- Voice (`voice_id`, `voice_provider`, `speed`)
+- Script/system prompt (`script`)
+- Tool attachments (`tools`)
+- Knowledge base attachments (`knowledgeBase`, using `kb_uuid` values)
+
+<Note>
+  Authentication is header-only. Pass `superU-Api-Key` in headers.
+</Note>
