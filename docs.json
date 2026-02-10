@@ -211,7 +211,7 @@
         "curl",
         "python"
       ],
-      "defaults": "required",
+      "defaults": "all",
       "prefill": true
     }
   },

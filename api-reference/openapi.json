@@ -77,7 +77,10 @@
               "example": {
                 "phoneNumberId": "pn_123",
                 "to_": "+14155552671",
-                "assistant_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+                "assistant_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                "additional_payload": {
+                  "key": "value"
+                }
               }
             }
           },
@@ -119,12 +122,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/pypi_support/twilio_call_create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"phoneNumberId\": \"pn_123\",\n  \"to_\": \"+14155552671\",\n  \"assistant_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/pypi_support/twilio_call_create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"phoneNumberId\": \"pn_123\",\n  \"to_\": \"+14155552671\",\n  \"assistant_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"additional_payload\": {\n    \"key\": \"value\"\n  }\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.calls.create_twilio_call(\n    phoneNumberId=\"pn_123\",\n    to_=\"+14155552671\",\n    assistant_id=\"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"phoneNumberId\": \"pn_123\",\n    \"to_\": \"+14155552671\",\n    \"assistant_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"additional_payload\": {\n        \"key\": \"value\"\n    }\n}\n\nresponse = client.calls.create_twilio_call(**payload)\nprint(response)"
           }
         ]
       }
@@ -145,7 +148,8 @@
                 "$ref": "#/components/schemas/TwilioCallAnalysisRequest"
               },
               "example": {
-                "call_uuid": "aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed"
+                "call_uuid": "aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed",
+                "custom_fields": []
               }
             }
           },
@@ -189,12 +193,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/pypi_support/twilio_call_analysis \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"call_uuid\": \"aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/pypi_support/twilio_call_analysis \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"call_uuid\": \"aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed\",\n  \"custom_fields\": [\n    {\n      \"field\": \"intent\",\n      \"definition\": \"Primary intent of the caller\",\n      \"outputs_options\": [\n        \"sales\",\n        \"support\",\n        \"other\"\n      ]\n    }\n  ]\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.calls.analysis_twilio_call(\n    call_uuid=\"aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"call_uuid\": \"aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed\",\n    \"custom_fields\": [\n        {\n            \"field\": \"intent\",\n            \"definition\": \"Primary intent of the caller\",\n            \"outputs_options\": [\n                \"sales\",\n                \"support\",\n                \"other\"\n            ]\n        }\n    ]\n}\n\nresponse = client.calls.analysis_twilio_call(**payload)\nprint(response)"
           }
         ]
       }
@@ -219,7 +223,11 @@
                 "to": "+14155552671",
                 "campaign_id": "demo_call",
                 "customer_name": "Ava",
-                "customer_id": "cust_123"
+                "customer_id": "cust_123",
+                "from": "+14155550000",
+                "variable_values": {
+                  "key": "value"
+                }
               }
             }
           },
@@ -262,12 +270,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/campaign/outbound/create_call/superu \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"assistant_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"to\": \"+14155552671\",\n  \"campaign_id\": \"demo_call\",\n  \"customer_name\": \"Ava\",\n  \"customer_id\": \"cust_123\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/campaign/outbound/create_call/superu \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"assistant_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"to\": \"+14155552671\",\n  \"from\": \"+14155550000\",\n  \"campaign_id\": \"demo_call\",\n  \"customer_name\": \"Ava\",\n  \"customer_id\": \"cust_123\",\n  \"variable_values\": {\n    \"key\": \"value\"\n  }\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.calls.create_outbound_call(\n    assistant_id=\"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    to=\"+14155552671\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"assistant_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"to\": \"+14155552671\",\n    \"from\": \"+14155550000\",\n    \"campaign_id\": \"demo_call\",\n    \"customer_name\": \"Ava\",\n    \"customer_id\": \"cust_123\",\n    \"variable_values\": {\n        \"key\": \"value\"\n    }\n}\n\nresponse = client.calls.create_outbound_call(**payload)\nprint(response)"
           }
         ]
       }
@@ -288,7 +296,35 @@
                 "$ref": "#/components/schemas/AgentCreateRequest"
               },
               "example": {
-                "type": "outbound"
+                "type": "outbound",
+                "name": "Demo Assistant",
+                "company_name": "SuperU",
+                "assistant_name": "Ava",
+                "first_message": "Hi, thanks for taking the call.",
+                "voice": "90ipbRoKi4CpHXvKVtl0",
+                "voice_id": "90ipbRoKi4CpHXvKVtl0",
+                "voice_provider": "11labs",
+                "speed": "1.0",
+                "bg_noice": "false",
+                "backgroundNoise": false,
+                "script": "You are a friendly assistant.",
+                "industry": "Blank Template",
+                "useCase": "Blank Template",
+                "form_model": {
+                  "key": "value"
+                },
+                "assistant_data": {
+                  "key": "value"
+                },
+                "knowledgeBase": [
+                  "kb_abc123"
+                ],
+                "tools": [
+                  "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
+                ],
+                "call_forwarding": {
+                  "key": "value"
+                }
               }
             }
           },
@@ -305,8 +341,7 @@
                 "example": {
                   "status": "success",
                   "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
-                  "vapi_assistant_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
-                  "message": "Agent created"
+                  "message": "Agent created successfully"
                 }
               }
             }
@@ -331,12 +366,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"type\": \"outbound\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"type\": \"outbound\",\n  \"name\": \"Demo Assistant\",\n  \"company_name\": \"SuperU\",\n  \"assistant_name\": \"Ava\",\n  \"first_message\": \"Hi, thanks for taking the call.\",\n  \"voice\": \"90ipbRoKi4CpHXvKVtl0\",\n  \"voice_id\": \"90ipbRoKi4CpHXvKVtl0\",\n  \"voice_provider\": \"11labs\",\n  \"speed\": \"1.0\",\n  \"bg_noice\": \"false\",\n  \"backgroundNoise\": false,\n  \"script\": \"You are a friendly assistant.\",\n  \"industry\": \"Blank Template\",\n  \"useCase\": \"Blank Template\",\n  \"form_model\": {\n    \"key\": \"value\"\n  },\n  \"assistant_data\": {\n    \"key\": \"value\"\n  },\n  \"knowledgeBase\": [\n    \"kb_abc123\"\n  ],\n  \"tools\": [\n    \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n  ],\n  \"call_forwarding\": {\n    \"key\": \"value\"\n  }\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.agents.create_agent(\n    name=\"Demo Assistant\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"type\": \"outbound\",\n    \"name\": \"Demo Assistant\",\n    \"company_name\": \"SuperU\",\n    \"assistant_name\": \"Ava\",\n    \"first_message\": \"Hi, thanks for taking the call.\",\n    \"voice\": \"90ipbRoKi4CpHXvKVtl0\",\n    \"voice_id\": \"90ipbRoKi4CpHXvKVtl0\",\n    \"voice_provider\": \"11labs\",\n    \"speed\": \"1.0\",\n    \"bg_noice\": \"false\",\n    \"backgroundNoise\": False,\n    \"script\": \"You are a friendly assistant.\",\n    \"industry\": \"Blank Template\",\n    \"useCase\": \"Blank Template\",\n    \"form_model\": {\n        \"key\": \"value\"\n    },\n    \"assistant_data\": {\n        \"key\": \"value\"\n    },\n    \"knowledgeBase\": [\n        \"kb_abc123\"\n    ],\n    \"tools\": [\n        \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n    ],\n    \"call_forwarding\": {\n        \"key\": \"value\"\n    }\n}\n\nresponse = client.agents.create_agent(**payload)\nprint(response)"
           }
         ]
       }
@@ -447,12 +482,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/list \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"search_query\": \"sales\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/list?page=1&limit=20&inbound_or_outbound=outbound \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"search_query\": \"sales\"\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.agents.list()\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": \"1\",\n    \"limit\": \"20\",\n    \"inbound_or_outbound\": \"outbound\",\n    \"search_query\": \"sales\"\n}\n\nresponse = client.agents.list(**payload)\nprint(response)"
           }
         ]
       }
@@ -522,7 +557,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.agents.update_name(\n    agent_id=\"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    name=\"Sales Assistant V2\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"name\": \"Sales Assistant V2\"\n}\n\nresponse = client.agents.update_name(**payload)\nprint(response)"
           }
         ]
       }
@@ -590,7 +625,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.agents.delete(\n    agent_id=\"66d3f3417bc4a5d5f8b7c8f4\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_object_id\": \"66d3f3417bc4a5d5f8b7c8f4\"\n}\n\nresponse = client.agents.delete(**payload)\nprint(response)"
           }
         ]
       }
@@ -614,6 +649,15 @@
                 "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
                 "version": "v2",
                 "assistant_data": {
+                  "key": "value"
+                },
+                "knowledgeBase": [
+                  "kb_01HXRA4N5B8Q0SJC0F30Z8W0DT"
+                ],
+                "tools": [
+                  "tool_01HXR9259WDZ2X3ZZKQ7HDG4C2"
+                ],
+                "call_forwarding": {
                   "key": "value"
                 }
               }
@@ -658,12 +702,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/version/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"version\": \"v2\",\n  \"assistant_data\": {\n    \"key\": \"value\"\n  }\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/version/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"version\": \"v2\",\n  \"assistant_data\": {\n    \"key\": \"value\"\n  },\n  \"knowledgeBase\": [\n    \"kb_01HXRA4N5B8Q0SJC0F30Z8W0DT\"\n  ],\n  \"tools\": [\n    \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n  ],\n  \"call_forwarding\": {\n    \"key\": \"value\"\n  }\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.agents.create_version(\n    agent_id=\"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    version=\"v2\",\n    assistant_data={\"first_message\": \"Hello\"}\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"version\": \"v2\",\n    \"assistant_data\": {\n        \"key\": \"value\"\n    },\n    \"knowledgeBase\": [\n        \"kb_01HXRA4N5B8Q0SJC0F30Z8W0DT\"\n    ],\n    \"tools\": [\n        \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n    ],\n    \"call_forwarding\": {\n        \"key\": \"value\"\n    }\n}\n\nresponse = client.agents.create_version(**payload)\nprint(response)"
           }
         ]
       }
@@ -686,7 +730,13 @@
               "example": {
                 "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
                 "version_id": "ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D",
-                "version": "v2.1"
+                "version": "v2.1",
+                "assistant_data": {
+                  "key": "value"
+                },
+                "composio-app": {
+                  "key": "value"
+                }
               }
             }
           },
@@ -728,12 +778,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/version/update \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"version_id\": \"ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D\",\n  \"version\": \"v2.1\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/agent/version/update \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"version_id\": \"ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D\",\n  \"version\": \"v2.1\",\n  \"assistant_data\": {\n    \"key\": \"value\"\n  },\n  \"composio-app\": {\n    \"key\": \"value\"\n  }\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.agents.update_version(\n    agent_id=\"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    version_id=\"ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D\",\n    version=\"v2.1\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"version_id\": \"ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D\",\n    \"version\": \"v2.1\",\n    \"assistant_data\": {\n        \"key\": \"value\"\n    },\n    \"composio-app\": {\n        \"key\": \"value\"\n    }\n}\n\nresponse = client.agents.update_version(**payload)\nprint(response)"
           }
         ]
       }
@@ -805,7 +855,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.agents.get_version(\n    agent_id=\"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    version=\"v2\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"version\": \"v2\"\n}\n\nresponse = client.agents.get_version(**payload)\nprint(response)"
           }
         ]
       }
@@ -881,7 +931,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.agents.list_versions(\n    agent_id=\"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\"\n}\n\nresponse = client.agents.list_versions(**payload)\nprint(response)"
           }
         ]
       }
@@ -950,7 +1000,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.agents.deploy_version(\n    agent_id=\"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    version_id=\"ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"version_id\": \"ver_01HXR8Q2S3E4YQH0RQ5K2V7A8D\"\n}\n\nresponse = client.agents.deploy_version(**payload)\nprint(response)"
           }
         ]
       }
@@ -1008,7 +1058,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.phone_numbers.get_owned()\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\nresponse = client.phone_numbers.get_owned()\nprint(response)"
           }
         ]
       }
@@ -1151,12 +1201,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/call-logs/all \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/call-logs/all?limit=20&page=1&before=2026-02-01T00%3A00%3A00Z&after=2026-01-01T00%3A00%3A00Z&status=completed&campaign_id=demo_call&search_query=Ava \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.call_logs.get_logs(assistant_id=\"all\")\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"assistant_id\": \"all\",\n    \"limit\": \"20\",\n    \"page\": \"1\",\n    \"before\": \"2026-02-01T00:00:00Z\",\n    \"after\": \"2026-01-01T00:00:00Z\",\n    \"status\": \"completed\",\n    \"campaign_id\": \"demo_call\",\n    \"search_query\": \"Ava\"\n}\n\nresponse = client.call_logs.get_logs(**payload)\nprint(response)"
           }
         ]
       }
@@ -1192,7 +1242,9 @@
                   ]
                 },
                 "tool_url": "/api/check-user",
-                "tool_url_domain": "https://your-api.com"
+                "tool_url_domain": "https://your-api.com",
+                "type": "http",
+                "async_": false
               }
             }
           },
@@ -1234,12 +1286,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/tool \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"name\": \"check-user-status\",\n  \"description\": \"Check if a user exists in the database\",\n  \"parameters\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"email\": {\n        \"type\": \"string\",\n        \"description\": \"User email\"\n      }\n    },\n    \"required\": [\n      \"email\"\n    ]\n  },\n  \"tool_url\": \"/api/check-user\",\n  \"tool_url_domain\": \"https://your-api.com\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/tool \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"name\": \"check-user-status\",\n  \"description\": \"Check if a user exists in the database\",\n  \"parameters\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"email\": {\n        \"type\": \"string\",\n        \"description\": \"User email\"\n      }\n    },\n    \"required\": [\n      \"email\"\n    ]\n  },\n  \"tool_url\": \"/api/check-user\",\n  \"tool_url_domain\": \"https://your-api.com\",\n  \"type\": \"http\",\n  \"async_\": false\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.tools.create({\n    \"name\": \"check-user-status\",\n    \"description\": \"Check if a user exists in CRM\",\n    \"parameters\": {\n        \"type\": \"object\",\n        \"properties\": {\"email\": {\"type\": \"string\"}},\n        \"required\": [\"email\"]\n    },\n    \"tool_url\": \"/api/check-user\",\n    \"tool_url_domain\": \"https://your-api.com\"\n})\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"name\": \"check-user-status\",\n    \"description\": \"Check if a user exists in the database\",\n    \"parameters\": {\n        \"type\": \"object\",\n        \"properties\": {\n            \"email\": {\n                \"type\": \"string\",\n                \"description\": \"User email\"\n            }\n        },\n        \"required\": [\n            \"email\"\n        ]\n    },\n    \"tool_url\": \"/api/check-user\",\n    \"tool_url_domain\": \"https://your-api.com\",\n    \"type\": \"http\",\n    \"async_\": False\n}\n\nresponse = client.tools.create(**payload)\nprint(response)"
           }
         ]
       }
@@ -1261,7 +1313,8 @@
               },
               "example": {
                 "page": 1,
-                "per_page": 20
+                "per_page": 20,
+                "type": "http"
               }
             }
           },
@@ -1310,12 +1363,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/tool/list \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"page\": 1,\n  \"per_page\": 20\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/tool/list \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"page\": 1,\n  \"per_page\": 20,\n  \"type\": \"http\"\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.tools.list()\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": 1,\n    \"per_page\": 20,\n    \"type\": \"http\"\n}\n\nresponse = client.tools.list(**payload)\nprint(response)"
           }
         ]
       }
@@ -1384,7 +1437,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.tools.get(\n    tool_id=\"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"tool_id\": \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n}\n\nresponse = client.tools.get(**payload)\nprint(response)"
           }
         ]
       },
@@ -1415,7 +1468,15 @@
                 "$ref": "#/components/schemas/ToolUpdateRequest"
               },
               "example": {
-                "name": "check-user-status-v2"
+                "name": "check-user-status-v2",
+                "description": "Check if a user exists in CRM",
+                "parameters": {
+                  "key": "value"
+                },
+                "tool_url": "/api/check-user",
+                "tool_url_domain": "https://your-api.com",
+                "type": "http",
+                "async_": false
               }
             }
           },
@@ -1457,12 +1518,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request PATCH \\\\\n  --url https://voip-middlware.superu.ai/tool/tool_01HXR9259WDZ2X3ZZKQ7HDG4C2 \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"name\": \"check-user-status-v2\"\n}'"
+            "source": "curl --request PATCH \\\\\n  --url https://voip-middlware.superu.ai/tool/tool_01HXR9259WDZ2X3ZZKQ7HDG4C2 \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"name\": \"check-user-status-v2\",\n  \"description\": \"Check if a user exists in CRM\",\n  \"parameters\": {\n    \"key\": \"value\"\n  },\n  \"tool_url\": \"/api/check-user\",\n  \"tool_url_domain\": \"https://your-api.com\",\n  \"type\": \"http\",\n  \"async_\": false\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.tools.update(\n    tool_id=\"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\",\n    update_data={\"description\": \"Updated by SDK smoke test\"}\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"tool_id\": \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\",\n    \"name\": \"check-user-status-v2\",\n    \"description\": \"Check if a user exists in CRM\",\n    \"parameters\": {\n        \"key\": \"value\"\n    },\n    \"tool_url\": \"/api/check-user\",\n    \"tool_url_domain\": \"https://your-api.com\",\n    \"type\": \"http\",\n    \"async_\": False\n}\n\nresponse = client.tools.update(**payload)\nprint(response)"
           }
         ]
       },
@@ -1526,7 +1587,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.tools.delete(\n    tool_id=\"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"tool_id\": \"tool_01HXR9259WDZ2X3ZZKQ7HDG4C2\"\n}\n\nresponse = client.tools.delete(**payload)\nprint(response)"
           }
         ]
       }
@@ -1547,7 +1608,8 @@
                 "$ref": "#/components/schemas/FolderCreateRequest"
               },
               "example": {
-                "folder_name": "Outbound Agents"
+                "folder_name": "Outbound Agents",
+                "description": "Sales and support"
               }
             }
           },
@@ -1589,12 +1651,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"folder_name\": \"Outbound Agents\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"folder_name\": \"Outbound Agents\",\n  \"description\": \"Sales and support\"\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.folders.create(\n    folder_name=\"Outbound Agents\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"folder_name\": \"Outbound Agents\",\n    \"description\": \"Sales and support\"\n}\n\nresponse = client.folders.create(**payload)\nprint(response)"
           }
         ]
       }
@@ -1669,7 +1731,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.folders.list()\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": 1,\n    \"per_page\": 20\n}\n\nresponse = client.folders.list(**payload)\nprint(response)"
           }
         ]
       }
@@ -1738,7 +1800,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.folders.get(\n    folder_id=\"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n}\n\nresponse = client.folders.get(**payload)\nprint(response)"
           }
         ]
       }
@@ -1760,7 +1822,8 @@
               },
               "example": {
                 "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1",
-                "folder_name": "Outbound Team"
+                "folder_name": "Outbound Team",
+                "description": "Top of funnel campaigns"
               }
             }
           },
@@ -1802,12 +1865,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/update \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\",\n  \"folder_name\": \"Outbound Team\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/update \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\",\n  \"folder_name\": \"Outbound Team\",\n  \"description\": \"Top of funnel campaigns\"\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.folders.update(\n    folder_id=\"fld_01HXR9A3RWQXTQED0KH43WSYH1\",\n    folder_name=\"Outbound Team\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\",\n    \"folder_name\": \"Outbound Team\",\n    \"description\": \"Top of funnel campaigns\"\n}\n\nresponse = client.folders.update(**payload)\nprint(response)"
           }
         ]
       }
@@ -1875,7 +1938,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.folders.delete(\n    folder_id=\"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n}\n\nresponse = client.folders.delete(**payload)\nprint(response)"
           }
         ]
       }
@@ -1896,7 +1959,8 @@
                 "$ref": "#/components/schemas/FolderAssignAgentRequest"
               },
               "example": {
-                "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0"
+                "agent_id": "ag_01HXR8FM5QYCVXAK4TYFJ4AEP0",
+                "folder_id": "fld_01HXR9A3RWQXTQED0KH43WSYH1"
               }
             }
           },
@@ -1939,12 +2003,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/assign-agent \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/folder/assign-agent \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n  \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.folders.assign_agent(\n    agent_id=\"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    folder_id=\"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"agent_id\": \"ag_01HXR8FM5QYCVXAK4TYFJ4AEP0\",\n    \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n}\n\nresponse = client.folders.assign_agent(**payload)\nprint(response)"
           }
         ]
       }
@@ -2031,7 +2095,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.folders.get_agents(\n    folder_id=\"fld_01HXR9A3RWQXTQED0KH43WSYH1\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"folder_id\": \"fld_01HXR9A3RWQXTQED0KH43WSYH1\",\n    \"page\": 1,\n    \"per_page\": 20\n}\n\nresponse = client.folders.get_agents(**payload)\nprint(response)"
           }
         ]
       }
@@ -2056,7 +2120,8 @@
                 "last_name": "Patel",
                 "email": "ava.patel@example.com",
                 "country_code": "+1",
-                "phone_number": "5551234567"
+                "phone_number": "5551234567",
+                "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B"
               }
             }
           },
@@ -2113,12 +2178,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/contact/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"first_name\": \"Ava\",\n  \"last_name\": \"Patel\",\n  \"email\": \"ava.patel@example.com\",\n  \"country_code\": \"+1\",\n  \"phone_number\": \"5551234567\"\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/contact/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"first_name\": \"Ava\",\n  \"last_name\": \"Patel\",\n  \"email\": \"ava.patel@example.com\",\n  \"country_code\": \"+1\",\n  \"phone_number\": \"5551234567\",\n  \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.contacts.create(\n    first_name=\"Ava\",\n    last_name=\"Patel\",\n    email=\"ava.patel@example.com\",\n    country_code=\"+1\",\n    phone_number=\"5551234567\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"first_name\": \"Ava\",\n    \"last_name\": \"Patel\",\n    \"email\": \"ava.patel@example.com\",\n    \"country_code\": \"+1\",\n    \"phone_number\": \"5551234567\",\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n}\n\nresponse = client.contacts.create(**payload)\nprint(response)"
           }
         ]
       }
@@ -2211,12 +2276,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/contact/list \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/contact/list?page=1&limit=10&search_query=ava \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.contacts.list()\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": \"1\",\n    \"limit\": \"10\",\n    \"search_query\": \"ava\"\n}\n\nresponse = client.contacts.list(**payload)\nprint(response)"
           }
         ]
       }
@@ -2241,10 +2306,16 @@
                 "contacts": [
                   {
                     "first_name": "Ava",
+                    "last_name": "Patel",
+                    "email": "ava.patel@example.com",
                     "country_code": "+1",
-                    "phone_number": "5551234567"
+                    "phone_number": "5551234567",
+                    "variable_values": {
+                      "key": "value"
+                    }
                   }
-                ]
+                ],
+                "audience_description": "Leads from webinar"
               }
             }
           },
@@ -2287,12 +2358,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/audience/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"audience_name\": \"Demo Audience\",\n  \"contacts\": [\n    {\n      \"first_name\": \"Ava\",\n      \"country_code\": \"+1\",\n      \"phone_number\": \"5551234567\"\n    }\n  ]\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/audience/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"audience_name\": \"Demo Audience\",\n  \"audience_description\": \"Leads from webinar\",\n  \"contacts\": [\n    {\n      \"first_name\": \"Ava\",\n      \"last_name\": \"Patel\",\n      \"email\": \"ava.patel@example.com\",\n      \"country_code\": \"+1\",\n      \"phone_number\": \"5551234567\",\n      \"variable_values\": {\n        \"key\": \"value\"\n      }\n    }\n  ]\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.audience.create(\n    audience_name=\"Demo Audience\",\n    contacts=[{\n        \"first_name\": \"Ava\",\n        \"country_code\": \"+1\",\n        \"phone_number\": \"5551234567\"\n    }]\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_name\": \"Demo Audience\",\n    \"audience_description\": \"Leads from webinar\",\n    \"contacts\": [\n        {\n            \"first_name\": \"Ava\",\n            \"last_name\": \"Patel\",\n            \"email\": \"ava.patel@example.com\",\n            \"country_code\": \"+1\",\n            \"phone_number\": \"5551234567\",\n            \"variable_values\": {\n                \"key\": \"value\"\n            }\n        }\n    ]\n}\n\nresponse = client.audience.create(**payload)\nprint(response)"
           }
         ]
       }
@@ -2373,12 +2444,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/audience/list \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/audience/list?page=1&limit=10 \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.audience.list()\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": \"1\",\n    \"limit\": \"10\"\n}\n\nresponse = client.audience.list(**payload)\nprint(response)"
           }
         ]
       }
@@ -2453,7 +2524,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.audience.get(\n    audience_id=\"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n}\n\nresponse = client.audience.get(**payload)\nprint(response)"
           }
         ]
       }
@@ -2547,12 +2618,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/audience/contacts/list?audience_id=aud_01HXR9V5S7W1S0Q4H4PDTGM43B \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/audience/contacts/list?audience_id=aud_01HXR9V5S7W1S0Q4H4PDTGM43B&page=1&limit=10 \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.audience.get_contacts(\n    audience_id=\"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n    \"page\": \"1\",\n    \"limit\": \"10\"\n}\n\nresponse = client.audience.get_contacts(**payload)\nprint(response)"
           }
         ]
       }
@@ -2574,7 +2645,8 @@
               },
               "example": {
                 "audience_id": "aud_01HXR9V5S7W1S0Q4H4PDTGM43B",
-                "audience_name": "Demo Audience - Q1"
+                "audience_name": "Demo Audience - Q1",
+                "audience_description": "Qualified leads"
               }
             }
           },
@@ -2623,12 +2695,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request PUT \\\\\n  --url https://voip-middlware.superu.ai/audience/update \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n  \"audience_name\": \"Demo Audience - Q1\"\n}'"
+            "source": "curl --request PUT \\\\\n  --url https://voip-middlware.superu.ai/audience/update \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n  \"audience_name\": \"Demo Audience - Q1\",\n  \"audience_description\": \"Qualified leads\"\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.audience.update(\n    audience_id=\"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n    audience_name=\"Demo Audience - Q1\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n    \"audience_name\": \"Demo Audience - Q1\",\n    \"audience_description\": \"Qualified leads\"\n}\n\nresponse = client.audience.update(**payload)\nprint(response)"
           }
         ]
       }
@@ -2653,8 +2725,13 @@
                 "contacts": [
                   {
                     "first_name": "Ava",
+                    "last_name": "Patel",
+                    "email": "ava.patel@example.com",
                     "country_code": "+1",
-                    "phone_number": "5551234567"
+                    "phone_number": "5551234567",
+                    "variable_values": {
+                      "key": "value"
+                    }
                   }
                 ]
               }
@@ -2706,12 +2783,12 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/audience/add-contacts \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n  \"contacts\": [\n    {\n      \"first_name\": \"Ava\",\n      \"country_code\": \"+1\",\n      \"phone_number\": \"5551234567\"\n    }\n  ]\n}'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/audience/add-contacts \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n  \"contacts\": [\n    {\n      \"first_name\": \"Ava\",\n      \"last_name\": \"Patel\",\n      \"email\": \"ava.patel@example.com\",\n      \"country_code\": \"+1\",\n      \"phone_number\": \"5551234567\",\n      \"variable_values\": {\n        \"key\": \"value\"\n      }\n    }\n  ]\n}'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.audience.add_contacts(\n    audience_id=\"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n    contacts=[{\n        \"first_name\": \"Ava\",\n        \"country_code\": \"+1\",\n        \"phone_number\": \"5551234567\"\n    }]\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\",\n    \"contacts\": [\n        {\n            \"first_name\": \"Ava\",\n            \"last_name\": \"Patel\",\n            \"email\": \"ava.patel@example.com\",\n            \"country_code\": \"+1\",\n            \"phone_number\": \"5551234567\",\n            \"variable_values\": {\n                \"key\": \"value\"\n            }\n        }\n    ]\n}\n\nresponse = client.audience.add_contacts(**payload)\nprint(response)"
           }
         ]
       }
@@ -2787,7 +2864,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.audience.delete(\n    audience_id=\"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"audience_id\": \"aud_01HXR9V5S7W1S0Q4H4PDTGM43B\"\n}\n\nresponse = client.audience.delete(**payload)\nprint(response)"
           }
         ]
       }
@@ -2883,7 +2960,7 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/knowledge-base/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  -F 'name=FAQ' \\\\\n  -F 'description=Frequently asked questions' \\\\\n  -F 'files=@/path/to/faq.pdf'"
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/knowledge-base/create \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --form 'name=FAQ' \\\\\n  --form 'description=Frequently asked questions' \\\\\n  --form 'files=@/path/to/file.pdf'"
           },
           {
             "lang": "python",
@@ -2965,7 +3042,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.knowledge_base.list()\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"page\": 1,\n    \"limit\": 10\n}\n\nresponse = client.knowledge_base.list(**payload)\nprint(response)"
           }
         ]
       }
@@ -3046,7 +3123,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.knowledge_base.get(\n    knowledge_base_id=\"kb_01HXRA4N5B8Q0SJC0F30Z8W0DT\"\n)\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"knowledge_base_id\": \"kb_01HXRA4N5B8Q0SJC0F30Z8W0DT\"\n}\n\nresponse = client.knowledge_base.get(**payload)\nprint(response)"
           }
         ]
       }
@@ -3101,7 +3178,7 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\nresponse = client.agents.import_agents()\nprint(response)"
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\nresponse = client.agents.import_agents()\nprint(response)"
           }
         ]
       }
