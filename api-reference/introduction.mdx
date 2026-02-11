@@ -1,20 +1,54 @@
 ---
-title: 'Introduction'
-description: 'Build, test, and ship with the SuperU API'
+title: "Introduction"
+description: "Build, test, and ship with the SuperU API"
 ---
 
 SuperU API lets you create and manage voice agents, place calls, handle tools, organize folders, and work with contacts, audiences, and knowledge bases.
-
-## Base URL
-
-`https://voip-middlware.superu.ai`
 
 ## Authentication
 
 Use your API key in the `superU-Api-Key` header for all secured endpoints.
 
 ```http
-superU-Api-Key: su_live_xxxxxxxxxxxxx
+superU-Api-Key: 5jrcxxxxxxxxxxxxxx4b98
+```
+
+## Where to find your API key
+
+You can generate and copy API keys from the SuperU dashboard.
+
+1. Go to [workspace.superu.ai](https://workspace.superu.ai)
+2. Open the API keys section
+3. Copy the existing key and use it
+
+![How to get API keys](</all pictures of platfrom guide/workspace-api.png>)
+
+## Installation
+
+```bash
+pip install superu
+```
+
+## Quick Start Example
+
+```python Python
+import superu
+
+client = superu.SuperU("your_api_key")
+
+# 1) List existing agents
+agents = client.agents.list(limit=5)
+print(agents)
+
+# 2) Start an outbound call
+call = client.calls.create_outbound_call(
+    assistant_id="assistant_id_from_dashboard",
+    to="+15557654321",
+    campaign_id="demo_call",
+    customer_name="Ava",
+    customer_id="cust_123"
+)
+print(call)
 ```
 
 ## API Playground
@@ -38,34 +72,15 @@ These status codes are now documented across the API, including endpoint-level e
 - `500` Internal Server Error
 - `501` Not Implemented
 
-## Quick Start Example
-
-```bash cURL
-curl --request POST \
-  --url https://voip-middlware.superu.ai/agent/list \
-  --header 'superU-Api-Key: su_live_xxxxxxxxxxxxx' \
-  --data '{
-    "search_query": "sales"
-  }'
-```
-
-```python Python
-from superu import SuperU
-
-client = SuperU("YOUR_SUPERU_API_KEY")
-response = client.agents.list(search_query="sales")
-print(response)
-```
-
 ## Endpoint Groups
 
-- Calls
-- Agents
-- Agent Versions
-- Phone Numbers
-- Call Logs
-- Tools
-- Folders
-- Contacts
-- Audiences
-- Knowledge Base
+- [Calls](/api-reference/calls/create-twilio-call)
+- [Agents](/api-reference/agents/create-agent)
+- [Agent Versions](/api-reference/agent-versions/create-agent-version)
+- [Phone Numbers](/api-reference/phone-numbers/get-owned-phone-numbers)
+- [Call Logs](/api-reference/call-logs/get-call-logs)
+- [Tools](/api-reference/tools/create-tool)
+- [Folders](/api-reference/folders/create-folder)
+- [Contacts](/api-reference/contacts/create-contact)
+- [Audiences](/api-reference/audiences/create-audience)
+- [Knowledge Base](/api-reference/knowledge-base/create-knowledge-base)

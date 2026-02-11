@@ -100,7 +100,6 @@
             "pages": [
               "POST /agent/create",
               "POST /agent/list",
-              "GET /agent/import",
               "POST /agent/update/name",
               "POST /agent/delete"
             ]
@@ -208,8 +207,8 @@
     },
     "examples": {
       "languages": [
-        "curl",
-        "python"
+        "python",
+        "curl"
       ],
       "defaults": "all",
       "prefill": true
