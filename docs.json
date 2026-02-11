@@ -208,8 +208,8 @@
     },
     "examples": {
       "languages": [
-        "curl",
-        "python"
+        "python",
+        "curl"
       ],
       "defaults": "all",
       "prefill": true
