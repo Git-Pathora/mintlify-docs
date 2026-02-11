@@ -100,7 +100,6 @@
             "pages": [
               "POST /agent/create",
               "POST /agent/list",
-              "GET /agent/import",
               "POST /agent/update/name",
               "POST /agent/delete"
             ]
