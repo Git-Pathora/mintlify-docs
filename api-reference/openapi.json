@@ -3127,61 +3127,6 @@
           }
         ]
       }
-    },
-    "/agent/import": {
-      "get": {
-        "tags": [
-          "Agents"
-        ],
-        "summary": "Import agents",
-        "description": "Imports agents for the current account.",
-        "operationId": "importAgents",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Agents imported",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericResponse"
-                },
-                "example": {
-                  "status": "success",
-                  "imported": 12,
-                  "message": "Agents imported successfully"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          },
-          "501": {
-            "$ref": "#/components/responses/NotImplemented"
-          }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "curl",
-            "label": "cURL",
-            "source": "curl --request GET \\\\\n  --url https://voip-middlware.superu.ai/agent/import \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
-          },
-          {
-            "lang": "python",
-            "label": "Python",
-            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\nresponse = client.agents.import_agents()\nprint(response)"
-          }
-        ]
-      }
     }
   },
   "components": {
