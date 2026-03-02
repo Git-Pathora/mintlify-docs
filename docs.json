@@ -89,9 +89,8 @@
             "group": "Calls",
             "openapi": "api-reference/openapi.json",
             "pages": [
-              "POST /pypi_support/twilio_call_create",
-              "POST /pypi_support/twilio_call_analysis",
-              "POST /campaign/outbound/create_call/superu"
+              "POST /campaign/outbound/create_call/superu",
+              "POST /call-logs/{assistant_id}"
             ]
           },
           {
@@ -120,13 +119,6 @@
             "openapi": "api-reference/openapi.json",
             "pages": [
               "POST /phoneNumber/owned"
-            ]
-          },
-          {
-            "group": "Call Logs",
-            "openapi": "api-reference/openapi.json",
-            "pages": [
-              "POST /call-logs/{assistant_id}"
             ]
           },
           {

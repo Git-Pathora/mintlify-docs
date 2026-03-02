@@ -1068,8 +1068,8 @@
         "tags": [
           "Call Logs"
         ],
-        "summary": "Get call logs",
-        "description": "Returns call logs for one assistant or for all assistants.",
+        "summary": "Get call logs and analysis",
+        "description": "Returns detailed call logs, including transcripts, recordings, and AI generated analysis.",
         "operationId": "getCallLogs",
         "parameters": [
           {
