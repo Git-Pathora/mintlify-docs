@@ -1,5 +1,5 @@
 ---
-title: "Pluto Voice Assistant"
+title: "superU Voice Assistant"
 description: "Complete guide to building a real-time AI voice assistant using SuperU SDK, WebSockets, and PyAudio for customer support and interactive applications."
 ---
 
@@ -9,7 +9,7 @@ This guide will help you set up a real-time AI voice assistant using the SuperU 
 
 ## Introduction
 
-**Pluto** lets you build a real-time conversational AI voice assistant for your website or app. It uses your microphone to capture audio, streams it to an AI model, and plays back the AI's spoken response—all in just a few hundred milliseconds.
+**superU** lets you build a real-time conversational AI voice assistant for your website or app. It uses your microphone to capture audio, streams it to an AI model, and plays back the AI's spoken response—all in just a few hundred milliseconds.
 
 ---
 
@@ -18,12 +18,14 @@ This guide will help you set up a real-time AI voice assistant using the SuperU 
 **Goal:** Enable real-time voice conversations with AI.
 
 **Use Cases:**
+
 - Customer support over AI calls
 - Voice assistant for your website/app
 - Cold calling with AI
 - Call center automation
 
 **Tech Stack:**
+
 - Python
 - PyAudio
 - WebSockets
@@ -50,11 +52,11 @@ Before you start, make sure you have:
 <Steps>
   <Step title="Sign Up and Get Your API Key">
     1. Go to [dev.superu.ai](https://dev.superu.ai/) and sign up for an account
-    2. After signing up, visit your dashboard
-    3. Copy your API key from the dashboard
-    
+    2. After signing up, visit your dashboard 3. Copy your API key from the
+    dashboard
     <Note>
-      For security, store your API key in an environment variable instead of hard-coding it in your code.
+      For security, store your API key in an environment variable instead of
+      hard-coding it in your code.
     </Note>
   </Step>
 </Steps>
@@ -74,6 +76,7 @@ Before you start, make sure you have:
     # macOS/Linux
     pip3 install pyaudio websockets superu
     ```
+
   </Step>
 
   <Step title="Configure Audio">
@@ -91,7 +94,7 @@ Before you start, make sure you have:
 
 <Steps>
   <Step title="Copy and Run the Code">
-    Create a new Python file (e.g., `pluto_voice_assistant.py`) and paste the following code. Replace `<YOUR_API_KEY>` with your actual API key:
+    Create a new Python file (e.g., `superU_voice_assistant.py`) and paste the following code. Replace `<YOUR_API_KEY>` with your actual API key:
 
     ```python
     import asyncio
@@ -162,13 +165,14 @@ Before you start, make sure you have:
         System_prompt = """
             You are a helpful and curious science assistant. Your job is to answer questions clearly, concisely, and in a way that's engaging for someone interested in science.
         """
-        pluto = superu_client.pluto.create_call(
+        superU_call = superu_client.calls.create_call(
             first_message=First_message,
             system_prompt=System_prompt,
             voice_id="90ipbRoKi4CpHXvKVtl0"  # Anika - Customer Care Agent
         )
-        asyncio.run(listen_and_send(pluto['ws_url'], pluto['streamId']))
+        asyncio.run(listen_and_send(superU_call['ws_url'], superU_call['streamId']))
     ```
+
   </Step>
 
   <Step title="Run the Application">
@@ -176,15 +180,16 @@ Before you start, make sure you have:
 
     ```bash
     # Windows
-    python pluto_voice_assistant.py
+    python superU_voice_assistant.py
 
     # macOS/Linux
-    python3 pluto_voice_assistant.py
+    python3 superU_voice_assistant.py
     ```
-    
+
     <Check>
       You should see "Connected to WebSocket. Streaming audio..." in your terminal, indicating a successful connection.
     </Check>
+
   </Step>
 </Steps>
 
@@ -210,13 +215,14 @@ The `System_prompt` variable defines how the assistant should behave and respond
 
 ```python
 System_prompt = """
-You are a friendly and knowledgeable customer support assistant. 
+You are a friendly and knowledgeable customer support assistant.
 Help users with their questions about our products and services.
 """
 ```
 
 <Tip>
-  Adjust this prompt to fit your specific use case, such as customer support, language learning, or technical help.
+  Adjust this prompt to fit your specific use case, such as customer support,
+  language learning, or technical help.
 </Tip>
 
 ---
@@ -243,7 +249,8 @@ You can choose from many different AI voices by changing the `voice_id` paramete
   href="https://superu.notion.site/25a234ddb88f807697c2ea5c37c00c20?v=25a234ddb88f80559e75000c1c4d4983"
   horizontal
 >
-  List of all available voice IDs with their description and tested out use cases.
+  List of all available voice IDs with their description and tested out use
+  cases.
 </Card>
 
 ---
@@ -255,5 +262,6 @@ You can choose from many different AI voices by changing the `voice_id` paramete
 - [SuperU Website](https://superu.ai)
 
 <Check>
-  Congratulations! You now have a real-time AI voice assistant running on your machine.
+  Congratulations! You now have a real-time AI voice assistant running on your
+  machine.
 </Check>
