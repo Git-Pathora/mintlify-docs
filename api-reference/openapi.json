@@ -1138,6 +1138,16 @@
             }
           },
           {
+            "name": "call_uuid",
+            "in": "query",
+            "description": "Call UUID filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "aa39db9f-d9f5-45f4-b4fc-9fe49f14f9ed"
+            }
+          },
+          {
             "name": "campaign_id",
             "in": "query",
             "description": "Campaign filter",
@@ -3335,7 +3345,7 @@
               },
               "variable_values": {
                 "$ref": "#/components/schemas/JsonObject",
-                "description": "Variable values value."
+                "description": "Key-value pairs for variables used in the agent script.\n\n- Variable names must exactly match those defined in the script.\n- These values replace the corresponding {{ variable_name }} placeholders in the script.\n\nSee: [Agent Script – Variable Syntax](/api-reference/agents/create-agent#body-script)"
               }
             }
           }
@@ -3412,8 +3422,8 @@
               },
               "script": {
                 "type": "string",
-                "description": "System prompt/script",
-                "example": "You are a friendly assistant."
+                "description": "System prompt template.\n\nVariable syntax:\n- Use {{ variable_name }}\n- Spaces inside braces are required (e.g., {{ name }})\n- Keep them same when passing the variables in the [Create Call request](/api-reference/calls/create-outbound-call#body-variable-values)",
+                "example": "You are a helpful assistant."
               },
               "industry": {
                 "type": "string",
