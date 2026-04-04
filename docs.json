@@ -175,6 +175,13 @@
               "POST /knowledge-base/list",
               "GET /knowledge-base/{knowledge_base_id}"
             ]
+          },
+          {
+            "group": "Campaigns",
+            "openapi": "api-reference/openapi.json",
+            "pages": [
+              "POST /campaign/outbound/create_with_workflow"
+            ]
           }
         ]
       },
