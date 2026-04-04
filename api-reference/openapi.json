@@ -56,6 +56,10 @@
     {
       "name": "Knowledge Base",
       "description": "Upload and manage knowledge bases."
+    },
+    {
+      "name": "Campaigns",
+      "description": "Create and manage outbound campaigns with automated workflows."
     }
   ],
   "paths": {
@@ -3205,6 +3209,85 @@
           }
         ]
       }
+    },
+    "/campaign/outbound/create_with_workflow": {
+      "post": {
+        "tags": [
+          "Campaigns"
+        ],
+        "summary": "Create outbound campaign with workflow",
+        "description": "Combined endpoint that creates an n8n workflow, activates it, creates a campaign, and schedules the webhook job. This replaces the need to manually create workflows and campaigns separately.\n\nYou must provide contacts using **either** `audienceId` (existing audience) **or** `csvData` (inline contact list) — not both. If `csvData` is provided, a new audience is automatically created from it.\n\nOptionally schedule the campaign for a future time using `dateTime`. If omitted, the campaign starts immediately.",
+        "operationId": "createOutboundCampaignWithWorkflow",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCampaignWithWorkflowRequest"
+              },
+              "example": {
+                "workflow_name": "oohhfhfoo",
+                "assistantId": "b64244f5-019c-47b6-bedd-cb359c0731a5",
+                "batchSize": 5,
+                "audienceId": "f750d6e9-448d-4198-be9a-ed142460c329",
+                "from_phone_number": "+14155550100",
+                "dateTime": "2024-04-24T08:28:00"
+              }
+            }
+          },
+          "description": "Request body for creating an outbound campaign with workflow."
+        },
+        "responses": {
+          "200": {
+            "description": "Campaign and workflow created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCampaignWithWorkflowResponse"
+                },
+                "example": {
+                  "id": "12345",
+                  "name": "My Outbound Campaign",
+                  "active": true,
+                  "webhookId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                  "webhookUrl": "https://n8n.example.com/webhook/a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                  "campaign": {
+                    "campaign_id": "f1e2d3c4-b5a6-7890-abcd-ef1234567890",
+                    "message": "Campaign created successfully",
+                    "status": "scheduled"
+                  },
+                  "scheduled_job": {
+                    "job_id": "663f1a2b3c4d5e6f7a8b9c0d",
+                    "redis_job_id": "rq:job:abc123",
+                    "execute_at": "2026-04-10T14:00:00+00:00"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/campaign/outbound/create_with_workflow \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"workflow_name\": \"My Outbound Campaign\",\n  \"assistantId\": \"b64244f5-019c-47b6-bedd-cb359c0731a5\",\n  \"batchSize\": 5,\n  \"audienceId\": \"f750d6e9-448d-4198-be9a-ed142460c329\",\n  \"from_phone_number\": \"+918031138532\",\n  \"dateTime\": \"2024-04-24T08:28:00\"\n}'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\npayload = {\n    \"workflow_name\": \"My Outbound Campaign\",\n    \"assistantId\": \"b64244f5-019c-47b6-bedd-cb359c0731a5\",\n    \"batchSize\": 5,\n    \"audienceId\": \"f750d6e9-448d-4198-be9a-ed142460c329\",\n    \"from_phone_number\": \"+918031138532\",\n    \"dateTime\": \"2024-04-24T08:28:00\"\n}\n\nresponse = client.campaigns.create_with_workflow(**payload)\nprint(response)"
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -3217,6 +3300,157 @@
       }
     },
     "schemas": {
+      "CsvContact": {
+        "type": "object",
+        "description": "A contact entry from CSV data",
+        "required": ["first_name", "country_code", "phone_number"],
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "description": "First name of the contact",
+            "example": "Ava"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Last name of the contact",
+            "example": "Smith"
+          },
+          "country_code": {
+            "type": "string",
+            "description": "Country code for the phone number (e.g. +1, +91)",
+            "example": "+1"
+          },
+          "phone_number": {
+            "type": "string",
+            "description": "Phone number of the contact (without country code)",
+            "example": "4155552671"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the contact",
+            "example": "ava@example.com"
+          },
+          "variable_values": {
+            "type": "object",
+            "description": "Custom key-value pairs for personalizing agent prompts",
+            "additionalProperties": true,
+            "example": {
+              "plan": "premium",
+              "company": "Acme Corp"
+            }
+          }
+        }
+      },
+      "CreateCampaignWithWorkflowRequest": {
+        "type": "object",
+        "required": ["workflow_name", "assistantId", "batchSize", "from_phone_number", "dateTime"],
+        "properties": {
+          "assistantId": {
+            "type": "string",
+            "description": "The agent/assistant ID to use for calls"
+          },
+          "from_phone_number": {
+            "type": "string",
+            "description": "The phone number to make outbound calls from (with country code)",
+            "example": "+14155550100"
+          },
+          "workflow_name": {
+            "type": "string",
+            "description": "Name for the workflow and campaign",
+            "default": "Custom Scheduled Workflow"
+          },
+          "name": {
+            "type": "string",
+            "description": "Alternative field for workflow name (used if workflow_name is not provided)"
+          },
+          "batchSize": {
+            "type": "integer",
+            "description": "Number of calls to process per batch (max 10)",
+            "default": 10,
+            "maximum": 10,
+            "minimum": 1
+          },
+          "audienceId": {
+            "type": "string",
+            "description": "ID of an existing audience. Provide **either** `audienceId` **or** `csvData`, not both."
+          },
+          "csvData": {
+            "type": "array",
+            "description": "Inline contact list. Provide **either** `csvData` **or** `audienceId`, not both. A new audience is created automatically from this data.",
+            "items": {
+              "$ref": "#/components/schemas/CsvContact"
+            }
+          },
+          "dateTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime for scheduling the campaign. Must be in the future. If omitted, the campaign starts immediately.",
+            "example": "2026-04-10T14:00:00Z"
+          }
+        }
+      },
+      "CreateCampaignWithWorkflowResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The n8n workflow ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the workflow"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Whether the workflow is active"
+          },
+          "webhookId": {
+            "type": "string",
+            "description": "UUID of the webhook trigger"
+          },
+          "webhookUrl": {
+            "type": "string",
+            "description": "Full URL of the webhook endpoint"
+          },
+          "campaign": {
+            "type": "object",
+            "properties": {
+              "campaign_id": {
+                "type": "string",
+                "description": "UUID of the created campaign"
+              },
+              "message": {
+                "type": "string",
+                "example": "Campaign created successfully"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["active", "scheduled"],
+                "description": "Campaign status — 'active' if started immediately, 'scheduled' if dateTime was provided"
+              }
+            }
+          },
+          "scheduled_job": {
+            "type": "object",
+            "description": "Present only when the campaign is scheduled for a future time",
+            "properties": {
+              "job_id": {
+                "type": "string",
+                "description": "MongoDB job document ID"
+              },
+              "redis_job_id": {
+                "type": "string",
+                "description": "Redis queue job ID"
+              },
+              "execute_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Scheduled execution time"
+              }
+            }
+          }
+        }
+      },
       "JsonObject": {
         "type": "object",
         "description": "Flexible JSON object",
