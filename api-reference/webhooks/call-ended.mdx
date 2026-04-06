@@ -1,0 +1,59 @@
+---
+title: "Call Ended"
+description: "Triggered when a call ends"
+---
+
+SuperU sends a `POST` request to your webhook URL when a call ends.
+
+## Setup
+
+1. Go to [workspace.superu.ai/dashboard/developer](https://workspace.superu.ai/dashboard/developer)
+2. Click the **Webhooks** tab
+3. Enter your server URL in the **Call Ended** endpoint field (e.g. `https://your-server.com/webhook`)
+4. Click **Verify & Save** — SuperU will send a test request to confirm your endpoint is reachable
+5. Your server must respond with `200 OK` and echo back the received `call_uuid`:
+
+```json
+{
+  "call_uuid": "<same uuid received>"
+}
+```
+
+## Payload
+
+```json
+{
+  "call_uuid": "c1a2b3d4-e5f6-7890-abcd-ef1234567890"
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `call_uuid` | string | Unique identifier of the call that ended |
+
+## Response
+
+Your endpoint must return a `200` HTTP status code. Any non-`2xx` response is treated as a failure.
+
+## Example
+
+```python Python
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    data = request.get_json()
+    call_uuid = data.get("call_uuid")
+
+    print(f"Call ended: {call_uuid}")
+
+    return jsonify({"call_uuid": call_uuid}), 200
+```
+
+```bash cURL
+curl -X POST https://your-server.com/webhook \
+  -H "Content-Type: application/json" \
+  -d '{"call_uuid": "c1a2b3d4-e5f6-7890-abcd-ef1234567890"}'
+```

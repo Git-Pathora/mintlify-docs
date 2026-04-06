@@ -1,0 +1,32 @@
+---
+title: "Webhooks"
+description: "Receive real-time call events at your own server endpoints"
+---
+
+Webhooks let SuperU push event notifications to your server as calls happen. Instead of polling for status, your server receives an HTTP `POST` request the moment an event fires.
+
+## Available Events
+
+| Event | Description |
+|---|---|
+| [Call Ended](/api-reference/webhooks/call-ended) | Triggered when a call ends |
+
+## Coming Soon
+
+| Event | Description |
+|---|---|
+| Call Started | Triggered when a call is connected |
+| Call Failed | Triggered when a call fails to connect or is dropped unexpectedly |
+| Voicemail Detected | Triggered when the agent detects it has reached a voicemail |
+| Transcription Ready | Triggered when the full transcript of a call is available |
+| Call Recording Ready | Triggered when the call recording has been processed and is ready to download |
+| Tool Called | Triggered when the agent invokes a tool during a call |
+| Human Handoff Requested | Triggered when the agent transfers the call to a human agent |
+| Sentiment Analysis Complete | Triggered when post-call sentiment analysis has finished |
+| **Account** | |
+| Credit Balance Low | Triggered when your credit balance falls below a set threshold |
+| Credit Balance Depleted | Triggered when your credit balance reaches zero and calls can no longer be placed |
+| Credits Added | Triggered when credits are added to your account |
+| Plan Upgraded | Triggered when your account is upgraded to a higher plan |
+| Plan Downgraded | Triggered when your account is downgraded to a lower plan |
+| API Key Rotated | Triggered when your API key is regenerated |

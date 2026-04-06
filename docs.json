@@ -182,6 +182,13 @@
             "pages": [
               "POST /campaign/outbound/batch_create"
             ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "api-reference/webhooks",
+              "api-reference/webhooks/call-ended"
+            ]
           }
         ]
       },
