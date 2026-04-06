@@ -180,7 +180,7 @@
             "group": "Campaigns",
             "openapi": "api-reference/openapi.json",
             "pages": [
-              "POST /campaign/outbound/create_with_workflow"
+              "POST /campaign/outbound/batch_create"
             ]
           }
         ]
