@@ -119,7 +119,8 @@
             "group": "Phone Numbers",
             "openapi": "api-reference/openapi.json",
             "pages": [
-              "POST /phoneNumber/owned"
+              "POST /phoneNumber/owned",
+              "POST /SIP/phoneNumber/owned"
             ]
           },
           {

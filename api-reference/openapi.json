@@ -1205,6 +1205,75 @@
         ]
       }
     },
+    "/SIP/phoneNumber/owned": {
+      "post": {
+        "tags": [
+          "Phone Numbers"
+        ],
+        "summary": "Get SIP Connected phone numbers",
+        "description": "Returns SIP connected phone numbers by the authenticated account.",
+        "operationId": "getSIPPhoneNumbers",
+        "responses": {
+          "200": {
+            "description": "Owned numbers returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                },
+                "example": [
+                  {
+                    "nick_name": "plivo SIP 3", 
+                    "sip_trunk_id": "ST_9APbKpadkja", 
+                    "number": "+919999999999", 
+                    "region": "INDIA", 
+                    "sip_cps": 2, 
+                    "sip_type": "outbound",
+                    "agentId": null
+                  },
+                  {
+                    "nick_name": "plivo SIP Inbound", 
+                    "sip_trunk_id": "ST_9APbKpadkjgh", 
+                    "number": "+13485798234", 
+                    "region": "US", 
+                    "sip_cps": 2, 
+                    "sip_type": "inbound",
+                    "agentId": null
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/SIP/phoneNumber/owned \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY'"
+          },
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "from superu import SuperU\n\nclient = SuperU(\"YOUR_SUPERU_API_KEY\")\n\nresponse = client.phone_numbers.get_sip_phone_numbers()\nprint(response)"
+          }
+        ]
+      }
+    },
     "/call-logs/{assistant_id}": {
       "post": {
         "tags": [
@@ -3935,22 +4004,22 @@
         "properties": {
           "status": {
             "type": "string",
-            "example": "success",
-            "description": "Status value."
+            "description": "Indicates if the request was successful.",
+            "example": "success"
           },
           "message": {
             "type": "string",
-            "example": "Request completed successfully",
-            "description": "Message value."
+            "description": "A descriptive message about the result of the request.",
+            "example": "Request completed successfully"
           },
           "data": {
             "type": "object",
             "additionalProperties": true,
-            "description": "Data value."
+            "description": "The payload of the response, if any."
           }
         },
         "additionalProperties": true,
-        "description": "Generic Response schema."
+        "description": "A generic response schema for successful API calls."
       },
       "ErrorResponse": {
         "type": "object",
@@ -4265,7 +4334,6 @@
             "type": "object",
             "required": [
               "agent_id",
-              "folder_id"
             ],
             "properties": {
               "agent_id": {
