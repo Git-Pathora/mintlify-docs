@@ -3859,6 +3859,65 @@
           }
         ]
       }
+    },
+    "/campaign/outbound/stop" : {
+      "post": {
+        "tags": [
+          "Campaigns"
+        ],
+        "summary": "STOP outbound campaign",
+        "description": "Stops an active outbound campaign.",
+        "operationId": "stopOutboundCampaign",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StopCampaignRequest"
+              },
+              "example": {
+                "campaign_id": "f1e2d3c4-b5a6-7890-abcd-ef1234567890"
+              }
+            }
+          },
+          "description": "Request body for stopping an outbound campaign."
+        },
+        "responses": {
+          "200": {
+            "description": "Campaign stopped successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCampaignWithWorkflowResponse"
+                },
+                "example": {
+                  "name": "My Outbound Campaign",
+                  "active": true,
+                  "campaign": {
+                    "message": "Campaign stopped successfully"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl --request POST \\\\\n  --url https://voip-middlware.superu.ai/campaign/outbound/stop \\\\\n  --header 'superU-Api-Key: YOUR_SUPERU_API_KEY' \\\\\n  --data '{\n  \"campaign_id\" : \"f1e2d3c4-b5a6-7890-abcd-ef1234567890\"\n}'"
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -3957,6 +4016,17 @@
             "format": "date-time",
             "description": "ISO 8601 datetime for scheduling the campaign. Must be in the future. If omitted, the campaign starts immediately.",
             "example": "2026-04-10T14:00:00Z"
+          }
+        }
+      },
+      "StopCampaignRequest": {
+        "type": "object",
+        "required": ["campaign_id"],
+        "properties": {
+          "campaign_id": {
+            "type": "string",
+            "description": "UUID of the campaign to stop",
+            "example": "f1e2d3c4-b5a6-7890-abcd-ef1234567890"
           }
         }
       },

@@ -181,7 +181,8 @@
             "group": "Campaigns",
             "openapi": "api-reference/openapi.json",
             "pages": [
-              "POST /campaign/outbound/batch_create"
+              "POST /campaign/outbound/batch_create",
+              "POST /campaign/outbound/stop"
             ]
           },
           {
